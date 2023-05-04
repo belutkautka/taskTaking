@@ -12,6 +12,53 @@ body {
 .right_nav {
   display: flex;
 }
+.profile_paragraph{
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  margin: 30px 75px 0px;
+}
+
+table{
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  margin: 10px 75px 0px;
+  width: 50%;
+  border-spacing: 0px 5px;
+  border-collapse: collapse;
+}
+
+td{
+  padding: 8px;
+}
+
+tr:nth-child(odd){
+  background-color: #ffffff;
+}
+
+tr:nth-child(even){
+  background-color: rgb(238, 238, 238);
+}
+
+dt:nth-child(odd){
+  background-color: #ffffff;
+}
+
+dt:nth-child(even){
+  background-color: rgb(238, 238, 238);
+}
+
+.table_head{
+  font-size: 23px;
+}
+
+.person_score{
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  margin: 0px 75px;
+}
 
 .left_nav {
   display: flex;
@@ -45,7 +92,7 @@ body {
   color: rgb(41, 41, 41);
   text-align: left;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
+  font-size: 25px;
   margin: 20px 75px 0px;
 
 }
@@ -54,9 +101,6 @@ body {
   padding: 5px;
 }
 
-.notifications .grey{
-  background-color: rgb(238, 238, 238);
-}
 
 .modal {
   position: absolute;
