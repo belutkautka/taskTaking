@@ -17,6 +17,15 @@ body {
   display: flex;
 }
 
+.alg_title a:last-child{
+  position: relative; 
+  font-size: 25px; 
+  top:-4px;
+}
+.right_nav p a{
+  padding: 0 10px 0 0;
+}
+
 .navbar a {
   text-align: center;
   vertical-align: middle;
