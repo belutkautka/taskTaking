@@ -2,12 +2,15 @@ body {
   margin: 0;
 }
 
+
+
 .navbar {
   display: flex;
   justify-content: space-between;
   border-bottom: 1.5px solid rgb(238, 238, 238);
   padding: 0px 175px;
 }
+
 
 .right_nav {
   display: flex;
