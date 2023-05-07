@@ -2,16 +2,12 @@ body {
     background-color: #f4f4f4;
 }
 
-
 .navbar {
-
     border-bottom: 3px solid rgb(238, 238, 238);
 }
 
 .navbar a {
-
     color: #111111;
-
 }
 
 .navbar a:hover {
