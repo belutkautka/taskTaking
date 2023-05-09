@@ -3,6 +3,7 @@ from starlette.staticfiles import StaticFiles
 
 from src.pages.router import router as router_pages
 
+# uvicorn src.main:app --reload
 app = FastAPI()
 app.include_router(router_pages)
 app.mount("/static", StaticFiles(directory='src/static'), name="static")

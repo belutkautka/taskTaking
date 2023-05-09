@@ -2,7 +2,6 @@ from fastapi import APIRouter, Request, Depends
 from fastapi.templating import Jinja2Templates
 
 # from operations.router import get_specific_operations
-# uvicorn src.main:app --reload
 router = APIRouter(
     prefix="/pages",
     tags=["Pages"]
