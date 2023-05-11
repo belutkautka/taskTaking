@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from starlette.staticfiles import StaticFiles
-
 from src.pages.router import router as router_pages
 
 # uvicorn src.main:app --reload
