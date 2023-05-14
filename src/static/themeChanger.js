@@ -3,20 +3,25 @@ const link = document.getElementById("theme-link");
 const lightTheme = "../static/light.css";
 const darkTheme = "../static/dark.css";
 
-btn.addEventListener("click", function () { ChangeTheme(); });
+btn.addEventListener("click", function () {
+    ChangeTheme();
+});
 
-function ChangeTheme()
-{
+let loadStyle = localStorage.getItem('theme');
+if (loadStyle) {
+    LoadStyle(loadStyle);
+}
+
+function ChangeTheme() {
     let currTheme = link.getAttribute("href");
-
-    if(currTheme == lightTheme)
-    {
-        currTheme = darkTheme;
+    if (currTheme == lightTheme) {
+        LoadStyle(darkTheme);
+    } else {
+        LoadStyle(lightTheme);
     }
-    else
-    {
-        currTheme = lightTheme;
-    }
+}
 
-    link.setAttribute("href", currTheme);
+function LoadStyle(loadStyle) {
+    localStorage.setItem('theme', loadStyle);
+    link.setAttribute("href", loadStyle);
 }
