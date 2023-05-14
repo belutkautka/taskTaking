@@ -8,7 +8,7 @@ tr:nth-child(odd) {
 }
 
 tr:nth-child(even) {
-    background-color: #281437;
+    background-color: #1a2424;
 }
 
 dt:nth-child(odd) {
@@ -16,7 +16,7 @@ dt:nth-child(odd) {
 }
 
 dt:nth-child(even) {
-    background-color: #281437;
+    background-color: #1a2424;
 }
 
 header {
@@ -24,7 +24,7 @@ header {
 }
 
 .navbar {
-    border-bottom: 4px solid #481a67;
+    border-bottom: 4px solid #33CCCC;
 }
 
 .navbar a {
@@ -32,7 +32,7 @@ header {
 }
 
 .navbar a:hover {
-    color: #8b39c2;
+    color: #33CCCC;
 }
 
 .notifications {
@@ -76,7 +76,7 @@ header {
 }
 
 .task_table {
-    border: 5px solid #481a67;
+    border: 5px solid #33CCCC;
 }
 
 .task_table:hover {
