@@ -8,20 +8,20 @@
 // })
 
 for (let i =0;i<7;i++){
-    createNewFieldSet()
+    createNewTask("Эрен уничтожает всех титанов","Длинный контест 5 задача С","2.8")
 }
-function createNewFieldSet() {
+function createNewTask(tValue, pValue, gValue) {
     let newTask = document.createElement("div");
     newTask.className="task_table";
     let title = document.createElement("div")
     title.className="title"
-    title.innerHTML = "Эрен уничтожает всех титанов"
+    title.innerHTML = tValue
     let path = document.createElement("div")
     path.className= "path"
-    path.innerHTML= "Длинный контест 5 задача С"
+    path.innerHTML= pValue
     let grade = document.createElement("div")
     grade.className = "grade"
-    grade.innerHTML = "2.8"
+    grade.innerHTML = gValue
     newTask.append(title,path,grade)
     document.getElementById("titles").append(newTask)
 }
