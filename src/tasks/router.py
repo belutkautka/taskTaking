@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
+from fastapi_cache.decorator import cache
 from sqlalchemy import select, insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -13,10 +14,23 @@ router = APIRouter(
 
 
 @router.get('/')
+@cache(expire=3600)
 async def get_task(task_id: int, session: AsyncSession = Depends(get_async_session)):
-    query = select(task).where(task.c.id == task_id).limit(1)
-    result = await session.execute(query)
-    return result.all()
+    try:
+        query = select(task).where(task.c.id == task_id).limit(1)
+        result = await session.execute(query)
+        return {
+            'Status': 'Success',
+            'Data': result.all(),
+            'Details': None
+        }
+    except Exception:
+        raise HTTPException(status_code=500, detail=
+        {
+            'Status': 'Error',
+            'Data': None,
+            'Details': None
+        })
 
 
 @router.post('/')

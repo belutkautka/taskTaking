@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.redis import RedisBackend
 from starlette.staticfiles import StaticFiles
+from redis import asyncio as aioredis
 
 from src.auth.base_config import fastapi_users, auth_backend
 from src.auth.schemas import UserRead, UserCreate
@@ -26,3 +29,9 @@ app.mount("/static", StaticFiles(directory='src/static'), name="static")
 @app.get("/")
 async def root():
     return RedirectResponse('pages/startpage', status_code=302)
+
+
+@app.on_event("startup")
+async def startup():
+    redis = aioredis.from_url("redis://localhost")
+    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")

@@ -8,3 +8,6 @@ requirments + pip install uvicorn <br />
 Сначала "npm install -g localtunnel" <br />
 Затем "lt --local-host 127.0.0.1 --port 8000" <br />
 Там выдаст ссылку, по которой надо будет ввести свой IP
+
+## Redis for windows:
+https://github.com/tporadowski/redis/releases
