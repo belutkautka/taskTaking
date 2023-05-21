@@ -9,7 +9,7 @@ metadata = MetaData()
 task = Table(
     "task",
     metadata,
-    Column("id", Integer, Identity(start=1, cycle=True), primary_key=True),
+    Column("id", Integer, Identity(start=1, always=True), primary_key=True),
     Column("name", String, nullable=False),
     Column("contest_type", String, nullable=False),
     Column("contest_number", Integer, nullable=False),

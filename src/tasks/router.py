@@ -14,7 +14,7 @@ router = APIRouter(
 
 
 @router.get('/')
-@cache(expire=3600)
+# @cache(expire=3600)
 async def get_task(task_id: int, session: AsyncSession = Depends(get_async_session)):
     try:
         query = select(task).where(task.c.id == task_id).limit(1)
@@ -35,7 +35,7 @@ async def get_task(task_id: int, session: AsyncSession = Depends(get_async_sessi
 
 @router.post('/')
 async def add_task(new_task: TaskCreate, session: AsyncSession = Depends(get_async_session)):
-    stmt = insert(new_task).values(**new_task().dict())
-    await session.execute()
+    stmt = insert(task).values(**new_task.dict())
+    await session.execute(stmt)
     await session.commit()
     return {'status': 'success'}
