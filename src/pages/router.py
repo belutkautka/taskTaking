@@ -27,3 +27,17 @@ def get_base_page(request: Request):
 @router.get("/tasks")
 def get_base_page(request: Request):
     return templates.TemplateResponse("tasks.html", {"request": request})
+
+@router.get("/teacherGroup")
+def get_base_page(request: Request):
+    return templates.TemplateResponse("tasks.html", {"request": request})
+
+
+@router.get("/teacherStartPage")
+def get_base_page(request: Request):
+    return templates.TemplateResponse("tasks.html", {"request": request})
+
+
+@router.get("/teacherTasks")
+def get_base_page(request: Request):
+    return templates.TemplateResponse("tasks.html", {"request": request})
