@@ -78,10 +78,6 @@ td {
     padding: 8px;
 }
 
-.table_head {
-    font-size: 23px;
-}
-
 .person_score {
     text-align: left;
     font-family: Arial, Helvetica, sans-serif;
@@ -207,7 +203,7 @@ td {
 .page_title {
     text-align: left;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 70px;
+    font-size: 80px;
     margin: 50px 75px 0px;
 }
 
