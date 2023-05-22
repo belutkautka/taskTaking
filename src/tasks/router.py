@@ -20,25 +20,26 @@ current_user = fastapi_users.current_user()
 @router.get('/')
 # @cache(expire=3600)
 async def get_task_by_teacher_id(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
-    try:
-        if user.role_id == 1:
-            query = select(task).where(task.c.added_by == user.id)
-        else:
-            query = select(task).where(task.c.added_by == user.invited_by)
+    # try:
+    if user.role_id == 1:
+        query = select(task).where(task.c.added_by == user.id)
+    else:
+        query = select(task).where(task.c.added_by == user.invited_by)
 
-        result = await session.execute(query)
-        return {
-            'Status': 'Success',
-            'Data': str(result.all()),
-            'Details': None
-        }
-    except Exception:
-        raise HTTPException(status_code=500, detail=
-        {
-            'Status': 'Error',
-            'Data': None,
-            'Details': None
-        })
+    result = await session.execute(query)
+
+    return {
+        'Status': 'Success',
+        'Data': [r._asdict() for r in result],
+        'Details': None
+    }
+    # except Exception:
+    #     raise HTTPException(status_code=500, detail=
+    #     {
+    #         'Status': 'Error',
+    #         'Data': None,
+    #         'Details': None
+    #     })
 
 
 @router.post('/')
@@ -47,6 +48,7 @@ async def add_task(new_task: TaskCreate, session: AsyncSession = Depends(get_asy
         if user.role_id != 1:
             raise Exception
         data = new_task.dict()
+        print(data)
         data['added_by'] = user.id
         stmt = insert(task).values(data)
         await session.execute(stmt)
