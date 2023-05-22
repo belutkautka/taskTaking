@@ -11,3 +11,7 @@ requirments + pip install uvicorn <br />
 
 ## Redis for windows:
 https://github.com/tporadowski/redis/releases
+
+## Creating DB
+alembic revision --autogenerate -m "Database created" <br />
+alembic upgrade head

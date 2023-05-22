@@ -20,6 +20,7 @@ user = Table(
     Column("username", String, nullable=False),
     Column("registered_at", TIMESTAMP, default=datetime.utcnow),
     Column("role_id", Integer, ForeignKey(role.c.id)),
+    Column("invited_by", Integer, nullable=True),
     Column("hashed_password", String, nullable=False),
     Column("is_active", Boolean, default=True, nullable=False),
     Column("is_superuser", Boolean, default=False, nullable=False),
@@ -33,6 +34,7 @@ class User(SQLAlchemyBaseUserTable[int], Base):  # класс создан из-
     username = Column(String, nullable=False)
     registered_at = Column(TIMESTAMP, default=datetime.utcnow)
     role_id = Column(Integer, ForeignKey(role.c.id))
+    invited_by = Column(Integer, nullable=True)
     hashed_password: str = Column(String(length=1024), nullable=False)
     is_active: bool = Column(Boolean, default=True, nullable=False)
     is_superuser: bool = Column(Boolean, default=False, nullable=False)
