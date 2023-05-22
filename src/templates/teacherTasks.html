@@ -12,9 +12,9 @@
     <header>
         <div class="navbar">
             <div class="left_nav">
-                <a class="alg_title" href="teacherStartPage">Алгосы</a>
-                <a href="teacherTasks">Задачи</a></p>
-                <a href="teacherGroup">Группа</a></p>
+                <a class="alg_title" href="teacherstartpage">Алгосы</a>
+                <a href="teachertasks">Задачи</a></p>
+                <a href="teachergroup">Группа</a></p>
             </div>
             <div class="right_nav">
                 <div class="images_button">
@@ -30,6 +30,119 @@
             </div>
         </div>
     </header>
+    <div id="modal_task" class="modal">
+        <div class="modal__content_deployed ">
+            <button id="modal__close-button" class="modal__close-button">
+                &#10006;
+            </button>
+            <p class="modal__title">
+                Эрен Уничтожает всех титанов
+            </p>
+            <p class="modal__text">
+                Эрен Йегер продолжает идти вперед к своей цели - он хочет уничтожить всех титанов.Эрен хочет расчистить
+                от титанов дорогу к стене Мария, чтобы начать операцию по возвращению Шиганшины.
+            </p>
+            <p class="modal__points">
+                ...
+            </p>
+            <div class="buttons_modal">
+                <button id="button_edit" class="button button_task">Редактировать</button>
+                <button id="button_delete" class="button button_task">Удалить задачу</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal_delete" class="modal modal_delete">
+        <div class="modal__content_deployed modal__content_deployed_delete">
+            <button class="modal__close-button">
+                &#10006;
+            </button>
+            <p class="modal__title">
+                Удалить задачу?
+            </p>
+            <div class="buttons_modal">
+                <button id="button_delete_back" class="button button_delete">Назад</button>
+                <button id="button_exactly_delete" class="button button_delete">Удалить</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal_form" class="modal modal_form">
+        <div class="modal__content_deployed modal__content_deployed_form">
+            <button class="modal__close-button">
+                &#10006;
+            </button>
+            <form>
+                <div class="form_pair">
+                    <div class="text_pair">Контест</div>
+                    <div class="radio_lengs">
+                        <div class="radio_len"><input type="radio" name="answer" value="long" required>Длинный</div>
+                        <div class="radio_len"><input type="radio" name="answer" value="short" required>Короткий</div>
+                    </div>
+                </div>
+                <div class="form_pair">
+                    <div class="text_pair">Номер контеста</div>
+                    <input class="number_input" type="number" name="t" value="1" min="1" max="30" step="1" required>
+                </div>
+                <div class="form_pair">
+                    <div class="text_pair">Буква</div>
+                    <input class="form" type="text" required>
+                </div>
+                <div class="form_pair">
+                    <div class="text_pair">Название</div>
+                    <input class="form" type="text" required>
+                </div>
+                <div class="form_pair">
+                    <div class="text_pair">Условия</div>
+                    <input class="form" type="text" required>
+                </div>
+                <div class="form_pair">
+                    <div class="text_pair">Балл</div>
+                    <input class="form" type="text" required>
+                </div>
+                <div class="form_pair">
+                    <div class="text_pair">Лимит</div>
+                    <input class="number_input" type="number" name="t" value="1" min="1" max="30" step="1" required>
+                </div>
+                <div class="form_pair">
+                    <div class="text_pair">Дедлайн</div>
+                    <div class="date">
+                        <input class="date_input" type="number" name="t" value="22" min="01" max="31" step="1" required>
+                        <div class="point">.</div>
+                        <input class="date_input" type="number" name="t" value="05" min="01" max="12" step="1" required>
+                        <div class="point">.</div>
+                        <input class="date_input year" type="number" name="t" value="2023" min="2023" max="3456"
+                            step="1" required>
+                    </div>
+                    <div class="time">
+                        <input class="time_input" type="number" name="t" value="9" min="0" max="23" step="1" required>
+                        <div class="point">:</div>
+                        <input class="time_input" type="number" name="t" value="00" min="00" max="59" step="1" required>
+                    </div>
+                </div>
+                <div class="buttons_modal">
+                    <button id="button_form_back" class="button button_form">Отменить изменения</button>
+                    <button id="button_save" class="button button_form">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="modal_back_change" class="modal modal_back_change">
+        <div class="modal__content_deployed modal__content_deployed_back_change">
+            <button class="modal__close-button">
+                &#10006;
+            </button>
+            <p class="modal__title">
+                Отменить изменения?
+            </p>
+            <div class="buttons_modal">
+                <button id="button_back_back" class="button button_delete">Назад</button>
+                <button id="button_back_change" class="button button_delete">Отменить</button>
+            </div>
+        </div>
+    </div>
+
+
     <div class="title_settings">
         <div class="page_title">Задачи</div>
         <div class="checkboxes">
@@ -46,7 +159,7 @@
         </div>
     </div>
     <p class="add_task">
-        <button class="add_task_button">
+        <button id="add_task_button" class="add_task_button">
             +
         </button>
         Добавить задачу
@@ -57,7 +170,7 @@
             <td>Контест</td>
             <td>
                 <div class="price">Стоимость
-                    <div class="sort_sign"> &#8597;</div>
+                    <div id="sort_sign" class="sort_sign"> &#8597;</div>
                 </div>
             </td>
             <td>Студент</td>
