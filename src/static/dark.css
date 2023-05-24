@@ -1,89 +1,23 @@
-body {
-    background: #111;
-    color: #f4f4f4;
-}
-
-tr:nth-child(odd) {
-    background-color: #111;
-}
-
-tr:nth-child(even) {
-    background-color: #1a1d24;
-}
-
-dt:nth-child(odd) {
-    background-color: #111;
-}
-
-dt:nth-child(even) {
-    background-color: #1a1d24;
-}
-
-header {
-    background-color: #111;
-}
-
-.navbar {
-    border-bottom: 4px solid #3B73E4;
-}
-
-.navbar a {
-    color: #f4f4f4;
-}
-
-.navbar a:hover {
-    color: #5f95ff;
-}
-
-.notifications {
-    color: #f4f4f4;
-}
-
-.modal {
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal__content_deployed {
-    background: #111;
-    box-shadow: 0 4px 5px rgb(0, 0, 0);
-}
-
-.modal__content {
-    background: #111;
-    box-shadow: 0 4px 5px rgb(0, 0, 0);
-}
-
-.modal__close-button {
-    color: #f4f4f4;
-}
-
-.modal__points {
-    color: rgb(167, 167, 167);
-}
-
-.button {
-    background-color: rgb(42, 42, 42);
-    color: #f4f4f4;
-    border: 1px solid rgb(86, 86, 86);
-}
-
-.button:active {
-    background-color: rgb(213, 213, 213);
-}
-
-.button:hover {
-    background-color: rgb(74, 74, 74);
-}
-
-.task_table {
-    border: 5px solid #3B73E4;
-}
-
-.task_table:hover {
-    border: 5px solid #6d6d6d;
-    background-color: #252525;
-}
-
-.path {
-    color: rgb(130, 130, 130);
+:root {
+    --color-body: #111;
+    --color-text: #f4f4f4;
+    --color-child-odd: #111;
+    --color-child-even: #1a1d24;
+    --color-border-bottom: #3B73E4;
+    --size-border-bottom: 4px;
+    --color-navbar-hover: #5f95ff;
+    --color-modal-background: rgba(0, 0, 0, 0.5);
+    --color-box-shadow: rgb(0, 0, 0);
+    --color-points: rgb(167, 167, 167);
+    --color-button-background: #111111;
+    --color-button-border: #3B73E4;
+    --color-button-active: #252525;
+    --color-button-hover: #252525;
+    --color-path: rgb(130, 130, 130);
+    --color-task-table-border-hover: #6d6d6d;
+    --size-task-table-border: 5px;
+    --color-task-table-background: #252525;
+    --color-task-table-border: #3B73E4;
+    --size-border-button: 3px;
+    --color-button-border-hover:#6d6d6d;
 }
