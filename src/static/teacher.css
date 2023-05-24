@@ -1,19 +1,8 @@
-:root {
-    --color-body-light: #f4f4f4;
-    --color-line-grey: rgb(238, 238, 238);
-    --color-light-grey: rgb(234, 234, 234);
-    --color-hover-light: #ff5e00;
-    --color-black: #111111;
-    --font-main: Arial, Helvetica, sans-serif;
-    --color-modal-background-light: rgba(0, 0, 0, 0.5);
-    --color-modal-shadow-light: rgb(102, 102, 102);
-    --color-modal-points-light: rgb(167, 167, 167);
-    --color-modal-light:#f9f9f9;
-}
+
 
 body {
     margin: 0;
-    background-color: var(--color-body-light);
+    background-color: var(--color-body);
 }
 
 .logo {
@@ -22,6 +11,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
+   
 }
 
 .left_nav {
@@ -37,7 +27,7 @@ body {
     vertical-align: middle;
     justify-content: space-between;
     padding: 0px 100px;
-    border-bottom: 3px solid var(--color-line-grey);
+    border-bottom: 3px solid var(--color-line-head);
 }
 
 .exit_image img {
@@ -54,7 +44,7 @@ body {
 
 .navbar a {
     vertical-align: middle;
-    color: var(--color-black);
+    color: var(--color-text);
     text-decoration: none;
     font-family: var(--font-main);
     font-size: 23px;
@@ -63,7 +53,7 @@ body {
 }
 
 .navbar a:hover {
-    color: var(--color-hover-light);
+    color: var(--color-hover-head);
 }
 
 .theme_images .theme_image:nth-of-type(2) {
@@ -120,6 +110,7 @@ table {
     table-layout: auto;
     margin: 0px 75px 20px;
     border-collapse: collapse;
+    color: var(--color-text);
 }
 
 td {
@@ -128,11 +119,11 @@ td {
 }
 
 tr:nth-child(odd) {
-    background-color: var(--color-body-light);
+    background-color: var(--color-body);
 }
 
 tr:nth-child(even) {
-    background-color: var(--color-light-grey);
+    background-color: var(--color-nth-child);
 }
 
 .page_title {
@@ -140,6 +131,7 @@ tr:nth-child(even) {
     font-family: var(--font-main);
     font-size: 80px;
     margin: 50px 20px 0px 75px;
+    color:var(--color-text);
 }
 
 .table_title {
@@ -167,14 +159,16 @@ tr:nth-child(even) {
     margin: 10px 75px 30px;
     font-size: 20px;
     font-family: var(--font-main);
+    color: var(--color-text);
 }
 
 .add_task_button {
     margin: 0px 10px;
     font-size: 20px;
-    background-color: rgb(248, 248, 248);
+    background-color: var(--color-modal-button-background);
     border-radius: 5px;
-    border: 1px solid #111111;
+    border: var(--size-border-add-task-button) solid var(--color-add-task-button);
+    color:var(--color-text);
 }
 
 .add_task_button:hover {
@@ -190,6 +184,7 @@ tr:nth-child(even) {
     font-size: 18px;
     font-family: var(--font-main);
     margin-bottom: 5px;
+    color: var(--color-text);
 }
 
 .checkbox {
@@ -210,17 +205,17 @@ tr:nth-child(even) {
     content: '';
     height: 18px;
     width: 18px;
-    outline: 1px solid #939598;
-    background-color: rgb(248, 248, 248);
+    outline: var(--outline-checbox-label) solid var(--color-border-checkbox);
+    background-color:var(--color-background-button);
     border-radius: 5px;
     position: absolute;
     left: 0;
 }
 
 .checkbox input[type=checkbox]:checked+label:after {
-    background: url(../static/img/plus.png);
+    background: var(--image-check-mark);
     background-size: 18px;
-    outline: 1px solid #939598;
+    outline: var(--outline-checbox-label) solid var(--color-border-checkbox-checked);
     border-radius: 5px;
     height: 18px;
     width: 18px;
@@ -230,16 +225,11 @@ tr:nth-child(even) {
     font-family: var(--font-main);
     font-size: 40px;
     margin: 86px 0px 30px 25px;
+    color:var(--color-text);
 }
 
 .title_group {
     display: flex;
-}
-
-.pencil {
-    height: 15px;
-    width: 15px;
-    margin: 84px 0px 0px 7px;
 }
 
 .pencil:hover {
@@ -247,10 +237,10 @@ tr:nth-child(even) {
 }
 
 .modal {
-    background-color: var(--color-modal-background-light);
+    overflow-y: scroll;
+    background-color: var(--color-modal-background);
     position: absolute;
     visibility: hidden;
-    overflow-y: scroll;
     top: -1000px;
     right: 0;
     bottom: 0;
@@ -269,13 +259,18 @@ tr:nth-child(even) {
     visibility: visible;
 }
 
+.modal_form{
+    padding: 80px 15px;
+}
+
 .modal__content_deployed {
     max-width: 500px;
     padding: 25px;
     border-radius: 8px;
     position: relative;
-    background: var(--color-body-light);
-    box-shadow: 0 4px 5px var(--color-modal-shadow-light);
+    background: var(--color-body);
+    box-shadow: 0 4px 5px var(--color-modal-shadow);
+    color: var(--color-text);
 }
 
 
@@ -293,6 +288,7 @@ tr:nth-child(even) {
     cursor: pointer;
     transition: .3s;
     outline: none;
+    color: var(--color-text);
 }
 
 .modal__close-button:hover {
@@ -304,7 +300,7 @@ tr:nth-child(even) {
     font-size: 1.5rem;
     margin: 0px 0 0 0;
     font-family: var(--font-main);
-    color: var(--color-black);
+    color: var(--color-text);
 }
 
 .modal__text {
@@ -312,7 +308,7 @@ tr:nth-child(even) {
     font-family: var(--font-main);
     font-size: 15px;
     margin: 10px 0 0px;
-    color: var(--color-black);
+    color: var(--color-text);
 }
 
 .modal__points {
@@ -320,7 +316,7 @@ tr:nth-child(even) {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 35px;
     margin: -20px 0 0px;
-    color: rgb(167, 167, 167);
+    color:var(--color-points);
 }
 
 .button {
@@ -332,25 +328,20 @@ tr:nth-child(even) {
     font-size: 20px;
     border-radius: 16px;
     border: 1px solid;
-    color: var(--color-black);
-    background-color: #ffffff;
+    color: var(--color-text);
+    background-color: var(--color-background-button);;
 }
-/*
-.button:active {
-    padding: 10px 20px;
-    margin: 10px 15px 10px;
-}
-*/
 
 .button {
-    background-color: #ffffff;
-    color: var(--color-black);
-    border-color: #373737;
+    background-color: var(--color-background-button);;
+    color: var(--color-text);
+    border:var(--size-border-add-task-button) solid var(--color-border-button);
    
 }
 
 .button:hover {
-    background-color: rgb(244, 244, 244);
+    background-color: var(--color-button-backgroung-hover);
+    border: var(--size-border-add-task-button) solid var(--color-border-modal-button-hover);
 }
 
 .buttons_modal{
@@ -392,12 +383,14 @@ tr:nth-child(even) {
 }
 
 .form{
-    border: 1px solid #717171;
+    border: 1px solid var(--color-input-border);
+    color: var(--color-text);
+    background-color: var(--color-num-input);
     padding: 5px;
     border-radius: 3px;
     display:inline-block;
     width: 350px;
-    background-color: #ffffff;
+    background-color: var(--color-background-button);
 }
 
 
@@ -405,11 +398,11 @@ tr:nth-child(even) {
     margin-top: 20px;
     margin-bottom: 10px;
     padding: 10px 50px;
-    background-color: #ffffff;
+    background-color: var(--color-background-button);
 }
 
 .number_input{
-    margin-right: 297px;
+    margin-right: 299px;
 }
 
 .point{
@@ -419,10 +412,11 @@ tr:nth-child(even) {
 .date{
     display: flex;
     padding: 0 10px;
-    margin-left: 66px;
+    margin-left: 55px;
 }
 .date_input{
     width: 40px;
+    
 }
 
 .year{
@@ -459,3 +453,11 @@ tr:nth-child(even) {
 .modal_back_change{
     padding: 200px 15px;
 }
+
+input{
+    color: var(--color-text);
+    background-color: var(--color-num-input);
+    border: 1px solid var(--color-input-border);
+    border-radius: 3px;
+}
+
