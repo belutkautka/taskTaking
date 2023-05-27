@@ -1,4 +1,4 @@
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, MetaData, Identity, TIMESTAMP, ARRAY
+from sqlalchemy import Table, Column, Integer, String, ForeignKey, MetaData, Identity, TIMESTAMP, Float
 
 from src.auth.models import user
 
@@ -16,7 +16,8 @@ task = Table(
     # Column("taken_by", ARRAY(Integer), nullable=True),
     # Column("taken_cnt", Integer), # calc
     Column("taken_max", Integer, nullable=True),
-    Column("dead_line", TIMESTAMP, nullable=True)
+    Column("dead_line", TIMESTAMP, nullable=True),
+    Column("task_value", Float, nullable=True)
 )
 
 taken_task = Table(

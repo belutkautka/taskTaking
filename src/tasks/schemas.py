@@ -11,3 +11,4 @@ class TaskCreate(BaseModel):
     description: str
     taken_max: int
     dead_line: int
+    task_value: float

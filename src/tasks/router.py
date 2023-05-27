@@ -19,9 +19,9 @@ router = APIRouter(
 current_user = fastapi_users.current_user()
 
 
-@router.get('/get_task_by_teacher_id')
+@router.get('/get_tasks_by_teacher_id')
 # @cache(expire=3600)
-async def get_task_by_teacher_id(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
+async def get_tasks_by_teacher_id(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
     try:
         if user.role_id == 1:
             query = select(task).where(task.c.added_by == user.id)
@@ -44,6 +44,19 @@ async def get_task_by_teacher_id(session: AsyncSession = Depends(get_async_sessi
         })
 
 
+@router.get('/get_my_taken_tasks')
+async def get_my_taken_tasks(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
+    if user.id != 2:
+        raise Exception
+    query = select(taken_task).where(taken_task.c.user_id == user.id)
+    result = await session.execute(query)
+    return {
+        'Status': 'Success',
+        'Data': [r._asdict() for r in result],
+            'Details': None
+        }
+
+
 @router.post('/take_task')
 # @cache(expire=3600)
 async def take_task(task_id: int, session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
@@ -64,16 +77,6 @@ async def take_task(task_id: int, session: AsyncSession = Depends(get_async_sess
     await session.execute(stmt)
     await session.commit()
     return {'Status': 'Success'}
-
-    # if task_dict[0]['taken_cnt'] == task_dict[0]['taken_max']:
-    #     raise Exception
-    # else:
-    #     stmt = update(task).where(task.c.id == task_id).values(taken_cnt = task_dict[0]['taken_cnt'] + 1)
-    #     await session.execute(stmt)
-    #     await session.commit()
-    #     stmt = update(user_db_model).where(user_db_model.c.id == user.id).
-
-
     # except Exception:
     #     raise HTTPException(status_code=500, detail=
     #     {
