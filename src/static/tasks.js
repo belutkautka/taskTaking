@@ -6,22 +6,34 @@
 //     let modal = document.getElementById('modal');
 //     modal.classList.remove('modal_active');
 // })
+let tasks = sendRequest("/tasks/get_tasks_by_teacher_id");
 
-for (let i =0;i<7;i++){
-    createNewTask("Эрен уничтожает всех титанов","Длинный контест 5 задача С","2.8")
+tasks.then(data => createNewTasks(data.Data));
+
+function createNewTasks(data) {
+    data.forEach(e => createNewTask(e.name, e.contest_type + " " + e.contest_number, e.task_value));
 }
+
 function createNewTask(tValue, pValue, gValue) {
     let newTask = document.createElement("div");
-    newTask.className="task_table";
+    newTask.className = "task_table";
     let title = document.createElement("div")
-    title.className="title"
+    title.className = "title"
     title.innerHTML = tValue
     let path = document.createElement("div")
-    path.className= "path"
-    path.innerHTML= pValue
+    path.className = "path"
+    path.innerHTML = pValue
     let grade = document.createElement("div")
     grade.className = "grade"
     grade.innerHTML = gValue
-    newTask.append(title,path,grade)
+    newTask.append(title, path, grade)
     document.getElementById("titles").append(newTask)
+}
+
+function sendRequest(url) {
+    return fetch(url).then(response => {
+        if (response.ok && response.status[0] !== "3") {
+            return response.json();
+        }
+    });
 }
