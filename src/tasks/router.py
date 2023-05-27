@@ -1,8 +1,9 @@
 import datetime
 
+import sqlalchemy
 from fastapi import APIRouter, Depends, HTTPException
 # from fastapi_cache.decorator import cache
-from sqlalchemy import select, insert, delete, and_
+from sqlalchemy import select, insert, delete, and_, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.auth.base_config import fastapi_users
@@ -46,22 +47,33 @@ async def get_tasks_by_teacher_id(session: AsyncSession = Depends(get_async_sess
 
 @router.get('/get_my_taken_tasks')
 async def get_my_taken_tasks(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
-    if user.id != 2:
-        raise Exception
+    if user.role_id != 2:
+        raise HTTPException(status_code=405, detail=
+        {
+            'Status': 'Error',
+            'Data': None,
+            'Details': 'Not a student'
+        })
+
     query = select(taken_task).where(taken_task.c.user_id == user.id)
     result = await session.execute(query)
     return {
         'Status': 'Success',
         'Data': [r._asdict() for r in result],
         'Details': None
-        }
+    }
 
 
 @router.post('/take_task')
 # @cache(expire=3600)
 async def take_task(task_id: int, session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
     if user.role_id != 2:
-        raise Exception
+        raise HTTPException(status_code=405, detail=
+        {
+            'Status': 'Error',
+            'Data': None,
+            'Details': 'Not a student'
+        })
 
     query = select(task).where(task.c.id == task_id)
     res = await session.execute(query)
@@ -73,30 +85,64 @@ async def take_task(task_id: int, session: AsyncSession = Depends(get_async_sess
     res = await session.execute(query)
     task_dict = [r._asdict() for r in res]
     if len(task_dict) == max:
-        raise Exception
-    stmt = insert(taken_task).values((task_id, user.id))
-    await session.execute(stmt)
-    await session.commit()
-    return {'Status': 'Success'}
-    # except Exception:
-    #     raise HTTPException(status_code=500, detail=
-    #     {
-    #         'Status': 'Error',
-    #         'Data': None,
-    #         'Details': None
-    #     })
+        raise HTTPException(status_code=422, detail=
+        {
+            'Status': 'Error',
+            'Data': None,
+            'Details': f'{max} students already took this task'
+        })
+    try:
+        stmt = insert(taken_task).values((task_id, user.id))
+        await session.execute(stmt)
+        await session.commit()
+    except:
+        raise HTTPException(status_code=422, detail=
+        {
+            'Status': 'Error',
+            'Data': None,
+            'Details': f'You already took this task'
+        })
+
+    if len(task_dict) + 1 == max:
+        await session.execute(update(task).where(task.c.id == task_id).values(is_available=False))
+        await session.commit()
+
+    return {
+        'Status': 'Success',
+        'Data': None,
+        'Details': None
+    }
 
 
 @router.post('/drop_task')
 # @cache(expire=3600)
 async def drop_task(task_id: int, session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
     if user.role_id != 2:
-        raise Exception
-    query = delete(taken_task).where(and_(taken_task.c.task_id == task_id, taken_task.c.user_id == user.id))
-    # query = delete(taken_task).where(taken_task.c.user_id == user.id)
-    await session.execute(query)
-    await session.commit()
-    return {'Status': 'Success'}
+        raise HTTPException(status_code=405, detail=
+        {
+            'Status': 'Error',
+            'Data': None,
+            'Details': 'Not a student'
+        })
+    try:
+        query = delete(taken_task).where(and_(taken_task.c.task_id == task_id, taken_task.c.user_id == user.id))
+        await session.execute(query)
+        await session.commit()
+
+        await session.execute(update(task).where(task.c.id == task_id).values(is_available=True))
+        await session.commit()
+
+        return {
+            'Status': 'Success',
+            'Data': None,
+            'Details': None
+        }
+    except:
+        return {
+            'Status': 'Error',
+            'Data': None,
+            'Details': None
+        }
 
 
 @router.post('/add_task')
@@ -104,10 +150,11 @@ async def add_task(new_task: TaskCreate, session: AsyncSession = Depends(get_asy
     try:
         if user.role_id != 1:
             raise Exception
-
         data = new_task.dict()
+
         data['added_by'] = user.id
         data['dead_line'] = datetime.datetime.utcnow() + datetime.timedelta(days=data['dead_line'])
+        data['is_available'] = True
 
         stmt = insert(task).values(data)
         await session.execute(stmt)
@@ -116,7 +163,7 @@ async def add_task(new_task: TaskCreate, session: AsyncSession = Depends(get_asy
     except Exception:
         raise HTTPException(status_code=405, detail=
         {
-            'Status': 'Not a teacher',
+            'Status': 'Error',
             'Data': None,
-            'Details': None
+            'Details': 'Not a teacher'
         })
