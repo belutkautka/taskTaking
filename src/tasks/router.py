@@ -53,7 +53,7 @@ async def get_my_taken_tasks(session: AsyncSession = Depends(get_async_session),
     return {
         'Status': 'Success',
         'Data': [r._asdict() for r in result],
-            'Details': None
+        'Details': None
         }
 
 
@@ -62,12 +62,13 @@ async def get_my_taken_tasks(session: AsyncSession = Depends(get_async_session),
 async def take_task(task_id: int, session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
     if user.role_id != 2:
         raise Exception
+
     query = select(task).where(task.c.id == task_id)
     res = await session.execute(query)
+
     task_dict = [r._asdict() for r in res]
-    print(task_dict)
     max = task_dict[0]['taken_max']
-    print(max)
+
     query = select(taken_task).where(task.c.id == task_id)
     res = await session.execute(query)
     task_dict = [r._asdict() for r in res]
@@ -91,14 +92,16 @@ async def take_task(task_id: int, session: AsyncSession = Depends(get_async_sess
 async def drop_task(task_id: int, session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
     if user.role_id != 2:
         raise Exception
-    query = taken_task.delete().where(and_(taken_task.c.task_id == task_id, taken_task.c.user_id == user.id))
+    query = delete(taken_task).where(and_(taken_task.c.task_id == task_id, taken_task.c.user_id == user.id))
+    # query = delete(taken_task).where(taken_task.c.user_id == user.id)
     await session.execute(query)
+    await session.commit()
     return {'Status': 'Success'}
 
 
 @router.post('/add_task')
 async def add_task(new_task: TaskCreate, session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
-    # try:
+    try:
         if user.role_id != 1:
             raise Exception
 
@@ -110,10 +113,10 @@ async def add_task(new_task: TaskCreate, session: AsyncSession = Depends(get_asy
         await session.execute(stmt)
         await session.commit()
         return {'Status': 'Success'}
-    # except Exception:
-    #     raise HTTPException(status_code=405, detail=
-    #     {
-    #         'Status': 'Not a teacher',
-    #         'Data': None,
-    #         'Details': None
-    #     })
+    except Exception:
+        raise HTTPException(status_code=405, detail=
+        {
+            'Status': 'Not a teacher',
+            'Data': None,
+            'Details': None
+        })
