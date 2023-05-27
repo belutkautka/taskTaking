@@ -1,9 +1,8 @@
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, MetaData, Identity
+from sqlalchemy import Table, Column, Integer, String, ForeignKey, MetaData, Identity, TIMESTAMP, ARRAY
 
 from src.auth.models import user
 
 metadata = MetaData()
-
 task = Table(
     "task",
     metadata,
@@ -14,5 +13,15 @@ task = Table(
     Column("task_number", Integer, nullable=False),
     Column("description", String, nullable=False),
     Column("added_by", Integer, ForeignKey(user.c.id), nullable=False),
-    Column("taken_by", Integer, ForeignKey(user.c.id), nullable=True),
+    # Column("taken_by", ARRAY(Integer), nullable=True),
+    # Column("taken_cnt", Integer), # calc
+    Column("taken_max", Integer, nullable=True),
+    Column("dead_line", TIMESTAMP, nullable=True)
+)
+
+taken_task = Table(
+    "taken_task",
+    metadata,
+    Column("task_id", Integer, ForeignKey(task.c.id), primary_key=True),
+    Column("user_id", Integer, ForeignKey(user.c.id), primary_key=True)
 )

@@ -39,6 +39,8 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
 
         if user_dict['role_id'] == 1:
             user_dict['invited_by'] = -1
+        else:
+            user_dict['max_task_available'] = 3
 
         created_user = await self.user_db.create(user_dict)
 

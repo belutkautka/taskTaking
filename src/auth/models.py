@@ -1,16 +1,18 @@
 from datetime import datetime
+
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
-from sqlalchemy import Table, Column, Integer, String, TIMESTAMP, ForeignKey, Boolean, MetaData, Identity
+from sqlalchemy import Table, Column, Integer, String, TIMESTAMP, Boolean, MetaData, Identity, ARRAY
+
 from src.database import Base
 
 metadata = MetaData()
 
-role = Table(
-    "role",
-    metadata,
-    Column("id", Integer, primary_key=True),
-    Column("role", String, nullable=False),
-)
+# role = Table(
+#     "role",
+#     metadata,
+#     Column("id", Integer, primary_key=True),
+#     Column("role", String, nullable=False),
+# )
 
 user = Table(
     "user",
@@ -19,9 +21,12 @@ user = Table(
     Column("email", String, nullable=True),
     Column("username", String, nullable=False),
     Column("registered_at", TIMESTAMP, default=datetime.utcnow),
-    Column("role_id", Integer, ForeignKey(role.c.id)),
+    # Column("role_id", Integer, ForeignKey(role.c.id)),
+    Column("role_id", Integer, nullable=False),
     Column("invited_by", Integer, nullable=True),
     Column("hashed_password", String, nullable=False),
+    # Column("tasks_taken", ARRAY(Integer), nullable=True),
+    Column("max_task_available", Integer),
     Column("is_active", Boolean, default=True, nullable=False),
     Column("is_superuser", Boolean, default=False, nullable=False),
     Column("is_verified", Boolean, default=False, nullable=False),
@@ -33,9 +38,12 @@ class User(SQLAlchemyBaseUserTable[int], Base):  # класс создан из-
     email = Column(String, nullable=False)
     username = Column(String, nullable=False)
     registered_at = Column(TIMESTAMP, default=datetime.utcnow)
-    role_id = Column(Integer, ForeignKey(role.c.id))
+    # role_id = Column(Integer, ForeignKey(role.c.id))
+    role_id = Column(Integer, nullable=False)
     invited_by = Column(Integer, nullable=True)
     hashed_password: str = Column(String(length=1024), nullable=False)
+    # tasks_taken = Column(ARRAY(Integer), nullable=True)
+    max_task_available = Column(Integer, nullable=True)
     is_active: bool = Column(Boolean, default=True, nullable=False)
     is_superuser: bool = Column(Boolean, default=False, nullable=False)
     is_verified: bool = Column(Boolean, default=False, nullable=False)
