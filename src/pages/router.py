@@ -47,3 +47,13 @@ def get_base_page(request: Request):
 @router.get("/roleselector")
 def get_base_page(request: Request):
     return templates.TemplateResponse("roleselector.html", {"request": request})
+
+
+@router.get("/studentregistration")
+def get_base_page(request: Request):
+    return templates.TemplateResponse("studentregistration.html", {"request": request})
+
+
+@router.get("/teacherregistration")
+def get_base_page(request: Request):
+    return templates.TemplateResponse("teacherregistration.html", {"request": request})
