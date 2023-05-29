@@ -398,7 +398,6 @@ h1 {
     /*width: 400px;*/
     display: flex;
     justify-content: center;
-
 }
 
 .role_btn {
@@ -422,6 +421,7 @@ h1 {
 }
 
 .reg_body {
+    font-family: Arial, Helvetica, sans-serif;
     display: flex;
     justify-content: center;
 }
