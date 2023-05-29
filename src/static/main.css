@@ -379,3 +379,89 @@ dt:nth-child(even) {
     background-color: var(--color-button-hover);
     border: var(--size-border-button) solid var(--color-button-border-hover);
 }
+
+/*регистрация*/
+.role_container {
+    zoom: 1.6;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.role_buttons {
+    align-items: center;
+    text-decoration: none;
+    /*width: 400px;*/
+    display: flex;
+    justify-content: center;
+
+}
+
+.role_btn {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color: black;
+    cursor: pointer;
+    box-shadow: 0 4px 5px rgb(102, 102, 102);
+}
+
+.role_buttons a {
+    text-decoration: none;
+}
+
+.role_btn:hover {
+    background-color: gray;
+}
+
+.reg_body {
+    display: flex;
+    justify-content: center;
+}
+
+.reg_container {
+    zoom: 1.6;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+#inputField {
+    margin: 10px 0;
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.reg_btn button {
+    padding: 10px;
+    width: 200px;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reg_btn:hover button {
+    background-color: #0056b3;
+}
