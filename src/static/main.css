@@ -10,7 +10,7 @@
     --color-box-shadow: rgb(102, 102, 102);
     --color-points: rgb(167, 167, 167);
     --color-button-background: rgb(232, 232, 232);
-    --color-button-border: #ec0d0d;
+    --color-button-border: rgb(130, 130, 130);
     --color-button-active: rgb(220, 220, 220);
     --color-button-hover: rgb(220, 220, 220);
     --color-path: rgb(130, 130, 130);
@@ -19,7 +19,7 @@
     --color-task-table-background: rgb(234, 234, 234);
     --color-task-table-border: #111111;
     --size-border-button: 3px;
-    --color-button-border-hover:#252525;
+    --color-button-border-hover: #5f5f5f;
 }
 
 body {
@@ -225,7 +225,7 @@ td {
 }
 
 .button {
-    margin: 5px 0 15px;
+    margin: 15px 0 0px;
     padding: 20px 80px;
     text-align: center;
     text-decoration: none;
@@ -464,4 +464,65 @@ form {
 
 .reg_btn:hover button {
     background-color: #0056b3;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Chrome, Opera, Safari */
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+details :focus {
+    outline: 0;
+}
+
+/* Firefox */
+details,
+summary {
+    display: block;
+}
+
+details summary:before {
+    content: "";
+}
+
+details[open] summary:before {
+    content: "";
+}
+
+summary::after {
+    content: "...";
+    float: right;
+    margin: -20px 10px 0 0;
+    padding: 0;
+    text-align: right;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 35px;
+    color: var(--color-points);
+}
+
+details[open] summary::after {
+    content: "-";
+}
+
+.dedline_student {
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    margin: 0px 75px 0px;
+}
+
+.limit_modal {
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    margin: 20px 0px 0px;
+    color: var(--color-text);
+}
+
+.button_forbidden{
+   display: none;
 }

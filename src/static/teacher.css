@@ -1,30 +1,30 @@
 :root {
     --color-body: #f4f4f4;
-    --color-background-button:#ffffff;
+    --color-background-button: #ffffff;
     --color-line-head: rgb(238, 238, 238);
     --color-nth-child: rgb(234, 234, 234);
-    --color-modal-button-background:rgb(248, 248, 248);
-    --color-button-backgroung-hover:#ececec;
+    --color-modal-button-background: rgb(248, 248, 248);
+    --color-button-backgroung-hover: #ececec;
     --color-hover-head: #ff5e00;
-    --color-text:#111111;
+    --color-text: #111111;
     --color-add-task-button: #111111;
     --font-main: Arial, Helvetica, sans-serif;
     --color-modal-background: rgba(0, 0, 0, 0.5);
     --color-modal-shadow: rgb(102, 102, 102);
-    --color-modal-body:#f9f9f9;
-    --color-points:rgb(232,232,232);
-    --color-border-form:#717171;
-    --color-border-checkbox:#939598;
+    --color-modal-body: #f9f9f9;
+    --color-points: rgb(232, 232, 232);
+    --color-border-form: #717171;
+    --color-border-checkbox: #939598;
     --color-border-button: #515151;
-    --outline-checbox-label:1px;
-    --color-border-checkbox-checked:#939598;
+    --outline-checbox-label: 1px;
+    --color-border-checkbox-checked: #939598;
     --size-border-add-task-button: 1px;
-    --image-check-mark:url(../static/img/blackCheckMark.png);
-    --color-border-modal-button-hover:#717171;
-    --color-num-input:#ffffff;
-    --color-input-border:#515151;
-    --color-grade:#bababa;
-    --color-grade-nth:#bababa;
+    --image-check-mark: url(../static/img/blackCheckMark.png);
+    --color-border-modal-button-hover: #717171;
+    --color-num-input: #ffffff;
+    --color-input-border: #515151;
+    --color-grade: #bababa;
+    --color-grade-nth: #bababa;
 }
 
 body {
@@ -38,7 +38,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
-   
+
 }
 
 .left_nav {
@@ -158,7 +158,7 @@ tr:nth-child(even) {
     font-family: var(--font-main);
     font-size: 80px;
     margin: 50px 20px 0px 75px;
-    color:var(--color-text);
+    color: var(--color-text);
 }
 
 .table_title {
@@ -195,7 +195,7 @@ tr:nth-child(even) {
     background-color: var(--color-modal-button-background);
     border-radius: 5px;
     border: var(--size-border-add-task-button) solid var(--color-add-task-button);
-    color:var(--color-text);
+    color: var(--color-text);
 }
 
 .add_task_button:hover {
@@ -233,7 +233,7 @@ tr:nth-child(even) {
     height: 18px;
     width: 18px;
     outline: var(--outline-checbox-label) solid var(--color-border-checkbox);
-    background-color:var(--color-background-button);
+    background-color: var(--color-background-button);
     border-radius: 5px;
     position: absolute;
     left: 0;
@@ -252,7 +252,7 @@ tr:nth-child(even) {
     font-family: var(--font-main);
     font-size: 40px;
     margin: 86px 0px 30px 25px;
-    color:var(--color-text);
+    color: var(--color-text);
 }
 
 .title_group {
@@ -286,7 +286,7 @@ tr:nth-child(even) {
     visibility: visible;
 }
 
-.modal_form{
+.modal_form {
     padding: 80px 15px;
 }
 
@@ -343,7 +343,7 @@ tr:nth-child(even) {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 35px;
     margin: -20px 0 0px;
-    color:var(--color-points);
+    color: var(--color-points);
 }
 
 .button {
@@ -356,14 +356,16 @@ tr:nth-child(even) {
     border-radius: 16px;
     border: 1px solid;
     color: var(--color-text);
-    background-color: var(--color-background-button);;
+    background-color: var(--color-background-button);
+    ;
 }
 
 .button {
-    background-color: var(--color-background-button);;
+    background-color: var(--color-background-button);
+    ;
     color: var(--color-text);
-    border:var(--size-border-add-task-button) solid var(--color-border-button);
-   
+    border: var(--size-border-add-task-button) solid var(--color-border-button);
+
 }
 
 .button:hover {
@@ -371,117 +373,118 @@ tr:nth-child(even) {
     border: var(--size-border-add-task-button) solid var(--color-border-modal-button-hover);
 }
 
-.buttons_modal{
+.buttons_modal {
     display: flex;
     margin-top: 15px;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
-.button_delete{
+.button_delete {
     padding: 10px 45px;
 }
 
-.modal__content_deployed_delete{
+.modal__content_deployed_delete {
     width: 350px;
 }
 
-.modal_delete{
+.modal_delete {
     padding: 200px 15px;
 }
 
 
-.modal__content_deployed_form{
+.modal__content_deployed_form {
     min-width: 600px;
-   
+
 }
 
-.text_pair{
+.text_pair {
     font-family: var(--font-main);
     font-size: 23px;
     white-space: nowrap;
     text-align: left;
 }
 
-.form_pair{
+.form_pair {
     display: flex;
     margin-top: 20px;
     margin-right: 20px;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
-.form{
+.form {
     border: 1px solid var(--color-input-border);
     color: var(--color-text);
     background-color: var(--color-num-input);
     padding: 5px;
     border-radius: 3px;
-    display:inline-block;
+    display: inline-block;
     width: 350px;
     background-color: var(--color-background-button);
 }
 
 
-.button_form{
+.button_form {
     margin-top: 20px;
     margin-bottom: 10px;
     padding: 10px 50px;
     background-color: var(--color-background-button);
 }
 
-.number_input{
+.number_input {
     margin-right: 299px;
 }
 
-.point{
+.point {
     font-size: 30px;
 }
 
-.date{
+.date {
     display: flex;
     padding: 0 10px;
     margin-left: 55px;
 }
-.date_input{
+
+.date_input {
     width: 40px;
-    
+
 }
 
-.year{
+.year {
     width: 60px;
 }
 
-.time_input{
+.time_input {
     width: 40px;
 }
 
-.time{
+.time {
     display: flex;
     padding: 0 10px;
 }
 
-.radio_len{
+.radio_len {
     font-family: var(--font-main);
     font-size: 20px;
     margin-right: 262px;
 }
 
-.radio_lengs{
+.radio_lengs {
     padding: 0px 0px;
 }
 
-.button_delete{
+.button_delete {
     padding: 10px 45px;
 }
 
-.modal__content_deployed_back_change{
+.modal__content_deployed_back_change {
     width: 350px;
 }
 
-.modal_back_change{
+.modal_back_change {
     padding: 200px 15px;
 }
 
-input{
+input {
     color: var(--color-text);
     background-color: var(--color-num-input);
     border: 1px solid var(--color-input-border);
@@ -489,16 +492,32 @@ input{
     font-family: var(--font-main);
 }
 
-.grade{
+.grade {
     font-family: var(--font-main);
     font-size: 18px;
     border: 1px solid var(--color-grade);
     background-color: var(--color-nth-child);
 }
 
-.grade_dark{
+.grade_dark {
     border: 1px solid var(--color-grade-nth);
     font-family: var(--font-main);
     font-size: 18px;
     background-color: var(--color-body);
+}
+
+.dedline {
+    text-align: left;
+    font-family: var(--font-main);
+    font-size: 25px;
+    margin: 50px 20px 0px 105px;
+    color: var(--color-text);
+}
+
+.limit {
+    font-size: 15px;
+    font-family: var(--font-main);
+    color: var(--color-border-checkbox-checked);
+    position: fixed;
+    left: 90px;
 }
