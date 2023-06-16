@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Registration</title>
+    <title>Sign In</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/main.css">
     <link rel="stylesheet" type="text/css" href="../static/light.css" id="theme-link">
@@ -46,16 +46,60 @@
         </div>
     </div>
 </header>
-<div class="role_container">
-    <div class="role_select">
-        <h1>Выберите роль</h1>
-    </div>
-    <br>
-    <div class="role_buttons">
-        <a class="role_btn" href="studentregistration">Студент</a>
-        <a class="role_btn" href="teacherregistration">Преподаватель</a>
+
+<!-- -->
+
+<div class="signin-container">
+    <div class="frame frame-short">
+
+        <div class="signin-nav">
+            <div class="btn">
+                <ul class="links">
+                    <li class="signin-active"><a class="btn-top">Войти</a></li>
+                    <li class="signup-inactive"><a class="btn-top">Зарегистрироваться</a></li>
+                </ul>
+                <div class="slider-box">
+                    <div class="slider"></div>
+                </div>
+            </div>
+        </div>
+
+        <form action="" class="login-form active">
+            <div class="login-box">
+                <div class="form-group">
+                    <label for="username">Логин</label>
+                    <input type="text" id="username">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password"/>
+                </div>
+                <div class="form-group">
+                    <input class="submit-btn" type="submit" value="Войти"/>
+                </div>
+
+            </div>
+        </form>
+
+
+        <form class="signin-form inactive">
+            <div class="signin-box">
+                <div class="form-group">
+                    <label for="regUsername">Логин da</label>
+                    <input type="text" id="regUsername">
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Пароль da</label>
+                    <input type="password" id="regPassword">
+                </div>
+            </div>
+        </form>
     </div>
 </div>
+
+
+<script src="../static/singIn.js"></script>
 <script src="../static/themeChanger.js"></script>
 </body>
 </html>
