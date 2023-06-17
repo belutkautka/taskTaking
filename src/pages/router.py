@@ -49,16 +49,6 @@ def get_base_page(request: Request, user: User = Depends(current_user)):
     return templates.TemplateResponse("teacherTasks.html", {"request": request})
 
 
-@router.get("/roleselector")
+@router.get("/signin")
 def get_base_page(request: Request):
-    return templates.TemplateResponse("roleselector.html", {"request": request})
-
-
-@router.get("/studentregistration")
-def get_base_page(request: Request):
-    return templates.TemplateResponse("studentregistration.html", {"request": request})
-
-
-@router.get("/teacherregistration")
-def get_base_page(request: Request):
-    return templates.TemplateResponse("teacherregistration.html", {"request": request})
+    return templates.TemplateResponse("signin.html", {"request": request})
