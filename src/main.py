@@ -28,7 +28,7 @@ app.mount("/static", StaticFiles(directory='src/static'), name="static")
 
 @app.get("/")
 async def root():
-    return RedirectResponse('pages/roleselector', status_code=302)
+    return RedirectResponse('pages/signin', status_code=302)
 
 
 # @app.on_event("startup")
