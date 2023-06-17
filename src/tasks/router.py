@@ -47,30 +47,27 @@ async def get_tasks_by_teacher_id(session: AsyncSession = Depends(get_async_sess
 
 @router.get('/get_students_by_task_id')
 async def get_students_by_task_id(task_id: int, session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
-    query = select(taken_task).where(taken_task.c.task_id == task_id)
-    result = await session.execute(query)
+    try:
+        query = select(taken_task).where(taken_task.c.task_id == task_id)
+        result = await session.execute(query)
 
-    students = [x['user_id'] for x in [r._asdict() for r in result]]
-    print(students)
+        students = [x['user_id'] for x in [r._asdict() for r in result]]
 
-    query = select(user_table.c.username).where(user_table.c.id.in_(students))
-    result = await session.execute(query)
+        query = select(user_table.c.username).where(user_table.c.id.in_(students))
+        result = await session.execute(query)
 
-    # query = select(user, taken_task).join(user.id)
-    # result = await session.execute(query)
-
-    return {
-        'Status': 'Success',
-        'Data': [r._asdict() for r in result],
-        'Details': None
-    }
-    # except Exception:
-    #     raise HTTPException(status_code=500, detail=
-    #     {
-    #         'Status': 'Error',
-    #         'Data': None,
-    #         'Details': None
-    #     })
+        return {
+            'Status': 'Success',
+            'Data': [r._asdict() for r in result],
+            'Details': None
+        }
+    except Exception:
+        raise HTTPException(status_code=500, detail=
+        {
+            'Status': 'Error',
+            'Data': None,
+            'Details': None
+        })
 
 
 @router.get('/get_my_taken_tasks')

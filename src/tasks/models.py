@@ -13,8 +13,6 @@ task = Table(
     Column("task_number", Integer, nullable=False),
     Column("description", String, nullable=False),
     Column("added_by", Integer, ForeignKey(user.c.id), nullable=False),
-    # Column("taken_by", ARRAY(Integer), nullable=True),
-    # Column("taken_cnt", Integer), # calc
     Column("taken_max", Integer, nullable=True),
     Column("dead_line", TIMESTAMP, nullable=True),
     Column("task_value", Float, nullable=True),
