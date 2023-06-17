@@ -1,13 +1,13 @@
 import datetime
 
-import sqlalchemy
 from fastapi import APIRouter, Depends, HTTPException
 # from fastapi_cache.decorator import cache
-from sqlalchemy import select, insert, delete, and_, update
+from sqlalchemy import select, insert, delete, and_, update, join
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.auth.base_config import fastapi_users
 from src.auth.models import User
+from src.auth.models import user as user_table
 from src.database import get_async_session
 from src.tasks.models import task, taken_task
 from src.tasks.schemas import TaskCreate
@@ -25,9 +25,9 @@ current_user = fastapi_users.current_user()
 async def get_tasks_by_teacher_id(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
     try:
         if user.role_id == 1:
-            query = select(task).where(task.c.added_by == user.id)
+            query = select(task).where(task.c.added_by == user.id).order_by(task.c.dead_line)
         else:
-            query = select(task).where(task.c.added_by == user.invited_by)
+            query = select(task).where(task.c.added_by == user.invited_by).order_by(task.c.dead_line)
 
         result = await session.execute(query)
 
@@ -45,6 +45,34 @@ async def get_tasks_by_teacher_id(session: AsyncSession = Depends(get_async_sess
         })
 
 
+@router.get('/get_students_by_task_id')
+async def get_students_by_task_id(task_id: int, session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
+    query = select(taken_task).where(taken_task.c.task_id == task_id)
+    result = await session.execute(query)
+
+    students = [x['user_id'] for x in [r._asdict() for r in result]]
+    print(students)
+
+    query = select(user_table.c.username).where(user_table.c.id.in_(students))
+    result = await session.execute(query)
+
+    # query = select(user, taken_task).join(user.id)
+    # result = await session.execute(query)
+
+    return {
+        'Status': 'Success',
+        'Data': [r._asdict() for r in result],
+        'Details': None
+    }
+    # except Exception:
+    #     raise HTTPException(status_code=500, detail=
+    #     {
+    #         'Status': 'Error',
+    #         'Data': None,
+    #         'Details': None
+    #     })
+
+
 @router.get('/get_my_taken_tasks')
 async def get_my_taken_tasks(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
     if user.role_id != 2:
@@ -55,7 +83,7 @@ async def get_my_taken_tasks(session: AsyncSession = Depends(get_async_session),
             'Details': 'Not a student'
         })
 
-    query = select(taken_task).where(taken_task.c.user_id == user.id)
+    query = select(taken_task).where(taken_task.c.user_id == user.id).order_by(task.c.dead_line)
     result = await session.execute(query)
     return {
         'Status': 'Success',
