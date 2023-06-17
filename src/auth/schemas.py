@@ -7,7 +7,7 @@ class UserRead(schemas.BaseUser[int]):
     email: str
     username: str
     role_id: int
-    invited_by: int
+    invited_by: str
     is_active: bool = True
     is_superuser: bool = False
     is_verified: bool = False
@@ -21,7 +21,7 @@ class UserCreate(schemas.BaseUserCreate):
     email: str
     password: str
     role_id: int
-    invited_by: int
+    invited_by: str
     is_active: Optional[bool] = True
     is_superuser: Optional[bool] = False
     is_verified: Optional[bool] = False
