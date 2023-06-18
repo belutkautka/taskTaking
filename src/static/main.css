@@ -668,14 +668,16 @@ details[open] summary::after {
 }
 
 label {
+    /*outline: 2px solid rgba(38, 231, 151, 0.5);*/
+    text-decoration: underline;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 16px;
     text-transform: uppercase;
     display: block;
-    height: 20px;
+    height: 15px;
     width: 100px;
     margin-top: 10px;
-    margin-left: 25px;
+    margin-left: 35px;
     margin-right: 80px;
     padding-bottom: 30px;
     /*text-align: left;*/
@@ -685,10 +687,11 @@ label {
 }
 
 .form-styling {
+    /*outline: 2px solid rgba(231, 38, 199, 0.5);*/
     color: var(--color-text);
-
-    width: 150px;
+    width: 130px;
     height: 25px;
+    margin-right: 35px;
     /*padding-left: 15px;*/
     border-radius: 17px;
     margin-bottom: 25px;
