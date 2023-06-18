@@ -19,5 +19,10 @@
     --color-task-table-background: #252525;
     --color-task-table-border: #3B73E4;
     --size-border-button: 3px;
-    --color-button-border-hover:#6d6d6d;
+    --color-button-border-hover: #6d6d6d;
+    --slider-color: linear-gradient(to right,
+    rgba(103, 147, 234, 0.92),
+    rgb(50, 96, 191));
+    --is-student-border: 2px solid #c2c2c2;
+    --is-student-background: #ffffff;
 }
