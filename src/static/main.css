@@ -708,6 +708,29 @@ label {
     /*border: 100px solid #050e17*/
 }
 
+.is-student {
+    position: relative;
+    padding-right: 175px;
+    cursor: pointer;
+}
+
+.is-student::after {
+    margin-left: 100px;
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #000;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+.custom-checkbox:checked + .is-student::after {
+    background-color: #000;
+}
+
+
 /*.custom-checkbox + label {*/
 /*    display: inline-flex;*/
 /*    align-items: center;*/
