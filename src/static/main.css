@@ -24,7 +24,7 @@
     rgb(255, 195, 110),
     rgb(255, 146, 91));
     --is-student-border: 2px solid #000;
-    --is-student-background: #000000;
+    --is-student-background: rgba(0, 0, 0, 0.56);
     --color-input-background: linear-gradient(to right, rgba(232, 232, 232, 0.82), rgb(215, 215, 215));
     --color-signin-shadow: rgb(128, 128, 128);
     --color-submit-button: rgb(110, 110, 110);
@@ -735,7 +735,7 @@ details[open] summary::after {
 }
 
 .custom-checkbox:checked + .is-student::after {
-    background-color: var(--is-student-background);
+    background-color: var(--color-submit-button);
 }
 
 
