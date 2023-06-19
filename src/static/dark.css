@@ -28,4 +28,9 @@
     --color-signin-shadow: rgba(128, 128, 128, 0.47);
     --color-submit-button: rgba(208, 208, 208, 0.38);
     --color-signin-container-border: rgba(255, 255, 255, 0.25);
+    --font-main: Arial, Helvetica, sans-serif;
+    --color-border-checkbox:#3B73E4;
+    --outline-checbox-label:2px;
+    --color-border-checkbox-checked:#3B73E4;
+    --image-check-mark:url(../static/img/whiteCheckMark.png);
 }

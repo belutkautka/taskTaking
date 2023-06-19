@@ -362,7 +362,6 @@ tr:nth-child(even) {
 
 .button {
     background-color: var(--color-background-button);
-    ;
     color: var(--color-text);
     border: var(--size-border-add-task-button) solid var(--color-border-button);
 
