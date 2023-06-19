@@ -49,9 +49,9 @@ submitBtn.addEventListener('click', () => {
             alert('Введите ID своего преподавателя!');
             return;
         }
-        alert(createUser(login.value, password.value, username.value, role_id, teacherId.value));
+        (createUser(login.value, password.value, username.value, role_id, teacherId.value));
     } else {
-        alert(loginUser(login.value, password.value));
+        (loginUser(login.value, password.value));
     }
 });
 
@@ -160,7 +160,6 @@ function createUser(login, password, username, role_id, invited_by) {
             } else {
                 //
             }
-
             return response;
         });
 }
