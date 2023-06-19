@@ -64,11 +64,11 @@
             </div>
         </div>
 
-        <form action="/auth/jwt/login" method="GET" class="login-form active">
+        <form action="#"  class="login-form active">
             <div class="login-box">
                 <div class="form-group login-group">
-                    <label class="signin-label" for="username">Логин</label>
-                    <input class="form-styling" type="text" id="username">
+                    <label class="signin-label" for="login">Логин</label>
+                    <input class="form-styling" type="text" id="login">
 
                     <label class="signin-label" for="password">Пароль</label>
                     <input class="form-styling" type="password" id="password"/>
@@ -78,11 +78,14 @@
                     <label class="signin-label" for="confirmPassword">Повторите пароль</label>
                     <input class="form-styling" type="password" id="confirmPassword">
 
+                    <label class="signin-label" for="username">Имя и фамилия</label>
+                    <input class="form-styling", type="text", id="username">
+
                     <input class="custom-checkbox" type="checkbox" id="isStudent" name="isStudent" checked/>
-                    <label for="isStudent" class="is-student signin-label">Я студент</label>
+                    <label class="is-student signin-label" for="isStudent">Я студент</label>
 
                     <div class="teacher-field">
-                        <label class="signin-label" for="teacher">имя преподавателя</label>
+                        <label class="signin-label" for="teacher">логин преподавателя</label>
                         <input class="form-styling" type="text" id="teacher">
                     </div>
                 </div>

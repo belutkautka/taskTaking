@@ -6,9 +6,9 @@ const frame = document.querySelector('.frame');
 const isStudent = document.getElementById('isStudent');
 const teacherField = document.querySelector('.teacher-field');
 const loginForm = document.querySelector('.login-form');
+const submitBtn = document.querySelector('.submit-btn');
 let animationFrameId = null;
-
-// let loginProcess = true;
+let signupProcess = false;
 
 isStudent.onclick = function () {
     if (isStudent.checked) {
@@ -17,6 +17,43 @@ isStudent.onclick = function () {
         slideToggle(teacherField, 500, true);
     }
 };
+
+submitBtn.addEventListener('click', () => {
+    let login = document.getElementById('login');
+    let password = document.getElementById('password');
+
+    if (!login.value) {
+        alert('Введите логин');
+        return;
+    }
+
+    if (!password.value) {
+        alert('Введите пароль');
+        return;
+    }
+
+    if (signupProcess) {
+        let confirmPassword = document.getElementById('confirmPassword');
+        let teacherId = document.getElementById('teacher');
+        let username = document.getElementById('username');
+        let role_id = isStudent.checked ? 2 : 1;
+        if (!confirmPassword.value) {
+            alert('Подтвердите пароль!');
+            return;
+        }
+        if (password.value !== confirmPassword.value) {
+            alert('Пароли не совпадают!');
+            return;
+        }
+        if (isStudent.checked && !teacherId.value) {
+            alert('Введите ID своего преподавателя!');
+            return;
+        }
+        alert(createUser(login.value, password.value, username.value, role_id, teacherId.value));
+    } else {
+        alert(loginUser(login.value, password.value));
+    }
+});
 
 buttons.forEach((btn, index) => {
     btn.addEventListener('click', () => {
@@ -27,8 +64,9 @@ buttons.forEach((btn, index) => {
 
         if (index === 0) {
             // ВОЙТИ
-            loginForm.attributes.item(0).value = '/auth/jwt/login';
-            loginForm.attributes.item(1).value = 'GET';
+            // loginForm.attributes.item(0).value = '/auth/jwt/login';
+            signupProcess = false;
+
             slider.style.left = `${index * 2000}px`;
             slider.style.width = "86px";
             frame.classList.replace('frame-long', 'frame-short');
@@ -36,8 +74,9 @@ buttons.forEach((btn, index) => {
             slideToggle(signinBox, 500, true);
         } else {
             // ЗАРЕГАТЬСЯ
-            loginForm.attributes.item(0).value = '/auth/register';
-            loginForm.attributes.item(1).value = 'POST';
+            // loginForm.attributes.item(0).value = '/auth/register';
+            signupProcess = true;
+
             slider.style.left = `${index * 108.5}px`;
             slider.style.width = "240px";
             frame.classList.replace('frame-short', 'frame-long');
@@ -97,30 +136,54 @@ function slideToggle(element, speed, hide = false) {
 }
 
 
-function sendRequest() {
+function createUser(login, password, username, role_id, invited_by) {
     return fetch("/auth/register", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            email: "string",
-            password: "string",
+            email: login,
+            password: password,
             is_active: true,
             is_superuser: false,
             is_verified: false,
-            username: "string",
-            role_id: 0, // если 1 то препод, 2 -- ученик
-            invited_by: 0
+            username: username,
+            role_id: role_id, // если 1 то препод, 2 -- ученик
+            invited_by: invited_by,
         })
     })
         .then(response => {
             if (response.ok && response.status[0] !== "3") {
-                return response.json();
+                loginUser(login, password);
+
             } else {
-                // не удалось зарегистрировать
+                //
             }
+
+            return response;
         });
+}
+
+function loginUser(login, password) {
+    return fetch('/auth/jwt/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'accept': 'application/json'
+        },
+        body: `grant_type=&username=${login}&password=${password}&scope=&client_id=&client_secret=`
+    })
+        .then(response => {
+
+            if (response.ok && response.status[0] !== "3") {
+
+            } else {
+                //
+            }
+
+            return response;
+        })
 }
 
 
