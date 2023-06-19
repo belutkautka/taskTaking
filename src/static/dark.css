@@ -24,7 +24,7 @@
     rgba(103, 147, 234, 0.92),
     rgb(50, 96, 191));
     --is-student-border: 2px solid #c2c2c2;
-    --is-student-background: #ffffff;
+    --is-student-background: rgba(161, 159, 159, 0.63);
     --color-signin-shadow: rgba(128, 128, 128, 0.47);
     --color-submit-button: rgba(208, 208, 208, 0.38);
     --color-signin-container-border: rgba(255, 255, 255, 0.25);
