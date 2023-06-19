@@ -673,7 +673,7 @@ details[open] summary::after {
     display: block;
 }
 
-label {
+.signin-label {
     /*outline: 2px solid rgba(38, 231, 151, 0.5);*/
     text-decoration: none;
     font-weight: 500;

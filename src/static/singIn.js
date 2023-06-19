@@ -5,6 +5,8 @@ const signinBox = document.querySelector(".signin-box");
 const frame = document.querySelector('.frame');
 const isStudent = document.getElementById('isStudent');
 const teacherField = document.querySelector('.teacher-field');
+const loginForm = document.querySelector('.login-form');
+let animationFrameId = null;
 
 // let loginProcess = true;
 
@@ -18,31 +20,32 @@ isStudent.onclick = function () {
 
 buttons.forEach((btn, index) => {
     btn.addEventListener('click', () => {
-        let start = null;
-        let startPos = 0;
-        let endPos = 0;
+        // alert(loginForm.attributes.item(1).value);
+        // let start = null;
+        // let startPos = 0;
+        // let endPos = 0;
 
         if (index === 0) {
             // ВОЙТИ
+            loginForm.attributes.item(0).value = '/auth/jwt/login';
+            loginForm.attributes.item(1).value = 'GET';
             slider.style.left = `${index * 2000}px`;
             slider.style.width = "86px";
             frame.classList.replace('frame-long', 'frame-short');
             // signinBox.classList.replace("active", "inactive");
             slideToggle(signinBox, 500, true);
-
         } else {
             // ЗАРЕГАТЬСЯ
+            loginForm.attributes.item(0).value = '/auth/register';
+            loginForm.attributes.item(1).value = 'POST';
             slider.style.left = `${index * 108.5}px`;
             slider.style.width = "240px";
             frame.classList.replace('frame-short', 'frame-long');
             // signinBox.classList.replace("inactive", "active");
             slideToggle(signinBox, 500);
-
         }
     });
 });
-
-let animationFrameId = null;
 
 function slideToggle(element, speed, hide = false) {
     let display = getComputedStyle(element).display;
@@ -110,7 +113,7 @@ function sendRequest() {
             role_id: 0, // если 1 то препод, 2 -- ученик
             invited_by: 0
         })
-        })
+    })
         .then(response => {
             if (response.ok && response.status[0] !== "3") {
                 return response.json();
