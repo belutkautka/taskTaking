@@ -93,6 +93,34 @@ function slideToggle(element, speed, hide = false) {
     }
 }
 
+
+function sendRequest() {
+    return fetch("/auth/register", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: "string",
+            password: "string",
+            is_active: true,
+            is_superuser: false,
+            is_verified: false,
+            username: "string",
+            role_id: 0, // если 1 то препод, 2 -- ученик
+            invited_by: 0
+        })
+        })
+        .then(response => {
+            if (response.ok && response.status[0] !== "3") {
+                return response.json();
+            } else {
+                // не удалось зарегистрировать
+            }
+        });
+}
+
+
 // Использование:
 // slideToggle(signinBox, 500); // где 500 это скорость анимации в миллисекундах
 

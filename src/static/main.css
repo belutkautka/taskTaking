@@ -26,6 +26,9 @@
     --is-student-border: 2px solid #000;
     --is-student-background: #000000;
     --color-input-background: linear-gradient(to right, rgba(232, 232, 232, 0.82), rgb(215, 215, 215));
+    --color-signin-shadow: rgb(128, 128, 128);
+    --color-submit-button: rgb(110, 110, 110);
+    --color-signin-container-border: rgba(229, 229, 229, 0.55);
 }
 
 body {
@@ -469,10 +472,11 @@ details[open] summary::after {
     height: auto;
     width: 500px;
     background-color: var(--color-body);
-    box-shadow: 8px 8px 20px rgb(128, 128, 128);
+    box-shadow: 8px 10px 10px var(--color-signin-shadow);
     position: relative;
     border-radius: 35px;
     font-family: Arial, Helvetica, sans-serif;
+    border-top: solid 3px var(--color-signin-container-border);
 }
 
 .frame {
@@ -664,14 +668,6 @@ details[open] summary::after {
     /*align-items: center*/
 }
 
-.signin-container {
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /*flex-wrap: nowrap;*/
-
-    border-top: solid 1px rgba(255, 255, 255, .5);
-}
-
 
 .login-group {
     display: block;
@@ -679,7 +675,7 @@ details[open] summary::after {
 
 label {
     /*outline: 2px solid rgba(38, 231, 151, 0.5);*/
-    text-decoration: underline;
+    text-decoration: none;
     font-weight: 500;
     font-size: 16px;
     text-transform: uppercase;
@@ -760,9 +756,9 @@ label {
     height: 35px;
     /*border: 2px solid var(--color-button-border);*/
     border: none;
-    border-radius: 20px;
+    border-radius: 14px;
     margin-top: 23px;
-    background-color: var(--color-modal-background);
+    background-color: var(--color-submit-button);
     margin-left: 8px;
     margin-right: 13px;
 }
