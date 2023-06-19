@@ -20,4 +20,9 @@
     --color-task-table-border: #111111;
     --size-border-button: 3px;
     --color-button-border-hover:#5f5f5f;
+    --font-main: Arial, Helvetica, sans-serif;
+    --color-border-checkbox: #939598;
+    --outline-checbox-label: 1px;
+    --color-border-checkbox-checked: #939598;
+    --image-check-mark: url(../static/img/blackCheckMark.png);
 }
