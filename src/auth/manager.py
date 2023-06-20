@@ -37,7 +37,6 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
         password = user_dict.pop("password")
         user_dict["hashed_password"] = self.password_helper.hash(password)
 
-
         if user_dict["role_id"] not in (1, 2):
             user_dict['role_id'] = 2
 
