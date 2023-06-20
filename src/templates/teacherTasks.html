@@ -2,9 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Профиль</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/teacher.css">
 </head>
 
@@ -69,10 +68,10 @@
 
     <div id="modal_form" class="modal modal_form ">
         <div class="modal__content_deployed modal__content_deployed_form">
-            <button class="modal__close-button">
+            <button id="modal_form__close-button" class="modal__close-button">
                 &#10006;
             </button>
-            <form>
+            <form name="add" >
                 <div class="form_pair">
                     <div class="text_pair">Контест</div>
                     <div class="radio_lengs">
@@ -82,43 +81,31 @@
                 </div>
                 <div class="form_pair">
                     <div class="text_pair">Номер контеста</div>
-                    <input class="number_input" type="number" name="t" value="1" min="1" max="30" step="1" required>
+                    <input class="number_input" type="number" name="contestNumber" value="1" min="1" max="30" step="1" required>
                 </div>
                 <div class="form_pair">
                     <div class="text_pair">Буква</div>
-                    <input class="form" type="text" required>
+                    <input class="form" type="text" name = "word" required>
                 </div>
                 <div class="form_pair">
                     <div class="text_pair">Название</div>
-                    <input class="form" type="text" required>
+                    <input class="form" name="name" type="text" required>
                 </div>
                 <div class="form_pair">
                     <div class="text_pair">Условия</div>
-                    <input class="form" type="text" required>
+                    <input class="form" name="description" type="text" required>
                 </div>
                 <div class="form_pair">
                     <div class="text_pair">Балл</div>
-                    <input class="form" type="text" required>
+                    <input class="number_input" type="number" name="score" value="1.0" min="1.0" max="30.0" step="0.1" required>
                 </div>
                 <div class="form_pair">
                     <div class="text_pair">Лимит</div>
-                    <input class="number_input" type="number" name="t" value="1" min="1" max="30" step="1" required>
+                    <input class="number_input" type="number" name="limit" value="1" min="1" max="30" step="1" required>
                 </div>
                 <div class="form_pair">
-                    <div class="text_pair">Дедлайн</div>
-                    <div class="date">
-                        <input class="date_input" type="number" name="t" value="22" min="01" max="31" step="1" required>
-                        <div class="point">.</div>
-                        <input class="date_input" type="number" name="t" value="05" min="01" max="12" step="1" required>
-                        <div class="point">.</div>
-                        <input class="date_input year" type="number" name="t" value="2023" min="2023" max="3456"
-                            step="1" required>
-                    </div>
-                    <div class="time">
-                        <input class="time_input" type="number" name="t" value="9" min="0" max="23" step="1" required>
-                        <div class="point">:</div>
-                        <input class="time_input" type="number" name="t" value="00" min="00" max="59" step="1" required>
-                    </div>
+                    <div class="text_pair">Количество дней на запись</div>
+                    <input class="number_input" type="number" name="days" value="1" min="1" max="30" step="1" required>
                 </div>
                 <div class="buttons_modal">
                     <button id="button_form_back" class="button button_form">Отменить изменения</button>
@@ -183,7 +170,7 @@
             <td>Длинный 1 задача 3</td>
             <td>2.847</td>
             <td>Бубб Полина</td>
-            <td><input id="grade" class="grade" type="number" name="t" min="0" max="30" step="0.1"></td>
+            <td><input id="grade1" class="grade" type="number" name="t" min="0" max="30" step="0.1"></td>
         </tr>
         <tr>
             <td class="teacher_task">
@@ -192,7 +179,7 @@
             <td>Длинный 3 задача 4</td>
             <td>2.847</td>
             <td>Белоусова Анастасия</td>
-            <td><input id="grade" class="grade_dark" type="number" name="t" min="0" max="30" step="0.1"></td>
+            <td><input id="grade2" class="grade_dark" type="number" name="t" min="0" max="30" step="0.1"></td>
         </tr>
         <tr>
             <td class="teacher_task">
@@ -201,7 +188,7 @@
             <td>Длинный 14 задача 5</td>
             <td>2.847</td>
             <td>Конюшенко Данил</td>
-            <td><input id="grade" class="grade" type="number" name="t" min="0" max="30" step="0.1"></td>
+            <td><input id="grade3" class="grade" type="number" name="t" min="0" max="30" step="0.1"></td>
         </tr>
         <tr>
             <td class="teacher_task">
@@ -216,6 +203,7 @@
     <div class="dedline">
         Дедлайн: 28.04.2023
     </div>
+    <script src="../static/teachertasks.js"></script>
 </body>
 
 </html>
