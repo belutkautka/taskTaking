@@ -33,4 +33,6 @@
     --outline-checbox-label:2px;
     --color-border-checkbox-checked:#3B73E4;
     --image-check-mark:url(../static/img/whiteCheckMark.png);
+    --color-signin-container: rgba(35, 35, 35, 0.82);
+    --color-input-background: rgba(141, 141, 141, 0.55);
 }

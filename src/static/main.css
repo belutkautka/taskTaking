@@ -25,7 +25,7 @@
     rgb(255, 146, 91));
     --is-student-border: 2px solid #000;
     --is-student-background: rgba(0, 0, 0, 0.56);
-    --color-input-background: #ffffff;
+    --color-input-background: rgb(232, 232, 232);
     --color-signin-shadow: rgb(128, 128, 128);
     --color-submit-button: rgb(110, 110, 110);
     --color-signin-container-border: rgba(229, 229, 229, 0.55);
@@ -34,6 +34,7 @@
     --outline-checbox-label: 1px;
     --color-border-checkbox-checked: #939598;
     --image-check-mark: url(../static/img/blackCheckMark.png);
+    --color-signin-container: rgba(255, 255, 255, 0.77);
 }
 
 body {
@@ -476,7 +477,7 @@ details[open] summary::after {
     justify-content: center;
     height: auto;
     width: 500px;
-    background-color: var(--color-body);
+    background-color: var(--color-signin-container);
     box-shadow: 8px 10px 10px var(--color-signin-shadow);
     position: relative;
     border-radius: 35px;
@@ -509,19 +510,19 @@ details[open] summary::after {
 }
 
 .frame-long {
-    height: 700px;
+    height: 680px;
 }
 
 .frame-short {
-    height: 450px;
+    height: 400px;
 }
 
 .signin-nav {
     /*outline: 2px solid rgba(243, 185, 40, 0.71);*/
     margin: 0 auto;
     padding-top: 10px;
-    padding-bottom: 10px;
-    height: 80px;
+    padding-bottom: 0;
+    height: 0;
     width: 480px;
     position: relative;
     display: grid;
@@ -554,11 +555,13 @@ details[open] summary::after {
     /* border: 2px solid #1a1d24;*/
     /*background: rgba(59, 228, 214, 0.73);*/
     width: auto;
+    height: 0;
 }
 
 .btn-top {
     /*border: 2px solid #1a1d24;*/
     width: auto;
+    height: 0;
 }
 
 .btn li:hover {
@@ -572,11 +575,13 @@ details[open] summary::after {
 }
 
 .slider-box {
+    /*outline: 2px solid rgba(189, 231, 38, 0.83);*/
     position: relative;
     margin-right: 25px;
     margin-left: 25px;
+    margin-bottom: 0;
     bottom: 20px;
-    height: 20px;
+    height: 0;
     /*border: 2px solid #1a1d24;*/
     /*background: #3B73E4;*/
 
@@ -593,9 +598,9 @@ details[open] summary::after {
     transition: all 0.5s ease-in-out;
 }
 
-.login-form,
-.signin-form {
-    /*display: block;*/
+.login-form {
+    padding-top: 0;
+    display: block;
     /*flex-shrink: 0;*/
     /*grid-area: B;*/
     /*outline: 2px solid rgba(231, 38, 38, 0.83);*/
@@ -607,6 +612,8 @@ details[open] summary::after {
     position: relative;
     transition: translate 0.5s ease-in-out;
     margin-bottom: 20px;
+    margin-top: 0;
+    padding-top: 0;
 }
 
 
@@ -617,7 +624,7 @@ details[open] summary::after {
     /*transition: all 0.5s ease-in-out;*/
     /*border: none;*/
     /*background-color: transparent;*/
-    margin-top: 25px;
+    margin-top: 15px;
     /*outline: 2px #3B73E4 solid;*/
     position: absolute;
     -webkit-transition: height .5s ease;
@@ -691,12 +698,12 @@ details[open] summary::after {
     font-size: 16px;
     /*text-transform: uppercase;*/
     display: block;
-    height: 15px;
+    height: 10px;
     width: 100px;
     margin-top: 10px;
     margin-left: 35px;
     margin-right: 80px;
-    padding-top: 16px;
+    padding-top: 19px;
     padding-bottom: 10px;
     /*text-align: left;*/
     clear: none;
@@ -710,11 +717,11 @@ details[open] summary::after {
     width: 130px;
     height: 25px;
     margin-right: 35px;
-    margin-top: 5px;
+    margin-top: 4px;
     top: 8px;
     position: relative;
     /*padding-left: 15px;*/
-    border-radius: 5px;
+    border-radius: 3px;
     margin-bottom: 25px;
     border-color: var(--color-box-shadow);
     border-width: 1px;
@@ -744,6 +751,9 @@ details[open] summary::after {
 }
 
 .input-container {
+    display: block;
+    /*position: absolute;*/
+    padding-top: 210px;
     /*margin-top: 10px;*/
     /*height: 20px;*/
     /*padding-top: 10px;*/
@@ -812,16 +822,16 @@ details[open] summary::after {
     text-transform: uppercase;
     font-size: 13px;
     text-align: center;
-    color: #ffffff;
+    color: var(--color-text);
     padding-top: 8px;
     padding-bottom: 8px;
     width: 100%;
     height: 35px;
     /*border: 2px solid var(--color-button-border);*/
-    border: none;
-    border-radius: 14px;
+    border: var(--size-border-button) solid var(--color-button-border);
+    border-radius: 16px;
     margin-top: 23px;
-    background-color: var(--color-submit-button);
+    background-color: var(--color-button-background);
     margin-left: 8px;
     margin-right: 13px;
 }
