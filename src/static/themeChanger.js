@@ -1,7 +1,9 @@
 const btn = document.getElementById("theme-button");
 const link = document.getElementById("theme-link");
+const exitButton = document.getElementsByClassName("exit_images").item(0)
 const lightTheme = "../static/light.css";
 const darkTheme = "../static/dark.css";
+
 const currentNotification = document.getElementById("current_notification");
 const notification = document.getElementById("notification");
 const currentProfile = document.getElementById("current_profile");
@@ -19,6 +21,10 @@ if (loadStyle) {
 
 btn.addEventListener("click", function () {
     ChangeTheme();
+});
+
+exitButton.addEventListener("click", function () {
+    sendLogOutRequest("/auth/jwt/logout");
 });
 
 function ChangeTheme() {
@@ -60,3 +66,12 @@ function LoadStyle(loadStyle) {
     link.setAttribute("href", loadStyle);
 }
 
+function sendLogOutRequest(url) {
+    return fetch(url, {
+        method: "POST",
+    }).then(response => {
+        if (response.ok && response.status[0] !== "3") {
+            return response.json();
+        }
+    });
+}
