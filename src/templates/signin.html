@@ -64,28 +64,43 @@
             </div>
         </div>
 
-        <form action="#"  class="login-form active">
+        <form action="#" class="login-form active">
             <div class="login-box">
                 <div class="form-group login-group">
-                    <label class="signin-label" for="login">Логин</label>
-                    <input class="form-styling" type="text" id="login">
-
-                    <label class="signin-label" for="password">Пароль</label>
-                    <input class="form-styling" type="password" id="password"/>
+                    <div class="input-container">
+                        <label class="signin-label" for="login">Логин</label>
+                        <input class="form-styling" type="text" id="login">
+                    </div>
+                    <div class="input-container">
+                        <label class="signin-label" for="password">Пароль</label>
+                        <input class="form-styling" type="password" id="password"/>
+                    </div>
                 </div>
 
                 <div class="signin-box form-group inactive">
-                    <label class="signin-label" for="confirmPassword">Повторите пароль</label>
-                    <input class="form-styling" type="password" id="confirmPassword">
+                    <div class="input-container">
+                        <label class="signin-label" for="confirmPassword">Повторите пароль</label>
+                        <input class="form-styling" type="password" id="confirmPassword">
+                    </div>
 
-                    <label class="signin-label" for="username">Имя и фамилия</label>
-                    <input class="form-styling" type="text" id="username">
+                    <div class="input-container">
+                        <label class="signin-label" for="username">Имя и фамилия</label>
+                        <input class="form-styling" type="text" id="username">
+                    </div>
 
-                    <input class="custom-checkbox" type="checkbox" id="isStudent" name="isStudent" checked/>
-                    <label class="is-student signin-label" for="isStudent">Я студент</label>
+                    <div class="input-container">
+                        <div class="signin-label">Я студент</div>
+                        <div class="is-student-checkbox">
+                            <input type="checkbox" id="isStudent" checked>
+                            <label for="isStudent"></label>
+                        </div>
+                    </div>
+
+                    <!--<input class="custom-checkbox" type="checkbox" id="isStudent" name="isStudent" checked/>-->
+                    <!--<label class="is-student signin-label" for="isStudent">Я студент</label>-->
 
                     <div class="teacher-field">
-                        <label class="signin-label" for="teacher">логин преподавателя</label>
+                        <label class="signin-label" for="teacher">Логин моего преподавателя</label>
                         <input class="form-styling" type="text" id="teacher">
                     </div>
                 </div>
@@ -93,8 +108,6 @@
                 <div class="form-group">
                     <input class="submit-btn" type="submit" value="Войти"/>
                 </div>
-
-
             </div>
         </form>
     </div>
