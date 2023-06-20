@@ -721,7 +721,7 @@ details[open] summary::after {
     top: 8px;
     position: relative;
     /*padding-left: 15px;*/
-    border-radius: 3px;
+    border-radius: 5px;
     margin-bottom: 25px;
     border-color: var(--color-box-shadow);
     border-width: 1px;
