@@ -739,7 +739,7 @@ details[open] summary::after {
 .is-student-checkbox {
     position: absolute;
     /*width: 100%;*/
-    top: 190px;
+    top: 210px;
     left: 290px;
     /*padding-right: 175px;*/
     cursor: pointer;
