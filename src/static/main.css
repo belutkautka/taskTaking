@@ -168,6 +168,7 @@ td {
     align-items: flex-start;
     padding: 120px 15px;
     background-color: var(--color-modal-background);
+    min-width: 500px;
 }
 
 .modal_active {
@@ -179,6 +180,7 @@ td {
 
 .modal__content_deployed {
     max-width: 500px;
+    min-width: 500px;
     padding: 25px;
     border-radius: 8px;
     position: relative;
@@ -188,6 +190,7 @@ td {
 
 .modal__content {
     max-width: 500px;
+    min-width: 500px;
     padding: 25px;
     border-radius: 8px;
     position: relative;
@@ -462,7 +465,7 @@ details[open] summary::after {
 .limit_modal {
     text-align: left;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
+    font-size: 15px;
     margin: 20px 0px 0px;
     color: var(--color-text);
 }
