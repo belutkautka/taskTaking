@@ -35,6 +35,9 @@
     --color-border-checkbox-checked: #939598;
     --image-check-mark: url(../static/img/blackCheckMark.png);
     --color-signin-container: rgba(255, 255, 255, 0.77);
+    --color-submit-button-border: rgb(190, 190, 190);
+    --color-submit-button-background-hover: rgb(145, 145, 145);
+
 }
 
 body {
@@ -477,11 +480,11 @@ details[open] summary::after {
     justify-content: center;
     height: auto;
     width: 500px;
-    background-color: var(--color-signin-container);
-    box-shadow: 8px 10px 10px var(--color-signin-shadow);
     position: relative;
     border-radius: 35px;
     font-family: var(--font-main);
+    background-color: var(--color-signin-container);
+    box-shadow: 6px 6px 8px var(--color-signin-shadow);
     border-top: solid 3px var(--color-signin-container-border);
 }
 
@@ -613,7 +616,6 @@ details[open] summary::after {
     transition: translate 0.5s ease-in-out;
     margin-bottom: 20px;
     margin-top: 0;
-    padding-top: 0;
 }
 
 
@@ -711,7 +713,7 @@ details[open] summary::after {
     /*margin-left: 15px;*/
 }
 
-.form-styling {
+.input-styling {
     /*outline: 2px solid rgba(231, 38, 199, 0.5);*/
     color: var(--color-text);
     width: 130px;
@@ -723,10 +725,15 @@ details[open] summary::after {
     /*padding-left: 15px;*/
     border-radius: 5px;
     margin-bottom: 25px;
-    border-color: var(--color-box-shadow);
     border-width: 1px;
     float: right;
-    background: var(--color-input-background);
+    background: var(--color-signin-container);
+    border-color: var(--color-border-checkbox);
+
+}
+
+.input-styling :hover {
+
 }
 
 .is-student-checkbox {
@@ -822,22 +829,23 @@ details[open] summary::after {
     text-transform: uppercase;
     font-size: 13px;
     text-align: center;
-    color: var(--color-text);
     padding-top: 8px;
     padding-bottom: 8px;
     width: 100%;
     height: 35px;
     /*border: 2px solid var(--color-button-border);*/
-    border: var(--size-border-button) solid var(--color-button-border);
     border-radius: 16px;
     margin-top: 23px;
-    background-color: var(--color-button-background);
     margin-left: 8px;
     margin-right: 13px;
+    color: var(--color-text);
+    background-color: var(--color-button-background);
+    border: var(--size-border-button) solid var(--color-submit-button-border);
 }
 
 .submit-btn:hover {
-    background-color: var(--color-navbar-hover);
+    background-color: var(--color-submit-button-border);
+
 }
 
 .page_title {

@@ -7,6 +7,7 @@ const isStudent = document.getElementById('isStudent');
 const teacherField = document.querySelector('.teacher-field');
 const loginForm = document.querySelector('.login-form');
 const submitBtn = document.querySelector('.submit-btn');
+const flexInner = document.querySelector('.flex-inner');
 let animationFrameId = null;
 let signupProcess = false;
 
@@ -18,56 +19,12 @@ isStudent.onclick = function () {
     }
 };
 
-submitBtn.addEventListener('click', async () => {
-    let login = document.getElementById('login');
-    let password = document.getElementById('password');
-
-    if (!login.value) {
-        alert('Введите логин');
-        return;
-    }
-
-    if (!password.value) {
-        alert('Введите пароль');
-        return;
-    }
-
-    if (signupProcess) {
-        let confirmPassword = document.getElementById('confirmPassword');
-        let teacherId = document.getElementById('teacher');
-        let username = document.getElementById('username');
-        let roleId = isStudent.checked ? 2 : 1;
-        if (!confirmPassword.value) {
-            alert('Подтвердите пароль!');
-            return;
-        }
-        if (password.value !== confirmPassword.value) {
-            alert('Пароли не совпадают!');
-            return;
-        }
-        if (isStudent.checked && !teacherId.value) {
-            alert('Введите ID своего преподавателя!');
-            return;
-        }
-        await handleCreateUser(login.value, password.value, username.value, roleId, teacherId.value)
-
-    } else {
-        await handleLogin(login.value, password.value);
-    }
-});
-
 buttons.forEach((btn, index) => {
     btn.addEventListener('click', () => {
-        // alert(loginForm.attributes.item(1).value);
-        // let start = null;
-        // let startPos = 0;
-        // let endPos = 0;
 
         if (index === 0) {
             // ВОЙТИ
-            // loginForm.attributes.item(0).value = '/auth/jwt/login';
             signupProcess = false;
-
             slider.style.left = `${index * 2000}px`;
             slider.style.width = "86px";
             frame.classList.replace('frame-long', 'frame-short');
@@ -75,14 +32,13 @@ buttons.forEach((btn, index) => {
             slideToggle(signinBox, 500, true);
         } else {
             // ЗАРЕГАТЬСЯ
-            // loginForm.attributes.item(0).value = '/auth/register';
             signupProcess = true;
-
             slider.style.left = `${index * 108.5}px`;
             slider.style.width = "240px";
             frame.classList.replace('frame-short', 'frame-long');
             // signinBox.classList.replace("inactive", "active");
             slideToggle(signinBox, 500);
+            // slideToggle(flexInner, 500, true);
         }
     });
 });
@@ -212,3 +168,45 @@ async function handleLogin(login, password) {
 function goToStartPage() {
     window.location.href = '/pages/startpage';
 }
+
+function goToTeacherStartPage(){
+    window.location.href = 'pages/teacherStartPage';
+}
+
+submitBtn.addEventListener('click', async () => {
+    let login = document.getElementById('login');
+    let password = document.getElementById('password');
+
+    if (!login.value) {
+        alert('Введите логин');
+        return;
+    }
+
+    if (!password.value) {
+        alert('Введите пароль');
+        return;
+    }
+
+    if (signupProcess) {
+        let confirmPassword = document.getElementById('confirmPassword');
+        let teacherId = document.getElementById('teacher');
+        let username = document.getElementById('username');
+        let roleId = isStudent.checked ? 2 : 1;
+        if (!confirmPassword.value) {
+            alert('Подтвердите пароль!');
+            return;
+        }
+        if (password.value !== confirmPassword.value) {
+            alert('Пароли не совпадают!');
+            return;
+        }
+        if (isStudent.checked && !teacherId.value) {
+            alert('Введите ID своего преподавателя!');
+            return;
+        }
+        await handleCreateUser(login.value, password.value, username.value, roleId, teacherId.value)
+
+    } else {
+        await handleLogin(login.value, password.value);
+    }
+});
