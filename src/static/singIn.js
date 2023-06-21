@@ -158,9 +158,11 @@ async function handleLogin(login, password) {
             return true;
         } else {
             console.error(`Login failed with status code ${result.status}`);
+            alert('Неправильный логин или пароль');
             return false;
         }
     } catch (error) {
+        alert('Неправильный логин или пароль');
         console.error('Login failed:', error);
     }
 }
@@ -169,7 +171,7 @@ function goToStartPage() {
     window.location.href = '/pages/startpage';
 }
 
-function goToTeacherStartPage(){
+function goToTeacherStartPage() {
     window.location.href = 'pages/teacherStartPage';
 }
 

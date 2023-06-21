@@ -12,7 +12,7 @@ const currentTheme = document.getElementById("current_theme");
 const theme = document.getElementById("theme");
 const currentExit = document.getElementById("current_exit");
 const exit = document.getElementById("exit");
-const bTree = document.getElementById("logo")
+const bTree = document.getElementById("logo");
 
 let loadStyle = localStorage.getItem('theme');
 if (loadStyle) {
@@ -23,13 +23,13 @@ btn.addEventListener("click", function () {
     ChangeTheme();
 });
 
-exitButton.addEventListener("click", function () {
-    sendLogOutRequest("/auth/jwt/logout");
+exitButton.addEventListener("click", async function () {
+    await sendLogOutRequest("/auth/jwt/logout");
 });
 
 function ChangeTheme() {
     let currTheme = link.getAttribute("href");
-    if (currTheme == lightTheme) {
+    if (currTheme === lightTheme) {
         LoadStyle(darkTheme);
     } else {
         LoadStyle(lightTheme);
@@ -66,12 +66,35 @@ function LoadStyle(loadStyle) {
     link.setAttribute("href", loadStyle);
 }
 
-function sendLogOutRequest(url) {
-    return fetch(url, {
-        method: "POST",
-    }).then(response => {
-        if (response.ok && response.status[0] !== "3") {
-            return response.json();
+async function sendLogOutRequest(url) {
+    try {
+        const result = await handleLogOut(url);
+        if (result.success) {
+            console.log(`Login success with status code ${result.status}`);
+            goToSignInPage();
+            return true;
+        } else {
+            console.error(`Login failed with status code ${result.status}`);
+            return false;
         }
+    } catch (error) {
+        console.log('Logout failed: ', error);
+    }
+}
+
+async function handleLogOut(url) {
+    const response = await fetch(url, {
+        method: "POST",
     });
+    let status = response.status;
+    if (response.ok && String(status)[0] !== "3") {
+        return {status: status, success: true};
+    } else {
+        return {status: status, success: false};
+    }
+}
+
+
+function goToSignInPage() {
+    window.location.href = '/pages/signin';
 }
