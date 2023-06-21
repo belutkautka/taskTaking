@@ -18,7 +18,7 @@ isStudent.onclick = function () {
     }
 };
 
-submitBtn.addEventListener('click', () => {
+submitBtn.addEventListener('click', async () => {
     let login = document.getElementById('login');
     let password = document.getElementById('password');
 
@@ -36,7 +36,7 @@ submitBtn.addEventListener('click', () => {
         let confirmPassword = document.getElementById('confirmPassword');
         let teacherId = document.getElementById('teacher');
         let username = document.getElementById('username');
-        let role_id = isStudent.checked ? 2 : 1;
+        let roleId = isStudent.checked ? 2 : 1;
         if (!confirmPassword.value) {
             alert('Подтвердите пароль!');
             return;
@@ -49,9 +49,10 @@ submitBtn.addEventListener('click', () => {
             alert('Введите ID своего преподавателя!');
             return;
         }
-        (createUser(login.value, password.value, username.value, role_id, teacherId.value));
+        await handleCreateUser(login.value, password.value, username.value, roleId, teacherId.value)
+
     } else {
-        (loginUser(login.value, password.value));
+        await handleLogin(login.value, password.value);
     }
 });
 
@@ -93,11 +94,8 @@ function slideToggle(element, speed, hide = false) {
         // show element
         element.style.display = 'block';
         element.style.height = '0px';
-
         let height = element.scrollHeight;
-
         let step = height / (speed / 0.016);  // 0.016 - время выполнения одного кадра при 60fps
-
         let animate = function () {
             let currentHeight = parseFloat(getComputedStyle(element).height);
             let newHeight = currentHeight + step;
@@ -136,8 +134,8 @@ function slideToggle(element, speed, hide = false) {
 }
 
 
-function createUser(login, password, username, role_id, invited_by) {
-    return fetch("/auth/register", {
+async function createUser(login, password, username, role_id, invited_by) {
+    const response = await fetch("/auth/register", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -149,56 +147,68 @@ function createUser(login, password, username, role_id, invited_by) {
             is_superuser: false,
             is_verified: false,
             username: username,
-            role_id: role_id, // если 1 то препод, 2 -- ученик
+            role_id: role_id, // если 1, то препод, 2 -- ученик
             invited_by: invited_by,
         })
-    })
-        .then(response => {
-            if (response.ok && response.status[0] !== "3") {
-                loginUser(login, password);
-
-            } else {
-                //
-            }
-            return response;
-        });
+    });
+    let status = response.status;
+    if (response.ok && String(status)[0] !== "3") {
+        return {status: status, success: true};
+    } else {
+        return {status: status, success: false};
+    }
 }
 
-function loginUser(login, password) {
-    return fetch('/auth/jwt/login', {
+async function loginUser(login, password) {
+    const response = await fetch('/auth/jwt/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'accept': 'application/json'
         },
         body: `grant_type=&username=${login}&password=${password}&scope=&client_id=&client_secret=`
-    })
-        .then(response => {
+    });
 
-            if (response.ok && response.status[0] !== "3") {
-
-            } else {
-                //
-            }
-
-            return response;
-        })
+    let status = response.status;
+    if (response.ok && String(status)[0] !== "3") {
+        return {status: status, success: true};
+    } else {
+        return {status: status, success: false};
+    }
 }
 
+async function handleCreateUser(login, password, username, roleId, teacherId) {
+    try {
+        const result = await createUser(login, password, username, roleId, teacherId);
+        if (result.success) {
+            console.log(`Sign up success with status code ${result.status}`);
+            await handleLogin(login, password);
+            return true;
+        } else {
+            console.error(`Sign up failed with status code ${result.status}`);
+            return false;
+        }
+    } catch (error) {
+        console.error('Sign up failed:', error);
+    }
+}
 
-// Использование:
-// slideToggle(signinBox, 500); // где 500 это скорость анимации в миллисекундах
+async function handleLogin(login, password) {
+    try {
+        const result = await loginUser(login, password);
+        if (result.success) {
+            console.log(`Login success with status code ${result.status}`);
+            goToStartPage();
+            return true;
+        } else {
+            console.error(`Login failed with status code ${result.status}`);
+            return false;
+        }
+    } catch (error) {
+        console.error('Login failed:', error);
+    }
+}
 
-
-// document.querySelector('.signin-nav .btn-top').addEventListener('click', function (e) {
-//     e.preventDefault();
-//
-//     if (e.target.innerHTML === "Войти") {
-//         loginBox.classList.replace("inactive", "active");
-//         signinBox.classList.replace("active", "inactive");
-//     } else if (e.target.innerHTML === "Зарегистрироваться") {
-//         loginBox.classList.replace("active", "inactive");
-//         signinBox.classList.replace("inactive", "active");
-//     }
-// });
-
+function goToStartPage() {
+    window.location.href = '/pages/startpage';
+}

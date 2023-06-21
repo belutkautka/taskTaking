@@ -645,7 +645,7 @@ details[open] summary::after {
     -webkit-transition: height .5s ease;
     -o-transition: height .5s ease;
     transition: height .5s ease;
-    position: relative;
+    /*position: relative;*/
 
     /*outline: 2px solid rgba(59, 24, 169, 0.76);*/
     display: flex;
