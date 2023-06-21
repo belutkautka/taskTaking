@@ -10,3 +10,11 @@ class TaskCreate(BaseModel):
     taken_max: int
     dead_line: int
     task_value: float
+
+
+class TaskUpdate(BaseModel):
+    task_id: int
+    description: str
+    taken_max: int
+    dead_line: int
+    task_value: float
