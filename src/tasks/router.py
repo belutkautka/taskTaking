@@ -107,8 +107,9 @@ async def get_my_taken_tasks(session: AsyncSession = Depends(get_async_session),
             'Details': 'Not a student'
         })
 
-    query = select(taken_task).where(taken_task.c.user_id == user.id).order_by(task.c.dead_line)
+    query = select(taken_task.c.task_id).where(taken_task.c.user_id == user.id)
     result = await session.execute(query)
+
     return {
         'Status': 'Success',
         'Data': [r._asdict() for r in result],
@@ -144,7 +145,7 @@ async def take_task(task_id: int, session: AsyncSession = Depends(get_async_sess
             'Details': f'{max} students already took this task'
         })
     try:
-        stmt = insert(taken_task).values((task_id, user.id))
+        stmt = insert(taken_task).values((task_id, user.id, 0, True))
         await session.execute(stmt)
         await session.commit()
     except:
@@ -252,3 +253,34 @@ async def add_task(updated_task: TaskUpdate, session: AsyncSession = Depends(get
     #         'Details': 'Not a teacher'
     #     })
 
+# @router.post('/rate_task')
+# async def rate_task(task_id: TaskUpdate, student_id: int,
+#                         session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
+#     # try:
+#         if user.role_id != 1:
+#             raise Exception
+#
+#         stmt = select(task).where(task.c.id == updated_task.task_id)
+#         res = await session.execute(stmt)
+#         task_dict = [r._asdict() for r in res]
+#         if user.id != task_dict[0]['added_by']:
+#             raise Exception
+#         print(task_dict)
+#         data = {}
+#         data['name'] = updated_task.name
+#         data['description'] = updated_task.description
+#         data['taken_max'] = updated_task.taken_max
+#         data['dead_line'] = task_dict[0]['dead_line'] + datetime.timedelta(days=updated_task.dead_line)
+#         data['task_value'] = updated_task.task_value
+#
+#         stmt = update(task).values(data).where(task.c.id == updated_task.task_id)
+#         await session.execute(stmt)
+#         await session.commit()
+#         return {'Status': 'Success'}
+    # except Exception:
+    #     raise HTTPException(status_code=405, detail=
+    #     {
+    #         'Status': 'Error',
+    #         'Data': None,
+    #         'Details': 'Not a teacher'
+    #     })
