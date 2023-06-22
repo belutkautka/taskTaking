@@ -38,22 +38,21 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
         user_dict["hashed_password"] = self.password_helper.hash(password)
         user_dict["is_superuser"] = True
 
-        if user_dict["role_id"] not in (1, 2):
-            user_dict['role_id'] = 2
-
-        if user_dict['role_id'] == 1:
-            user_dict['invited_by'] = None
-        else:
-            user_dict['max_task_available'] = 3
+        if user_dict['role_id'] == 2:
             teacher = await self.user_db.get_by_email(user_dict['invited_by'])
+
             if teacher is None:
                 raise exceptions.UserNotExists()
+
+            user_dict['max_task_available'] = 3
+            user_dict['score_sum'] = 0
+            user_dict['has_unchecked_tasks'] = False
             user_dict['invited_by'] = teacher.id
+        else:
+            user_dict['invited_by'] = None
 
         created_user = await self.user_db.create(user_dict)
-
         await self.on_after_register(created_user, request)
-
         return created_user
 
 

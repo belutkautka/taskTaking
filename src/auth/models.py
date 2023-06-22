@@ -24,7 +24,9 @@ user = Table(
     Column("role_id", Integer, nullable=False),
     Column("invited_by", Integer, nullable=True),
     Column("hashed_password", String, nullable=False),
-    Column("max_task_available", Integer),
+    Column("max_task_available", Integer, nullable=True),
+    Column("score_sum", Integer, nullable=True),
+    Column("has_unchecked_tasks", Boolean, nullable=True),
     Column("is_active", Boolean, default=True, nullable=False),
     Column("is_superuser", Boolean, default=False, nullable=False),
     Column("is_verified", Boolean, default=False, nullable=False),
@@ -40,6 +42,8 @@ class User(SQLAlchemyBaseUserTable[int], Base):  # класс создан из-
     invited_by = Column(Integer, nullable=True)
     hashed_password: str = Column(String(length=1024), nullable=False)
     max_task_available = Column(Integer, nullable=True)
+    score_sum = Column(Integer, nullable=True)
+    has_unchecked_tasks = Column(Boolean, nullable=True)
     is_active: bool = Column(Boolean, default=True, nullable=False)
     is_superuser: bool = Column(Boolean, default=False, nullable=False)
     is_verified: bool = Column(Boolean, default=False, nullable=False)

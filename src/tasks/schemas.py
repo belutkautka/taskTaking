@@ -14,6 +14,7 @@ class TaskCreate(BaseModel):
 
 class TaskUpdate(BaseModel):
     task_id: int
+    name: str
     description: str
     taken_max: int
     dead_line: int

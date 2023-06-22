@@ -8,6 +8,9 @@ class UserRead(schemas.BaseUser[int]):
     username: str
     role_id: int
     invited_by: Optional[int]
+    max_task_available: Optional[int]
+    score_sum: Optional[float]
+    has_unchecked_tasks: Optional[bool]
     is_active: bool = True
     is_superuser: bool = False
     is_verified: bool = False

@@ -20,6 +20,33 @@ router = APIRouter(
 current_user = fastapi_users.current_user()
 
 
+@router.get('/get_students_by_teacher_id')
+# @cache(expire=3600)
+async def get_students_by_teacher_id(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
+    # try:
+        if user.role_id == 1:
+            query = select(user_table.c.username, user_table.c.score_sum).where(user_table.c.invited_by == user.id)\
+                .order_by(user_table.c.score_sum)
+        else:
+            query = select(user_table.c.username, user_table.c.score_sum).where(user_table.c.invited_by == user.invited_by)\
+                .order_by(user_table.c.score_sum)
+
+        result = await session.execute(query)
+
+        return {
+            'Status': 'Success',
+            'Data': [r._asdict() for r in result],
+            'Details': None
+        }
+    # except Exception:
+    #     raise HTTPException(status_code=500, detail=
+    #     {
+    #         'Status': 'Error',
+    #         'Data': None,
+    #         'Details': None
+    #     })
+
+
 @router.get('/get_tasks_by_teacher_id')
 # @cache(expire=3600)
 async def get_tasks_by_teacher_id(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
@@ -207,7 +234,7 @@ async def add_task(updated_task: TaskUpdate, session: AsyncSession = Depends(get
             raise Exception
         print(task_dict)
         data = {}
-
+        data['name'] = updated_task.name
         data['description'] = updated_task.description
         data['taken_max'] = updated_task.taken_max
         data['dead_line'] = task_dict[0]['dead_line'] + datetime.timedelta(days=updated_task.dead_line)
@@ -224,3 +251,4 @@ async def add_task(updated_task: TaskUpdate, session: AsyncSession = Depends(get
     #         'Data': None,
     #         'Details': 'Not a teacher'
     #     })
+

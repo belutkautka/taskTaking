@@ -23,5 +23,7 @@ taken_task = Table(
     "taken_task",
     metadata,
     Column("task_id", Integer, ForeignKey(task.c.id), primary_key=True),
-    Column("user_id", Integer, ForeignKey(user.c.id), primary_key=True)
+    Column("user_id", Integer, ForeignKey(user.c.id), primary_key=True),
+    Column("score", Float, nullable=True),
+    Column("is_checked", Boolean, nullable=True)
 )
