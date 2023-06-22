@@ -58,10 +58,16 @@ async def get_students_by_teacher_id(session: AsyncSession = Depends(get_async_s
 @router.get('/get_tasks_by_teacher_id')
 async def get_tasks_by_teacher_id(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
     try:
+        current_dt = datetime.datetime.utcnow()
+
         if user.role_id == 1:
-            query = select(task).where(task.c.added_by == user.id).order_by(task.c.dead_line)
+            query = select(task)\
+                .where(and_(task.c.added_by == user.id, task.c.dead_line > current_dt))\
+                .order_by(task.c.dead_line)
         else:
-            query = select(task).where(task.c.added_by == user.invited_by).order_by(task.c.dead_line)
+            query = select(task)\
+                .where(and_(task.c.added_by == user.invited_by, task.c.dead_line > current_dt))\
+                .order_by(task.c.dead_line)
 
         result = await session.execute(query)
 
@@ -139,18 +145,18 @@ async def take_task(task_id: int, session: AsyncSession = Depends(get_async_sess
     query = select(task).where(task.c.id == task_id)
     res = await session.execute(query)
     task_dict = [r._asdict() for r in res]
-    max = task_dict[0]['taken_max']
+    max_task_cnt = task_dict[0]['taken_max']
 
     query = select(taken_task).where(taken_task.c.task_id == task_id)
     res = await session.execute(query)
     task_dict = [r._asdict() for r in res]
 
-    if len(task_dict) == max:
+    if len(task_dict) == max_task_cnt:
         raise HTTPException(status_code=422, detail=
         {
             'Status': 'Error',
             'Data': None,
-            'Details': f'{max} students already took this task'
+            'Details': f'{max_task_cnt} students already took this task'
         })
     try:
         stmt = insert(taken_task).values((task_id, user.id, 0, True))
@@ -164,7 +170,7 @@ async def take_task(task_id: int, session: AsyncSession = Depends(get_async_sess
             'Details': f'You already took this task'
         })
 
-    if len(task_dict) + 1 == max:
+    if len(task_dict) + 1 == max_task_cnt:
         await session.execute(update(task).where(task.c.id == task_id).values(is_available=False))
         await session.commit()
 
