@@ -47,6 +47,24 @@ async def get_students_by_teacher_id(session: AsyncSession = Depends(get_async_s
     #     })
 
 
+@router.get('/get_unchecked_task')
+# @cache(expire=3600)
+async def get_students_by_teacher_id(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
+    if user.role_id == 1:
+        raise Exception
+
+    query = select(user_table.c.username, user_table.c.score_sum).where(user_table.c.invited_by == user.invited_by)\
+            .order_by(user_table.c.score_sum)
+
+    result = await session.execute(query)
+
+    return {
+        'Status': 'Success',
+        'Data': [r._asdict() for r in result],
+        'Details': None
+    }
+
+
 @router.get('/get_tasks_by_teacher_id')
 # @cache(expire=3600)
 async def get_tasks_by_teacher_id(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
@@ -277,7 +295,8 @@ async def rate_task(task_id: int, user_id: int, score: int,
         await session.commit()
 
         stmt = update(user_table) \
-        .values({'has_unchecked_tasks': True}) \
+        .values({'has_unchecked_tasks': True,
+                 'score_sum': user_table.c.score_sum + score}) \
         .where(user_table.c.id == user_id)
 
         await session.execute(stmt)
