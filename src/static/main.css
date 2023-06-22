@@ -278,6 +278,7 @@ td {
 }
 
 .titles {
+    padding-bottom: 40px;
     margin: 0px;
     align-items: flex;
     display: flex;
@@ -422,13 +423,6 @@ summary::after {
 
 details[open] summary::after {
     content: "-";
-}
-
-.dedline_student {
-    text-align: left;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    margin: 0px 75px 0px;
 }
 
 .limit_modal {

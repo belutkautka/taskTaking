@@ -7,35 +7,45 @@ let tasks = new Map();
 let takenTasks = new Set();
 
 let taskRequest = sendGetTaskRequest("/tasks/get_tasks_by_teacher_id")
-let takenTaskRequest = sendGetTaskRequest("/tasks/get_my_taken_tasks")
+sendGetTaskRequest("/tasks/get_my_taken_tasks")
     .then(data => data.Data.forEach(e => takenTasks.add(e.task_id)))
-taskRequest.then(data => createNewTasks(data.Data));
+    .then(e => sendGetTaskRequest("/tasks/get_tasks_by_teacher_id"))
+    .then(data => createNewTasks(data.Data));
 
 function createNewTasks(data) {
-    data.forEach(e => createNewTask(e.name, `${e.contest_type} ${e.contest_number} ${e.task_number} задача` , e.task_value, e.description, e.id));
+    data.forEach(e => createNewTask(e));
 }
 
-function createNewTask(tValue, pValue, gValue, dValue, id) {
+function createNewTask(data) {
     let newTask = document.createElement("div");
+    newTask.id = data.id
     newTask.className = "task_table";
     let title = document.createElement("div");
     title.className = "title";
-    title.innerHTML = tValue;
+    title.innerHTML = data.name;
     let path = document.createElement("div");
     path.className = "path";
-    path.innerHTML = pValue;
+    path.innerHTML = `${data.contest_type} ${data.contest_number} задача ${data.task_number}`;
     let grade = document.createElement("div");
     grade.className = "grade";
-    grade.innerHTML = gValue;
-    newTask.append(title, path, grade);
+    grade.innerHTML = data.task_value;
+    if (takenTasks.has(data.id)) {
+        newTask.classList.add('task_selected');
+        path.classList.add('text_selected')
+    } else if (!data.is_available) {
+        newTask.classList.add('task_blocked');
+        title.classList.add('text_blocked');
+        grade.classList.add('text_blocked');
+    }
     document.getElementById("titles").append(newTask);
     newTask.addEventListener('click', function (e) {
-        modalTitle.innerHTML = tValue;
-        modalText.innerHTML = dValue;
-        modalButton.innerHTML=takenTasks.has(id)?"Снять задачу":"Взять задачу"
+        modalTitle.innerHTML = data.name;
+        modalText.innerHTML = data.description;
+        modalButton.innerHTML = takenTasks.has(data.id) ? "Снять задачу" : "Взять задачу"
         modal.classList.add('modal_active');
     });
-    addTaskToDictionary(tValue,id);
+    newTask.append(title, path, grade);
+    addTaskToDictionary(data.name, data.id);
 }
 
 function addTaskToDictionary(name, id) {
@@ -50,17 +60,30 @@ function sendGetTaskRequest(url) {
         }
     });
 }
-function sendTakeTaskRequest(url, id) {
-    return fetch(url+"?task_id="+id, {
+
+function sendTaskRequest(url, id) {
+    return fetch(url + "?task_id=" + id, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
-        }})
-        .then(response => {
-        if (response.ok && response.status[0] !== "3") {
-            return response.json();
         }
-    });
+    })
+        .then(response => {
+            let task = document.getElementById(taskId);
+            if (response.ok && response.status[0] !== "3") {
+                if (url === '/tasks/drop_task') {
+                    task.classList.remove('task_selected');
+                    task.children[1].classList.remove('text_selected')
+                } else {
+                    task.classList.add('task_selected');
+                    task.children[1].classList.add('text_selected')
+                }
+            } else {
+                task.classList.add('task_blocked');
+                task.children[0].classList.add('text_blocked');
+                task.children[2].classList.add('text_blocked')
+            }
+        });
 }
 
 document.querySelector('.modal__close-button').addEventListener('click', function (e) {
@@ -68,16 +91,15 @@ document.querySelector('.modal__close-button').addEventListener('click', functio
 });
 
 document.querySelector('.button').addEventListener('click', function (e) {
-    if (modalButton.innerHTML==="Снять задачу"){
-        modalButton.innerHTML = "Взять задачу"
-        taskId = tasks.get(modalTitle.innerHTML);
-        sendTakeTaskRequest("/tasks/drop_task", taskId);
-        takenTasks.delete(taskId)
-    }
-    else{
-    modalButton.innerHTML = "Снять задачу";
     taskId = tasks.get(modalTitle.innerHTML);
-    sendTakeTaskRequest("/tasks/take_task",taskId);
-    takenTasks.add(taskId)
+    let task = document.getElementById(taskId);
+    if (modalButton.innerHTML === "Снять задачу") {
+        modalButton.innerHTML = "Взять задачу"
+        takenTasks.delete(taskId);
+        sendTaskRequest("/tasks/drop_task", taskId);
+    } else {
+        modalButton.innerHTML = "Снять задачу";
+        takenTasks.add(taskId);
+        sendTaskRequest("/tasks/take_task", taskId);
     }
 });

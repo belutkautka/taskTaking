@@ -29,27 +29,39 @@
             </div>
         </div>
     </header>
-    <div id="modal_task" class="modal ">
-        <div class="modal__content_deployed ">
-            <button id="modal__close-button" class="modal__close-button">
+    <div id="modal_task" class="modal">
+        <div class="modal__content_deployed">
+            <button class="modal__close-button">
                 &#10006;
             </button>
-            <p class="modal__title">
-                Эрен Уничтожает всех титанов
-            </p>
-            <p class="modal__text">
+            <details> 
+                <summary>
+                    <p id="modal__title" class="modal__title ">
+                        Эрен Уничтожает всех титанов
+                    </p>
+                    <p id="modal__text" class="modal__text">
+                        Эрен Йегер продолжает идти вперед к своей цели - он хочет уничтожить всех титанов.Эрен хочет расчистить
+                        от титанов дорогу к стене Мария, чтобы начать операцию по возвращению Шиганшины.
+                    </p>
+                </summary>
+                <div id="modal__text1" class="modal__text">
                 Эрен Йегер продолжает идти вперед к своей цели - он хочет уничтожить всех титанов.Эрен хочет расчистить
-                от титанов дорогу к стене Мария, чтобы начать операцию по возвращению Шиганшины.
-            </p>
-            <p class="modal__points">
-                ...
-            </p>
+                        от титанов дорогу к стене Мария, чтобы начать операцию по возвращению Шиганшины.
+                    </div>
+            </details>
+            
             <div class="buttons_modal">
                 <button id="button_edit" class="button button_task">Редактировать</button>
                 <button id="button_delete" class="button button_task">Удалить задачу</button>
             </div>
+            <div class="limit_modal">3 задачи до 22.30.2023</div>
         </div>
     </div>
+
+
+
+
+
 
     <div id="modal_delete" class="modal modal_delete ">
         <div class="modal__content_deployed modal__content_deployed_delete">
@@ -71,7 +83,7 @@
             <button id="modal_form__close-button" class="modal__close-button">
                 &#10006;
             </button>
-            <form name="add" >
+            <form name="add">
                 <div class="form_pair">
                     <div class="text_pair">Контест</div>
                     <div class="radio_lengs">
@@ -81,11 +93,12 @@
                 </div>
                 <div class="form_pair">
                     <div class="text_pair">Номер контеста</div>
-                    <input class="number_input" type="number" name="contestNumber" value="1" min="1" max="30" step="1" required>
+                    <input class="number_input" type="number" name="contestNumber" value="1" min="1" max="30" step="1"
+                        required>
                 </div>
                 <div class="form_pair">
                     <div class="text_pair">Буква</div>
-                    <input class="form" type="text" name = "word" required>
+                    <input class="form" type="text" name="word" required>
                 </div>
                 <div class="form_pair">
                     <div class="text_pair">Название</div>
@@ -97,7 +110,8 @@
                 </div>
                 <div class="form_pair">
                     <div class="text_pair">Балл</div>
-                    <input class="number_input task_score" type="number" name="score" value="1.0" min="1.0" max="30.0" step="0.1" required>
+                    <input class="number_input task_score" type="number" name="score" value="1.0" min="1.0" max="30.0"
+                        step="0.1" required>
                 </div>
                 <div class="form_pair">
                     <div class="text_pair">Лимит</div>
@@ -162,7 +176,7 @@
         </tr>
         <tr>
             <td class="teacher_task">
-                <div class="limit">2</div>Эрен уничтожает всех титанов
+                Эрен уничтожает всех титанов
             </td>
             <td>Длинный 1 задача 3</td>
             <td>2.847</td>
@@ -171,7 +185,7 @@
         </tr>
         <tr>
             <td class="teacher_task">
-                <div class="limit">8</div>Новое изобретение Тони Старка
+                Новое изобретение Тони Старка
             </td>
             <td>Длинный 3 задача 4</td>
             <td>2.847</td>
@@ -180,7 +194,7 @@
         </tr>
         <tr>
             <td class="teacher_task">
-                <div class="limit">5</div>Сильный подмассив
+                Сильный подмассив
             </td>
             <td>Длинный 14 задача 5</td>
             <td>2.847</td>
@@ -189,7 +203,7 @@
         </tr>
         <tr>
             <td class="teacher_task">
-                <div class="limit">1</div>Количество различных подстрок
+                Количество различных подстрок
             </td>
             <td>Длинный 14 задача 3</td>
             <td>2.847</td>
@@ -197,9 +211,6 @@
             <td><input id="grade" class="grade_dark" type="number" name="t" min="0" max="30" step="0.1"></td>
         </tr>
     </table>
-    <div class="dedline">
-        Дедлайн: 28.04.2023
-    </div>
     <script src="../static/teachertasks.js"></script>
 </body>
 
