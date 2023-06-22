@@ -14,15 +14,21 @@
     --color-button-active: rgb(220, 220, 220);
     --color-button-hover: rgb(220, 220, 220);
     --color-path: rgb(130, 130, 130);
-    --color-task-table-border-hover: #111111;
-    --size-task-table-border: 2px;
+    --color-task-table-border-hover: #3b3b3b;
+    --size-task-table-border: 3.5px;
     --color-task-table-background: rgb(234, 234, 234);
-    --color-task-table-border: #111111;
+    --color-task-table-border: #3b3b3b;
     --size-border-button: 3px;
-    --color-button-border-hover:#5f5f5f;
+    --color-button-border-hover: #5f5f5f;
     --font-main: Arial, Helvetica, sans-serif;
     --color-border-checkbox: #939598;
     --outline-checbox-label: 1px;
     --color-border-checkbox-checked: #939598;
     --image-check-mark: url(../static/img/blackCheckMark.png);
+    --color-submit-button-background-hover: rgb(145, 145, 145);
+    --color-task-block: rgb(181, 181, 181);
+    --color-text-block: rgb(134, 134, 134);
+    --color-text-selected: rgb(130, 130, 130);
+    --color-background-selected: #f4f4f4;
+    --color-border-selected: #ff6f1c;
 }
