@@ -231,9 +231,10 @@ async def add_task(updated_task: TaskUpdate, session: AsyncSession = Depends(get
         stmt = select(task).where(task.c.id == updated_task.task_id)
         res = await session.execute(stmt)
         task_dict = [r._asdict() for r in res]
+
         if user.id != task_dict[0]['added_by']:
             raise Exception
-        print(task_dict)
+
         data = {}
         data['name'] = updated_task.name
         data['description'] = updated_task.description
@@ -244,6 +245,7 @@ async def add_task(updated_task: TaskUpdate, session: AsyncSession = Depends(get
         stmt = update(task).values(data).where(task.c.id == updated_task.task_id)
         await session.execute(stmt)
         await session.commit()
+
         return {'Status': 'Success'}
     # except Exception:
     #     raise HTTPException(status_code=405, detail=
@@ -253,30 +255,35 @@ async def add_task(updated_task: TaskUpdate, session: AsyncSession = Depends(get
     #         'Details': 'Not a teacher'
     #     })
 
-# @router.post('/rate_task')
-# async def rate_task(task_id: TaskUpdate, student_id: int,
-#                         session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
-#     # try:
-#         if user.role_id != 1:
-#             raise Exception
-#
-#         stmt = select(task).where(task.c.id == updated_task.task_id)
-#         res = await session.execute(stmt)
-#         task_dict = [r._asdict() for r in res]
-#         if user.id != task_dict[0]['added_by']:
-#             raise Exception
-#         print(task_dict)
-#         data = {}
-#         data['name'] = updated_task.name
-#         data['description'] = updated_task.description
-#         data['taken_max'] = updated_task.taken_max
-#         data['dead_line'] = task_dict[0]['dead_line'] + datetime.timedelta(days=updated_task.dead_line)
-#         data['task_value'] = updated_task.task_value
-#
-#         stmt = update(task).values(data).where(task.c.id == updated_task.task_id)
-#         await session.execute(stmt)
-#         await session.commit()
-#         return {'Status': 'Success'}
+
+@router.post('/rate_task')
+async def rate_task(task_id: int, user_id: int, score: int,
+                    session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
+    # try:
+        if user.role_id != 1:
+            raise Exception
+
+        data = {}
+        data['task_id'] = task_id
+        data['user_id'] = user_id
+        data['score'] = score
+        data['is_checked'] = False
+
+        stmt = update(taken_task)\
+            .values(data)\
+            .where(and_(taken_task.c.task_id == task_id, taken_task.c.user_id == user_id))
+
+        await session.execute(stmt)
+        await session.commit()
+
+        stmt = update(user_table) \
+        .values({'has_unchecked_tasks': True}) \
+        .where(user_table.c.id == user_id)
+
+        await session.execute(stmt)
+        await session.commit()
+
+        return {'Status': 'Success'}
     # except Exception:
     #     raise HTTPException(status_code=405, detail=
     #     {
