@@ -114,7 +114,7 @@ async def get_my_taken_tasks(session: AsyncSession = Depends(get_async_session),
             'Details': 'Not a student'
         })
 
-    query = select(task.c.id, task.c.task_value, taken_task.c.score)\
+    query = select(task.c.id, task.c.name, task.c.task_value, taken_task.c.score)\
         .join(taken_task, task.c.id == taken_task.c.task_id)\
         .where(taken_task.c.user_id == user.id)
     result = await session.execute(query)
