@@ -1,7 +1,6 @@
 import datetime
 
 from fastapi import APIRouter, Depends, HTTPException
-# from fastapi_cache.decorator import cache
 from sqlalchemy import select, insert, delete, and_, update, join
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -21,39 +20,12 @@ current_user = fastapi_users.current_user()
 
 
 @router.get('/get_students_by_teacher_id')
-# @cache(expire=3600)
-async def get_students_by_teacher_id(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
-    # try:
-        if user.role_id == 1:
-            query = select(user_table.c.username, user_table.c.score_sum).where(user_table.c.invited_by == user.id)\
-                .order_by(user_table.c.score_sum)
-        else:
-            query = select(user_table.c.username, user_table.c.score_sum).where(user_table.c.invited_by == user.invited_by)\
-                .order_by(user_table.c.score_sum)
-
-        result = await session.execute(query)
-
-        return {
-            'Status': 'Success',
-            'Data': [r._asdict() for r in result],
-            'Details': None
-        }
-    # except Exception:
-    #     raise HTTPException(status_code=500, detail=
-    #     {
-    #         'Status': 'Error',
-    #         'Data': None,
-    #         'Details': None
-    #     })
-
-
-@router.get('/get_unchecked_task')
-# @cache(expire=3600)
 async def get_students_by_teacher_id(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
     if user.role_id == 1:
-        raise Exception
-
-    query = select(user_table.c.username, user_table.c.score_sum).where(user_table.c.invited_by == user.invited_by)\
+        query = select(user_table.c.username, user_table.c.score_sum).where(user_table.c.invited_by == user.id)\
+            .order_by(user_table.c.score_sum)
+    else:
+        query = select(user_table.c.username, user_table.c.score_sum).where(user_table.c.invited_by == user.invited_by)\
             .order_by(user_table.c.score_sum)
 
     result = await session.execute(query)
@@ -65,8 +37,25 @@ async def get_students_by_teacher_id(session: AsyncSession = Depends(get_async_s
     }
 
 
+# @router.get('/get_unchecked_task')
+# # @cache(expire=3600)
+# async def get_students_by_teacher_id(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
+#     if user.role_id == 1:
+#         raise Exception
+#
+#     query = select(user_table.c.username, user_table.c.score_sum).where(user_table.c.invited_by == user.invited_by)\
+#             .order_by(user_table.c.score_sum)
+#
+#     result = await session.execute(query)
+#
+#     return {
+#         'Status': 'Success',
+#         'Data': [r._asdict() for r in result],
+#         'Details': None
+#     }
+
+
 @router.get('/get_tasks_by_teacher_id')
-# @cache(expire=3600)
 async def get_tasks_by_teacher_id(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
     try:
         if user.role_id == 1:
@@ -136,7 +125,6 @@ async def get_my_taken_tasks(session: AsyncSession = Depends(get_async_session),
 
 
 @router.post('/take_task')
-# @cache(expire=3600)
 async def take_task(task_id: int, session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
     if user.role_id != 2:
         raise HTTPException(status_code=405, detail=
@@ -148,13 +136,13 @@ async def take_task(task_id: int, session: AsyncSession = Depends(get_async_sess
 
     query = select(task).where(task.c.id == task_id)
     res = await session.execute(query)
-
     task_dict = [r._asdict() for r in res]
     max = task_dict[0]['taken_max']
 
-    query = select(taken_task).where(task.c.id == task_id)
+    query = select(taken_task).where(taken_task.c.task_id == task_id)
     res = await session.execute(query)
     task_dict = [r._asdict() for r in res]
+
     if len(task_dict) == max:
         raise HTTPException(status_code=422, detail=
         {
@@ -186,7 +174,6 @@ async def take_task(task_id: int, session: AsyncSession = Depends(get_async_sess
 
 
 @router.post('/drop_task')
-# @cache(expire=3600)
 async def drop_task(task_id: int, session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
     if user.role_id != 2:
         raise HTTPException(status_code=405, detail=
