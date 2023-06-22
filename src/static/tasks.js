@@ -7,7 +7,7 @@ let tasks = new Map();
 let takenTasks = new Set();
 
 sendGetTaskRequest("/tasks/get_my_taken_tasks")
-    .then(data => data.Data.forEach(e => takenTasks.add(e.task_id)))
+    .then(data => data.Data.forEach(e => takenTasks.add(e.id)))
     .then(e => sendGetTaskRequest("/tasks/get_tasks_by_teacher_id"))
     .then(data => createNewTasks(data.Data));
 
