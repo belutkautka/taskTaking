@@ -75,6 +75,7 @@ async function sendLogOutRequest(url) {
             return true;
         } else {
             console.error(`Login failed with status code ${result.status}`);
+            goToSignInPage();
             return false;
         }
     } catch (error) {

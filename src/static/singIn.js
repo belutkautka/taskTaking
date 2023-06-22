@@ -5,17 +5,21 @@ const signinBox = document.querySelector(".signin-box");
 const frame = document.querySelector('.frame');
 const isStudent = document.getElementById('isStudent');
 const teacherField = document.querySelector('.teacher-field');
-const loginForm = document.querySelector('.login-form');
+const form = document.querySelector('.form');
 const submitBtn = document.querySelector('.submit-btn');
-const flexInner = document.querySelector('.flex-inner');
+const inputs = document.getElementsByTagName('input');
+const isStudentInput = document.querySelector("[name='isStudent']");
+const teacherInput = document.querySelector("[name='teacher']");
 let animationFrameId = null;
 let signupProcess = false;
 
 isStudent.onclick = function () {
     if (isStudent.checked) {
         slideToggle(teacherField, 500);
+        inputs[inputs.length - 1].required = true;
     } else {
         slideToggle(teacherField, 500, true);
+        inputs[inputs.length - 1].required = false;
     }
 };
 
@@ -30,6 +34,10 @@ buttons.forEach((btn, index) => {
             frame.classList.replace('frame-long', 'frame-short');
             // signinBox.classList.replace("active", "inactive");
             slideToggle(signinBox, 500, true);
+            submitBtn.value = 'Войти';
+            for (let i = 2; i < inputs.length; i++) {
+                inputs[i].required = false;
+            }
         } else {
             // ЗАРЕГАТЬСЯ
             signupProcess = true;
@@ -39,7 +47,15 @@ buttons.forEach((btn, index) => {
             // signinBox.classList.replace("inactive", "active");
             slideToggle(signinBox, 500);
             // slideToggle(flexInner, 500, true);
+            submitBtn.value = 'Зарегистрироваться';
+            for (let i = 2; i < inputs.length; i++) {
+                inputs[i].required = true;
+            }
+            isStudentInput.removeAttribute('required');
+            teacherInput.removeAttribute('required');
         }
+
+        isStudent.required = false;
     });
 });
 
@@ -180,12 +196,10 @@ submitBtn.addEventListener('click', async () => {
     let password = document.getElementById('password');
 
     if (!login.value) {
-        alert('Введите логин');
         return;
     }
 
     if (!password.value) {
-        alert('Введите пароль');
         return;
     }
 
@@ -195,15 +209,12 @@ submitBtn.addEventListener('click', async () => {
         let username = document.getElementById('username');
         let roleId = isStudent.checked ? 2 : 1;
         if (!confirmPassword.value) {
-            alert('Подтвердите пароль!');
             return;
         }
         if (password.value !== confirmPassword.value) {
-            alert('Пароли не совпадают!');
             return;
         }
         if (isStudent.checked && !teacherId.value) {
-            alert('Введите ID своего преподавателя!');
             return;
         }
         await handleCreateUser(login.value, password.value, username.value, roleId, teacherId.value)
