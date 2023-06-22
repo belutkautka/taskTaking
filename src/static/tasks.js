@@ -6,7 +6,6 @@ const modalButton = document.getElementById('button');
 let tasks = new Map();
 let takenTasks = new Set();
 
-let taskRequest = sendGetTaskRequest("/tasks/get_tasks_by_teacher_id")
 sendGetTaskRequest("/tasks/get_my_taken_tasks")
     .then(data => data.Data.forEach(e => takenTasks.add(e.task_id)))
     .then(e => sendGetTaskRequest("/tasks/get_tasks_by_teacher_id"))
