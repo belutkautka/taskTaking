@@ -289,7 +289,7 @@ async def add_task(updated_task: TaskUpdate, session: AsyncSession = Depends(get
 
 
 @router.post('/rate_task')
-async def rate_task(task_id: int, user_id: int, score: int,
+async def rate_task(task_id: int, user_id: int, score: float,
                     session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
     if user.role_id != 1:
         raise Exception
