@@ -314,6 +314,10 @@ td {
     display: block;
 }
 
+.profile_image{
+top: 10px;
+}
+
 .profile:hover {
     cursor: pointer;
 }
