@@ -563,3 +563,17 @@ details[open] summary::after {
 .button_forbidden {
     display: none;
 }
+
+.button_send_mark{
+   position: relative;
+    font-size: 17px;
+    margin: 5px 0 5px;
+    padding: 7px 30px;
+    left:1185px;
+    border: 1px solid var(--color-border-button);
+    background-color:#ffffff;
+}
+.button_send_mark:hover{
+    border: 1px solid var(--color-border-button);
+    background-color:var(--color-button-backgroung-hover);
+}
