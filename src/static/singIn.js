@@ -34,7 +34,7 @@ buttons.forEach((btn, index) => {
             frame.classList.replace('frame-long', 'frame-short');
             // signinBox.classList.replace("active", "inactive");
             slideToggle(signinBox, 500, true);
-            submitBtn.value = 'Войти';
+            submitBtn.textContent = 'Войти';
             for (let i = 2; i < inputs.length; i++) {
                 inputs[i].required = false;
             }
@@ -47,7 +47,7 @@ buttons.forEach((btn, index) => {
             // signinBox.classList.replace("inactive", "active");
             slideToggle(signinBox, 500);
             // slideToggle(flexInner, 500, true);
-            submitBtn.value = 'Зарегистрироваться';
+            submitBtn.textContent = 'Зарегистрироваться';
             for (let i = 2; i < inputs.length; i++) {
                 inputs[i].required = true;
             }
@@ -106,8 +106,8 @@ function slideToggle(element, speed, hide = false) {
 }
 
 
-async function createUser(login, password, username, role_id, invited_by) {
-    const response = await fetch("/auth/register", {
+function createUser(login, password, username, role_id, invited_by) {
+    return fetch("/auth/register", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -123,16 +123,10 @@ async function createUser(login, password, username, role_id, invited_by) {
             invited_by: invited_by,
         })
     });
-    let status = response.status;
-    if (response.ok && String(status)[0] !== "3") {
-        return {status: status, success: true};
-    } else {
-        return {status: status, success: false};
-    }
 }
 
-async function loginUser(login, password) {
-    const response = await fetch('/auth/jwt/login', {
+function loginUser(login, password) {
+    return fetch('/auth/jwt/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -140,69 +134,28 @@ async function loginUser(login, password) {
         },
         body: `grant_type=&username=${login}&password=${password}&scope=&client_id=&client_secret=`
     });
-
-    let status = response.status;
-    if (response.ok && String(status)[0] !== "3") {
-        return {status: status, success: true};
-    } else {
-        return {status: status, success: false};
-    }
 }
 
-function getRoleId() {
-    let roleId = 2;
-    const response = fetch('/users/me').then(response => response.json())
+function goToNextPage(e) {
+    return fetch('/users/me')
+        .then(response => response.json())
         .then(data => {
-            roleId = data['role_id'];
+            const roleId = data['role_id'];
+            if (roleId === 2) {
+                goToStartPage();
+            } else if (roleId === 1) {
+                goToTeacherStartPage();
+            } else console.error('None role id');
+            return roleId;
         });
-    return roleId;
 }
 
 
-async function handleCreateUser(login, password, username, roleId, teacherId) {
-    try {
-        const result = await createUser(login, password, username, roleId, teacherId);
-        if (result.success) {
-            console.log(`Sign up success with status code ${result.status}`);
-            await handleLogin(login, password);
-            return true;
-        } else {
-            console.error(`Sign up failed with status code ${result.status}`);
-            return false;
-        }
-    } catch (error) {
-        console.error('Sign up failed:', error);
-    }
-}
-
-async function handleLogin(login, password) {
-    try {
-        const result = await loginUser(login, password);
-        if (result.success) {
-            console.log(`Login success with status code ${result.status}`);
-            let roleId = getRoleId();
-            if (roleId === '2')
-                await goToStartPage();
-            else
-                await goToTeacherStartPage();
-            return true;
-        } else {
-            console.error(`Login failed with status code ${result.status}`);
-            alert('Неправильный логин или пароль');
-            return false;
-        }
-    } catch (error) {
-        alert('Неправильный логин или пароль');
-        console.error('Login failed:', error);
-    }
-}
-
-
-async function goToStartPage() {
+function goToStartPage() {
     window.location.href = '/pages/startpage';
 }
 
-async function goToTeacherStartPage() {
+function goToTeacherStartPage() {
     window.location.href = '/pages/teacherstartpage';
 }
 
@@ -232,9 +185,11 @@ submitBtn.addEventListener('click', async () => {
         if (isStudent.checked && !teacherId.value) {
             return;
         }
-        await handleCreateUser(login.value, password.value, username.value, roleId, teacherId.value)
-
-    } else {
-        await handleLogin(login.value, password.value);
+        await createUser(login.value, password.value, username.value, roleId, teacherId.value);
     }
+    loginUser(login.value, password.value)
+        .then(e => goToNextPage(e));
+
 });
+
+
