@@ -907,3 +907,15 @@ details[open] summary::after {
     bottom: 30px;
     left: 70px;
 }
+
+.circle{
+    position: absolute;
+    top: 22px;
+    right: 358px;
+    max-width: 10px;
+}
+
+.block{
+    display: none;
+}
+
