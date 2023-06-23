@@ -893,19 +893,16 @@ details[open] summary::after {
 }
 
 .days_recording {
-    position: relative;
     font-size: 14px;
-    bottom: 10px;
     color: var(--color-days-rec);
     font-family: var(--font-main);
-    left: 100px;
+    margin-left: 3px;
 }
 
 .dedline_image {
     max-width: 20px;
     position: relative;
-    bottom: 30px;
-    left: 70px;
+    bottom: 3px;
 }
 
 .circle {
@@ -921,4 +918,16 @@ details[open] summary::after {
 
 .circle_tr {
     max-width: 10px;
+}
+
+.time_over{
+    color: var(--color-time-over);
+    
+}
+
+.days{
+    display: flex;
+    position: relative;
+    bottom: 12px;
+    left: 157px;
 }
