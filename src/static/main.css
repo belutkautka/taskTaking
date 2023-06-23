@@ -920,9 +920,5 @@ details[open] summary::after {
 }
 
 .circle_tr{
-    position: relative;
     max-width: 10px;
-    bottom: 35px;
-    left: 72px;
 }
-
