@@ -268,5 +268,3 @@ submitBtn.addEventListener('click', async () => {
         }
     }
 });
-
-

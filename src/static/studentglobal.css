@@ -21,8 +21,8 @@ body[data_theme="light"] {
     --size-border-button: 3px;
     --color-button-border-hover: #5f5f5f;
     --slider-color: linear-gradient(to right,
-            rgb(255, 195, 110),
-            rgb(255, 146, 91));
+    rgb(255, 195, 110),
+    rgb(255, 146, 91));
     --is-student-border: 2px solid #000;
     --is-student-background: rgba(0, 0, 0, 0.56);
     --color-input-background: rgb(232, 232, 232);
@@ -71,8 +71,8 @@ body[data_theme="dark"] {
     --size-border-button: 3px;
     --color-button-border-hover: #6d6d6d;
     --slider-color: linear-gradient(to right,
-            rgba(103, 147, 234, 0.92),
-            rgb(50, 96, 191));
+    rgba(103, 147, 234, 0.92),
+    rgb(50, 96, 191));
     --is-student-border: 2px solid #c2c2c2;
     --is-student-background: rgba(161, 159, 159, 0.63);
     --color-signin-shadow: rgb(0, 0, 0);
@@ -414,7 +414,6 @@ td {
 }
 
 
-
 .profile:hover {
     cursor: pointer;
 }
@@ -527,11 +526,11 @@ details[open] summary::after {
     content: "-";
 }
 
-details[open] .modal__text_summ{
+details[open] .modal__text_summ {
     display: none;
 }
 
-details{
+details {
     margin-bottom: 30px;
 }
 
@@ -562,7 +561,7 @@ details{
     font-family: var(--font-main);
     background-color: var(--color-signin-container);
     box-shadow: 6px 6px 8px var(--color-signin-shadow);
-    border-top: solid 3px var(--color-signin-container-border);
+    /*border-top: solid 3px var(--color-signin-container-border);*/
 }
 
 .frame {
@@ -793,7 +792,7 @@ details{
 .input-styling {
     /*outline: 2px solid rgba(231, 38, 199, 0.5);*/
     color: var(--color-text);
-    width: 70% ;
+    width: 70%;
     height: 25px;
     margin-top: 4px;
     margin-right: 3px;
@@ -808,7 +807,8 @@ details{
 
 }
 
-.input-styling :hover {}
+.input-styling :hover {
+}
 
 .is-student-checkbox {
     position: absolute;
@@ -857,7 +857,7 @@ details{
     left: 0;
 }
 
-.is-student-checkbox input[type=checkbox]:checked+label::after {
+.is-student-checkbox input[type=checkbox]:checked + label::after {
     background: var(--image-check-mark);
     background-size: 18px;
     outline: var(--outline-checbox-label) solid var(--color-border-checkbox-checked);
@@ -901,32 +901,61 @@ details{
 /*}*/
 
 
-
 .submit-btn {
     z-index: 20;
+    position: relative;
     cursor: pointer;
     font-weight: lighter;
     /*text-transform: uppercase;*/
-    font-size: 15px;
+    font-size: 23px;
+    font-family: var(--font-main);
     text-align: center;
-    padding-top: 5px;
-    padding-bottom: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     width: 80%;
-    height: 35px;
+    height: 50px;
     /*border: 2px solid var(--color-button-border);*/
     border-radius: 16px;
     margin-top: 23px;
     margin-left: 43px;
     margin-right: 13px;
     color: var(--color-text);
-    background-color: var(--color-button-background);
+    background-color: var(--color-signin-container);
     border: var(--size-border-button) solid var(--color-submit-button-border);
+    overflow: hidden;
+    /*transition: all, .5s;*/
 }
 
-.submit-btn:hover {
+.submit-btn::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-color: var(--color-submit-button-border);
-
+    transition: all .5s;
+    z-index: -1;
+    transform: translateX(-100%);
 }
+
+.submit-btn:hover::before {
+    transform: translateX(0);
+}
+
+.submit-btn:focus::before {
+    transform: translateX(0);
+}
+
+
+/*.submit-btn:hover {*/
+/*    background-color: var(--color-submit-button-border);*/
+/*}*/
+
+/*.submit-btn:focus {*/
+/*    background-color: var(--color-submit-button-border);*/
+/*}*/
+
 
 .page_title {
     text-align: left;
@@ -974,7 +1003,7 @@ details{
     left: 0;
 }
 
-.checkbox input[type=checkbox]:checked+label:after {
+.checkbox input[type=checkbox]:checked + label:after {
     background: var(--image-check-mark);
     background-size: 18px;
     outline: var(--outline-checbox-label) solid var(--color-border-checkbox-checked);
