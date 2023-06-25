@@ -84,17 +84,23 @@ async def get_tasks_by_teacher_id(session: AsyncSession = Depends(get_async_sess
     try:
         current_dt = datetime.datetime.utcnow()
 
-        if user.role_id == 1:
-            query = select(task, user_table.c.username, taken_task.c.score, taken_task.c.user_id) \
-                .outerjoin(taken_task, task.c.id == taken_task.c.task_id) \
-                .outerjoin(user_table, user_table.c.id == taken_task.c.user_id) \
-                .where(and_(task.c.added_by == user.id, task.c.dead_line > current_dt)) \
-                .order_by(task.c.dead_line)
-
-        else:
+        if user.role_id == 2:
             query = select(task) \
                 .where(and_(task.c.added_by == user.invited_by, task.c.dead_line > current_dt)) \
                 .order_by(task.c.dead_line)
+            result = await session.execute(query)
+
+            return {
+                'Status': 'Success',
+                'Data': [r._asdict() for r in result],
+                'Details': None
+            }
+
+        query = select(task, user_table.c.username, taken_task.c.score, taken_task.c.user_id) \
+            .outerjoin(taken_task, task.c.id == taken_task.c.task_id) \
+            .outerjoin(user_table, user_table.c.id == taken_task.c.user_id) \
+            .where(and_(task.c.added_by == user.id, task.c.dead_line > current_dt)) \
+            .order_by(task.c.dead_line)
 
         result = await session.execute(query)
         result = [r._asdict() for r in result]
@@ -340,3 +346,26 @@ async def rate_task(task_id: int, user_id: int, score: float,
     await session.commit()
 
     return {'Status': 'Success'}
+
+
+@router.post('/delete_task')
+async def delete_task(task_id: int, session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
+    if user.role_id != 1:
+        raise Exception
+
+    # stmt = update(taken_task) \
+    #     .values(data) \
+    #     .where(and_(taken_task.c.task_id == task_id, taken_task.c.user_id == user_id))
+    stmt = select(task)\
+        .outerjoin(taken_task, task.c.id == taken_task.c.task_id)
+    result = await session.execute(stmt)
+
+    # await session.execute(stmt)
+    # await session.commit()
+
+    # return {'Status': 'Success'}
+    return {
+        'Status': 'Success',
+        'Data': [r._asdict() for r in result],
+        'Details': None
+    }
