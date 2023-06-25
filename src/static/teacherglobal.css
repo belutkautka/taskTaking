@@ -551,6 +551,14 @@ summary::-webkit-details-marker {
     display: none;
 }
 
+details[open] .modal__text_summ{
+    display: none;
+}
+
+details{
+    margin-bottom: 30px;
+}
+
 /* Chrome, Opera, Safari */
 details summary::-webkit-details-marker {
     display: none;
