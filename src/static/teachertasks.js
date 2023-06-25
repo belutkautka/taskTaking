@@ -87,7 +87,7 @@ function makeTask(data) {
         newTask.classList.add("free")
     }
     newTask.append(name, contest, score, student, input);
-    tasks.append(newTask);
+    document.getElementById("button").parentNode.insertBefore(newTask,document.getElementById("button"));
     name.addEventListener('click', function (e) {
         modalTitle.innerHTML = data.name;
         modalText.innerHTML = data.description.length > 150 ? data.description.substring(0, 147) + "..." : data.description;
@@ -165,7 +165,7 @@ active.addEventListener('click', function (e) {
 
 sortSign.addEventListener('click', function (e) {
     if (unsortedTasks === null)
-        unsortedTasks = Array.from(tasks.querySelectorAll('tr')).slice(1)
+        unsortedTasks = Array.from(tasks.querySelectorAll('tr')).slice(1);
     if (sortSign.innerHTML === '↕') {
         sortSign.innerHTML = '↑';
         if (sortedTasks === null) {
@@ -183,6 +183,7 @@ sortSign.addEventListener('click', function (e) {
         sortSign.innerHTML = '↕';
         tasks.tBodies[0].append(...unsortedTasks);
     }
+    tasks.tBodies[0].append(document.getElementById("button"));
 });
 
 active.addEventListener('click', function (e) {
