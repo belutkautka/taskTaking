@@ -590,7 +590,7 @@ details {
 }
 
 .frame-long {
-    height: 680px;
+    height: 600px;
 }
 
 .frame-short {
@@ -605,12 +605,10 @@ details {
     height: 0;
     width: 480px;
     position: relative;
-    display: grid;
+    display: flex;
     place-items: center;
     grid-area: A;
     justify-content: space-evenly;
-    /*margin-left: 10px;*/
-    /*margin-right: 10px;*/
 }
 
 
@@ -783,11 +781,11 @@ details {
     display: flex;
     height: 10px;
     width: 100px;
-    margin-top: 6px;
+    margin-top: 15px;
     margin-left: 38px;
     margin-right: 80px;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 3px;
     /*text-align: left;*/
     clear: none;
     float: left;
@@ -802,7 +800,7 @@ details {
     margin-top: 4px;
     margin-right: 3px;
     margin-left: 60px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     top: 20px;
     position: relative;
     border-radius: 5px;
@@ -816,10 +814,12 @@ details {
 }
 
 .is-student-checkbox {
-    position: absolute;
+    position: relative;
+    bottom: 27px;
+    left: 25px;
     /*width: 100%;*/
-    top: 198px;
-    left: 260px;
+    /*top: 198px;*/
+    /*left: 260px;*/
     /*padding-right: 175px;*/
     cursor: pointer;
 }
@@ -839,7 +839,7 @@ details {
 .input-container {
     margin-left: 25px;
     /*margin-top: 20px;*/
-    margin-bottom: 0px;
+    margin-bottom: 0;
     display: block;
     /*position: absolute;*/
     /*padding-top: 210px;*/
@@ -921,7 +921,7 @@ details {
     height: 50px;
     /*border: 2px solid var(--color-button-border);*/
     border-radius: 16px;
-    margin-top: 23px;
+    margin-top: 50px;
     margin-left: 43px;
     margin-right: 13px;
     color: var(--color-text);
