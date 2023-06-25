@@ -2,6 +2,9 @@ const modal = document.getElementById('modal');
 const modalTitle = document.getElementById('modal__title');
 const modalText = document.getElementById('modal__text');
 const modalButton = document.getElementById('button');
+const busy = document.getElementById("check_busy");
+const active = document.getElementById("check_free")
+loadStyle = localStorage.getItem('theme');
 
 let tasks = new Map();
 let takenTasks = new Set();
@@ -19,12 +22,13 @@ function createNewTask(data) {
     let newTask = document.createElement("div");
     newTask.id = data.id
     newTask.className = "task_table";
+    newTask.classList.add("task_active")
     let title = document.createElement("div");
     title.className = "title";
     title.innerHTML = data.name;
     let path = document.createElement("div");
     path.className = "path";
-    path.innerHTML = `${data.contest_type} ${data.contest_number} задача ${data.task_number}`;
+    path.innerHTML = `${data.contest_type} контест ${data.contest_number} задача ${data.task_number}`;
     let grade = document.createElement("div");
     grade.className = "grade";
     grade.innerHTML = data.task_value;
@@ -33,6 +37,7 @@ function createNewTask(data) {
         path.classList.add('text_selected')
     } else if (!data.is_available) {
         newTask.classList.add('task_blocked');
+        newTask.classList.remove("task_active")
         title.classList.add('text_blocked');
         grade.classList.add('text_blocked');
     }
@@ -43,7 +48,35 @@ function createNewTask(data) {
         modalButton.innerHTML = takenTasks.has(data.id) ? "Снять задачу" : "Взять задачу"
         modal.classList.add('modal_active');
     });
-    newTask.append(title, path, grade);
+    let days =document.createElement("div");
+    days.className="days";
+    let time = document.createElement("div");
+    let image = document.createElement("img");
+    let dedline = Math.ceil((Date.parse(data.dead_line)- Date.now()) / (1000 * 3600 * 24))
+    image.className = "dedline_image";
+    if (loadStyle==="dark"|loadStyle===null){
+        if (dedline<2){
+            image.src ="../static/img/darkthemededline.png"
+            time.className = "days_recording time_over";
+        }
+        else{
+            image.src ="../static/img/darkrededline.png"
+            time.className = "days_recording";
+        }
+    }
+    else{
+        if (dedline<2){
+            image.src ="../static/img/rededline.png"
+            time.className = "days_recording time_over";
+        }
+        else{
+            image.src ="../static/img/dedline.png"
+            time.className = "days_recording";
+        }
+    }
+    time.innerHTML = `${dedline} день`;
+    days.append(image,time);
+    newTask.append(title, path, grade,days);
     addTaskToDictionary(data.name, data.id);
 }
 
@@ -91,7 +124,6 @@ document.querySelector('.modal__close-button').addEventListener('click', functio
 
 document.querySelector('.button').addEventListener('click', function (e) {
     taskId = tasks.get(modalTitle.innerHTML);
-    let task = document.getElementById(taskId);
     if (modalButton.innerHTML === "Снять задачу") {
         modalButton.innerHTML = "Взять задачу"
         takenTasks.delete(taskId);
@@ -102,3 +134,26 @@ document.querySelector('.button').addEventListener('click', function (e) {
         sendTaskRequest("/tasks/take_task", taskId);
     }
 });
+busy.addEventListener('click', function (e){
+       if (!busy.checked)
+       {
+          [...document.getElementsByClassName("task_blocked")]
+              .forEach(e=>e.style.display="none");
+       }
+       else{
+           [...document.getElementsByClassName("task_blocked")]
+               .forEach(e=>e.style.display="");
+       }
+});
+active.addEventListener('click', function (e){
+
+    if (!active.checked)
+    {
+        [...document.getElementsByClassName("task_active")]
+            .forEach(e=>e.style.display="none");
+    }
+    else{
+        [...document.getElementsByClassName("task_active")]
+            .forEach(e=>e.style.display="");
+    }
+})
