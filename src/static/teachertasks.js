@@ -16,21 +16,46 @@ document.getElementById("button_save").addEventListener('click', function (e) {
     sendAddTaskRequest("/tasks/add_task")
 });
 
-function makeTask( data){
+function makeTask(data) {
     let newTask = document.createElement("tr");
     newTask.id = data.id;
     let name = document.createElement("td")
     name.className = "teacher_task";
     name.innerHTML = data.name;
     let contest = document.createElement("td");
-    contest.innerHTML= `${data.contest_type} ${data.contest_number} задача ${data.task_number}`;
+    contest.innerHTML = `${data.contest_type} ${data.contest_number} задача ${data.task_number}`;
     let score = document.createElement("td");
-    score.innerHTML=data.taken_max;
+    score.innerHTML = data.task_value;
     let student = document.createElement("td");
-    student.innerHTML = "Утка";
     let input = document.createElement("td");
-    input.innerHTML = `<input className=grade type=number name=t min=0 max=30 step=0.1></td>`;
-    newTask.append(name, contest, score,student,input);
+    if (data.username != null) {
+        if (data.username.length == 1) {
+            student.innerHTML = data.username[0];
+            input.innerHTML = `<input id = ${data.user_id[0]}_${data.id} className=grade type=number name=t min=0 max=30 step=0.1></td>`;
+        } else {
+            student.innerHTML = "►";
+            student.addEventListener('click', function (e) {
+                if (student.innerHTML === "►") {
+                    student.innerHTML = "▼";
+                    input.innerHTML = "<br>";
+                    for (let i = 0; i < data.username.length; i++) {
+                        let st = document.createElement("p")
+                        st.innerHTML = data.username[i];
+                        student.append(st);
+                        let inp = document.createElement("p")
+                        inp.innerHTML = `<input id = ${data.user_id[i]}_${data.id} className=grade type=number name=t min=0 max=30 step=0.1></td>`
+                        input.append(inp)
+                    }
+                } else {
+                    student.innerHTML = "►"
+                    input.innerHTML = "";
+                }
+            })
+        }
+    } else {
+        student.innerHTML = "—"
+    }
+    newTask.append(name, contest, score, student, input);
     tasks.append(newTask);
 }
 
@@ -43,7 +68,7 @@ function sendAddTaskRequest(url) {
         },
         body: JSON.stringify({
             name: form.name.value,
-            contest_type: form.answer.value=="long"?"Длинный":"Короткий",
+            contest_type: form.answer.value == "long" ? "Длинный" : "Короткий",
             contest_number: form.contestNumber.value,
             task_number: form.word.value,
             description: form.description.value,
@@ -52,15 +77,15 @@ function sendAddTaskRequest(url) {
             task_value: form.score.value
         })
     }).then(response => {
-            if (response.ok && response.status[0] !== "3") {
-                modal.classList.remove('modal_active');
-                form.reset();
-            }
-            else{
-                alert("Не удалось создать задачу, попробуйте еще раз")
-            }
-        });
+        if (response.ok && response.status[0] !== "3") {
+            modal.classList.remove('modal_active');
+            form.reset();
+        } else {
+            alert("Не удалось создать задачу, попробуйте еще раз")
+        }
+    });
 }
+
 function sendGetTaskRequest(url) {
     return fetch(url).then(response => {
         if (response.ok && response.status[0] !== "3") {
