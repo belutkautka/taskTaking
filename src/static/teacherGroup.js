@@ -21,7 +21,7 @@ sortSign.addEventListener('click', function (e) {
         if (sortedStudents === null) {
             sortedStudents = Array.from(students.querySelectorAll('tr'))
                 .slice(1)
-                .sort((rowA, rowB) => +rowA.cells[1].innerHTML > +rowB.cells[1].innerHTML ? -1 : 1);
+                .sort((rowA, rowB) => +rowA.cells[1].innerHTML > +rowB.cells[1].innerHTML ? 1 : -1);
             sortedDescStudents = Array.from(sortedStudents);
             sortedDescStudents.reverse();
         }
