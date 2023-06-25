@@ -294,13 +294,6 @@ tr:nth-child(even) {
     width: 18px;
 }
 
-.group {
-    font-family: var(--font-main);
-    font-size: 40px;
-    margin: 86px 0px 30px 25px;
-    color: var(--color-text);
-}
-
 .title_group {
     display: flex;
 }
@@ -728,12 +721,6 @@ details[open] summary::after {
         padding: 5px 20px;
         float: right;
     }
-
-    .group {
-        font-family: var(--font-main);
-        font-size: 25px;
-        margin: 45px 0px 20px 15px;
-    }
 }
 
 
@@ -744,11 +731,6 @@ details[open] summary::after {
     }
     .table_title{
         font-size: 20px;
-    }
-    .group {
-        font-family: var(--font-main);
-        font-size: 30px;
-        margin: 58px 0px 30px 15px;
     }
 
     .button_send_mark {

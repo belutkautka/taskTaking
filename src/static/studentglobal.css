@@ -332,8 +332,7 @@ td {
 }
 
 .task_table {
-    min-height: 120px;
-    max-height: 120px;
+    height: 120px;
     text-align: center;
     width: 215px;
     font-family: Arial, Helvetica, sans-serif;
@@ -347,8 +346,7 @@ td {
 }
 
 .task_table:hover {
-    min-height: 120px;
-    max-height: 120px;
+    height: 120px;
     text-align: center;
     width: 215px;
     font-family: Arial, Helvetica, sans-serif;
@@ -1093,6 +1091,34 @@ details {
 }
 
 @media screen and (max-width: 600px) {
+    .page_title {
+        font-size: 40px;
+        margin: 30px 20px 0px 20px;
+    }
+    .text_checkbox {
+        font-size: 14px;
+    }
+
+    .add_task_button {
+        font-size: 14px;
+
+    }
+
+    .checkboxes {
+        margin-top: 45px;
+    }
+
+
+    .checkbox label:after {
+        height: 14px;
+        width: 14px;
+    }
+
+    .checkbox input[type=checkbox]:checked+label:after {
+        background-size: 14px;
+        height: 14px;
+        width: 14px;
+    }
     .navbar_mobile {
         padding: 0px 20px;
         height: 65px;
@@ -1134,11 +1160,73 @@ details {
     table {
         width: 90%;
     }
+    
+    .task_table {
+        height: 90px;
+        width: 170px;
+        margin: 20px 0px 0px 20px;
+        padding: 5px 10px 5px 10px;
+    }
+    
+    .task_table:hover {
+        height: 90px;
+        width: 170px;
+        margin: 20px 0px 0px 20px;
+        padding: 5px 10px 5px 10px;
+    }
+    
+    .title {
+        height: 40px;
+        width: 200px;
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+    
+    .path {
+        font-size: 11px;
+        color: var(--color-path);
+    }
+    
+    .grade {
+        font-size: 20px;
+        margin: 10px 0 10px 0;
+    }
+    .titles {
+        margin: 0px;
+        margin: 40px 0px 0px 5px;
+    }
+
+    .days {
+        left: 126px;
+    }
+
+    .days_recording {
+        font-size: 9.8px;
+    }
+
+    .dedline_image {
+        max-width: 13px;
+        position: relative;
+        bottom: 2px;
+    }
 }
 
 
 @media screen and (min-width: 600px) and (max-width: 950px) {
 
+    .titles {
+        padding-bottom: 40px;
+        margin: 0px;
+        align-items: flex;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 40px 0px 0px 5px;
+    }
+    
+    .page_title {
+        font-size: 50px;
+        margin: 40px 20px 0px 30px;
+    }
     .table_head {
         font-size: 20px;
     }
@@ -1151,6 +1239,7 @@ details {
     table {
         font-size: 17px;
         margin: 0px 30px 20px;
+        width: 90%;
     }
 
     .page_title {
@@ -1163,8 +1252,29 @@ details {
         padding: 10px 10px;
     }
 
-    table {
-        width: 90%;
+    .text_checkbox {
+        font-size: 16px;
+    }
+
+    .add_task_button {
+        font-size: 16px;
+
+    }
+
+    .checkboxes {
+        margin-top: 60px;
+    }
+
+
+    .checkbox label:after {
+        height: 15px;
+        width: 15px;
+    }
+
+    .checkbox input[type=checkbox]:checked+label:after {
+        background-size: 15px;
+        height: 15px;
+        width: 15px;
     }
 
 }
