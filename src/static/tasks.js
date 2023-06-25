@@ -2,6 +2,7 @@ const modal = document.getElementById('modal');
 const modalTitle = document.getElementById('modal__title');
 const modalText = document.getElementById('modal__text');
 const modalButton = document.getElementById('button');
+let loadStyle = localStorage.getItem('theme');
 
 let tasks = new Map();
 let takenTasks = new Set();
@@ -43,7 +44,40 @@ function createNewTask(data) {
         modalButton.innerHTML = takenTasks.has(data.id) ? "Снять задачу" : "Взять задачу"
         modal.classList.add('modal_active');
     });
-    newTask.append(title, path, grade);
+    let days =document.createElement("div");
+    days.className="days";
+    let time = document.createElement("div");
+    let image = document.createElement("img");
+    let dedline = Math.ceil((Date.parse(data.dead_line)- Date.now()) / (1000 * 3600 * 24))
+    image.className = "dedline_image";
+    alert(loadStyle)
+    if (loadStyle==="dark"|loadStyle===null){
+        if (dedline<2){
+            image.src ="../static/img/darkthemededline.png"
+            time.className = "days_recording time_over";
+        }
+        else{
+            image.src ="../static/img/darkrededline.png"
+            time.className = "days_recording";
+        }
+    }
+    else{
+        alert(1)
+        if (dedline<2){
+            image.src ="../static/img/rededline.png"
+            time.className = "days_recording time_over";
+        }
+        else{
+            image.src ="../static/img/dedline.png"
+            time.className = "days_recording";
+        }
+    }
+    image.className = "dedline_image";
+    image.src ="../static/img/rededline.png"
+    time.className = "days_recording";
+    time.innerHTML = `${dedline} день`;
+    days.append(image,time);
+    newTask.append(title, path, grade,days);
     addTaskToDictionary(data.name, data.id);
 }
 
