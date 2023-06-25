@@ -599,7 +599,7 @@ details {
 
 .signin-nav {
     /*outline: 2px solid rgba(243, 185, 40, 0.71);*/
-    margin-top: -20px;
+    margin-top: 0;
     padding-top: 10px;
     padding-bottom: 0;
     height: 0;
@@ -679,7 +679,7 @@ details {
 .login-form {
     /*outline: 2px solid rgba(231, 38, 38, 0.83);*/
     padding-top: 0;
-    margin-top: -40px;
+    margin-top: -30px;
     display: block;
     /*flex-shrink: 0;*/
     /*grid-area: B;*/
