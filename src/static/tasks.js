@@ -70,9 +70,6 @@ function createNewTask(data) {
             time.className = "days_recording";
         }
     }
-    image.className = "dedline_image";
-    image.src ="../static/img/rededline.png"
-    time.className = "days_recording";
     time.innerHTML = `${dedline} день`;
     days.append(image,time);
     newTask.append(title, path, grade,days);
