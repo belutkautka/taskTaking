@@ -126,6 +126,7 @@ body {
 }
 
 .navbar {
+    height: 70px;
     display: flex;
     vertical-align: middle;
     justify-content: space-between;
@@ -144,7 +145,7 @@ img {
 }
 
 .images_button img {
-    min-width: 30px;
+    width: 30px;
     vertical-align: middle;
     text-align: center;
     margin: 20px 20px;
@@ -1075,4 +1076,31 @@ details {
     position: relative;
     bottom: 12px;
     left: 157px;
+}
+
+@media screen and (max-width: 900px) and (min-width: 600px) {
+    .navbar_mobile {
+        padding: 0px 20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .navbar_mobile {
+        padding: 0px 20px;
+        height: 65px;
+    }
+
+    .navbar_mobile a {
+        font-size: 18px;
+        margin: 20px 10px;
+    }
+
+    .navbar_mobile img {
+        max-width: 25px;
+    }
+
+    .images_button img {
+        max-width: 25px;
+        margin: 20px 10px;
+    }
 }

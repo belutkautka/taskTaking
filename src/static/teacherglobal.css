@@ -555,11 +555,11 @@ summary::-webkit-details-marker {
     display: none;
 }
 
-details[open] .modal__text_summ{
+details[open] .modal__text_summ {
     display: none;
 }
 
-details{
+details {
     margin-bottom: 30px;
 }
 
@@ -626,4 +626,32 @@ details[open] summary::after {
 .button_send_mark:hover {
     border: var(--size-border-mark) solid var(--color-border-button);
     background-color: var(--color-button-backgroung-hover);
+}
+
+
+@media screen and (max-width: 900px) and (min-width: 600px) {
+    .navbar_mobile {
+        padding: 0px 20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .navbar_mobile {
+        padding: 0px 20px;
+        height: 65px;
+    }
+
+    .navbar_mobile a {
+        font-size: 18px;
+        margin: 20px 10px;
+    }
+
+    .navbar_mobile img {
+        max-width: 25px;
+    }
+
+    .images_button img {
+        max-width: 25px;
+        margin: 20px 10px;
+    }
 }
