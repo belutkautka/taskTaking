@@ -28,8 +28,10 @@ document.getElementById("button_delete").addEventListener('click', function (e) 
     modalDelete.classList.add('modal_active');
 });
 document.getElementById("button_send_mark").addEventListener('click', function (e) {
-    console.log(document.getElementsByTagName("input")[0]);
-
+    [...document.getElementsByClassName("score")].forEach(e => {
+        if (+e.value !== 0)
+            sendRateTaskRequest(e.id.split("_")[1], e.id.split("_")[0], e.value);
+    });
 });
 
 document.getElementById("button_delete_back").addEventListener('click', function (e) {
@@ -45,6 +47,7 @@ document.getElementById("button_save").addEventListener('click', function (e) {
 document.querySelector('.modal__close-button').addEventListener('click', function (e) {
     modalTask.classList.remove('modal_active');
 });
+
 function makeTask(data) {
     let newTask = document.createElement("tr");
     newTask.id = data.id;
@@ -60,7 +63,13 @@ function makeTask(data) {
     if (data.username != null) {
         if (data.username.length == 1) {
             student.innerHTML = data.username[0];
-            input.innerHTML = `<input id = ${data.user_id[0]}_${data.id} className=grade type=number name=t min=0 max=30 step=0.1></td>`;
+            if (data.score[0] !== 0)
+                input.innerHTML = `<input id = ${data.user_id[0]}_${data.id} class="number_input task_score score" type="number" value=${data.score[0]} name="score"  min="0.0" max="30.0"
+                        step="0.1" required>`;
+            else {
+                input.innerHTML = `<input id = ${data.user_id[0]}_${data.id} class="number_input task_score score" type="number" name="score"  min="1.0" max="30.0"
+                        step="0.1" required>`;
+            }
         } else {
             student.innerHTML = "►";
             student.addEventListener('click', function (e) {
@@ -68,16 +77,22 @@ function makeTask(data) {
                     student.innerHTML = "▼";
                     input.innerHTML = "<br>";
                     for (let i = 0; i < data.username.length; i++) {
+                        let id = `${data.user_id[0]}_${data.id}`;
                         let st = document.createElement("p")
                         st.innerHTML = data.username[i];
                         student.append(st);
                         let inp = document.createElement("p")
-                        inp.innerHTML = `<input id = ${data.user_id[i]}_${data.id} className=grade type=number name=t min=0 max=30 step=0.1></td>`
+                        if (data.score[0] !== 0)
+                            inp.innerHTML = `<input id = ${data.user_id[0]}_${data.id} class="number_input task_score score" type="number" value=${data.score[i]} name="score"  min="0.0" max="30.0"
+                        step="0.1" required>`;
+                        else
+                            inp.innerHTML = `<input id = ${data.user_id[i]}_${data.id} class="number_input task_score score" type="number" name="score"  min="0.0" max="30.0"
+                         step="0.1" required>`;
                         input.append(inp)
                     }
                 } else {
                     student.innerHTML = "►"
-                    input.innerHTML = "";
+                    input.innerHTML="";
                 }
             })
         }
@@ -87,14 +102,14 @@ function makeTask(data) {
         newTask.classList.add("free")
     }
     newTask.append(name, contest, score, student, input);
-    document.getElementById("button").parentNode.insertBefore(newTask,document.getElementById("button"));
+    document.getElementById("button").parentNode.insertBefore(newTask, document.getElementById("button"));
     name.addEventListener('click', function (e) {
         modalTitle.innerHTML = data.name;
         modalText.innerHTML = data.description.length > 150 ? data.description.substring(0, 147) + "..." : data.description;
         modalDescription.innerHTML = data.description;
         modalTask.classList.add('modal_active');
         modalTask.id = data.id;
-        modalLimit.innerHTML = `${data.taken_max} места до ${data.dead_line.slice(0,10)} включительно`
+        modalLimit.innerHTML = `${data.taken_max} места до ${data.dead_line.slice(0, 10)} включительно`
     })
 }
 
@@ -124,13 +139,24 @@ function sendAddTaskRequest(url) {
 }
 
 function sendDeleteTaskRequest(id) {
-    return fetch(   `/tasks/delete_task?task_id=${id}`, {
+    return fetch(`/tasks/delete_task?task_id=${id}`, {
         method: "POST",
     }).then(response => {
         if (response.ok && response.status[0] !== "3") {
             location.reload();
         } else {
             alert("Не удалось удалить задачу, ее уже кто-то взял или она уже оценена")
+        }
+    });
+}
+
+function sendRateTaskRequest(taskId, userId, score) {
+    return fetch(`/tasks/rate_task?task_id=${taskId}&user_id=${userId}&score=${score}`, {
+        method: "POST",
+    }).then(response => {
+        if (response.ok && response.status[0] !== "3") {
+        } else {
+            alert("Не удалось оценить задачу")
         }
     });
 }
@@ -142,6 +168,7 @@ function sendGetTaskRequest(url) {
         }
     });
 }
+
 busy.addEventListener('click', function (e) {
     if (!busy.checked) {
         [...document.getElementsByClassName("taken")]
