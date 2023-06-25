@@ -2,6 +2,8 @@ const modal = document.getElementById('modal');
 const modalTitle = document.getElementById('modal__title');
 const modalText = document.getElementById('modal__text');
 const modalButton = document.getElementById('button');
+const busy = document.getElementById("check_busy");
+const active = document.getElementById("check_free")
 loadStyle = localStorage.getItem('theme');
 
 let tasks = new Map();
@@ -20,6 +22,7 @@ function createNewTask(data) {
     let newTask = document.createElement("div");
     newTask.id = data.id
     newTask.className = "task_table";
+    newTask.classList.add("task_active")
     let title = document.createElement("div");
     title.className = "title";
     title.innerHTML = data.name;
@@ -34,6 +37,7 @@ function createNewTask(data) {
         path.classList.add('text_selected')
     } else if (!data.is_available) {
         newTask.classList.add('task_blocked');
+        newTask.classList.remove("task_active")
         title.classList.add('text_blocked');
         grade.classList.add('text_blocked');
     }
@@ -120,7 +124,6 @@ document.querySelector('.modal__close-button').addEventListener('click', functio
 
 document.querySelector('.button').addEventListener('click', function (e) {
     taskId = tasks.get(modalTitle.innerHTML);
-    let task = document.getElementById(taskId);
     if (modalButton.innerHTML === "Снять задачу") {
         modalButton.innerHTML = "Взять задачу"
         takenTasks.delete(taskId);
@@ -131,3 +134,26 @@ document.querySelector('.button').addEventListener('click', function (e) {
         sendTaskRequest("/tasks/take_task", taskId);
     }
 });
+busy.addEventListener('click', function (e){
+       if (!busy.checked)
+       {
+          [...document.getElementsByClassName("task_blocked")]
+              .forEach(e=>e.style.display="none");
+       }
+       else{
+           [...document.getElementsByClassName("task_blocked")]
+               .forEach(e=>e.style.display="");
+       }
+});
+active.addEventListener('click', function (e){
+
+    if (!active.checked)
+    {
+        [...document.getElementsByClassName("task_active")]
+            .forEach(e=>e.style.display="none");
+    }
+    else{
+        [...document.getElementsByClassName("task_active")]
+            .forEach(e=>e.style.display="");
+    }
+})
