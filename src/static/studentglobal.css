@@ -761,7 +761,11 @@ details {
 }
 
 .form-group .teacher-form {
-    margin-top: 20px;
+    /*margin-top: 20px;*/
+}
+
+#teacher {
+    margin-top: 0;
 }
 
 
@@ -779,10 +783,10 @@ details {
     display: flex;
     height: 10px;
     width: 100px;
-    margin-top: 3px;
+    margin-top: 6px;
     margin-left: 38px;
     margin-right: 80px;
-    padding-top: 19px;
+    padding-top: 10px;
     padding-bottom: 10px;
     /*text-align: left;*/
     clear: none;
@@ -799,7 +803,7 @@ details {
     margin-right: 3px;
     margin-left: 60px;
     margin-bottom: 25px;
-    top: 8px;
+    top: 20px;
     position: relative;
     border-radius: 5px;
     border-width: 1px;
@@ -814,7 +818,7 @@ details {
 .is-student-checkbox {
     position: absolute;
     /*width: 100%;*/
-    top: 200px;
+    top: 198px;
     left: 260px;
     /*padding-right: 175px;*/
     cursor: pointer;
@@ -835,7 +839,7 @@ details {
 .input-container {
     margin-left: 25px;
     /*margin-top: 20px;*/
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     display: block;
     /*position: absolute;*/
     /*padding-top: 210px;*/
