@@ -1095,6 +1095,7 @@ details {
         font-size: 40px;
         margin: 30px 20px 0px 20px;
     }
+
     .text_checkbox {
         font-size: 14px;
     }
@@ -1119,6 +1120,7 @@ details {
         height: 14px;
         width: 14px;
     }
+
     .navbar_mobile {
         padding: 0px 20px;
         height: 65px;
@@ -1137,6 +1139,7 @@ details {
         max-width: 25px;
         margin: 20px 10px;
     }
+
     .table_head {
         font-size: 18px;
     }
@@ -1160,44 +1163,46 @@ details {
     table {
         width: 90%;
     }
-    
+
     .task_table {
         height: 90px;
-        width: 170px;
+        width: 160px;
         margin: 20px 0px 0px 20px;
         padding: 5px 10px 5px 10px;
     }
-    
+
     .task_table:hover {
         height: 90px;
-        width: 170px;
+        width: 160px;
         margin: 20px 0px 0px 20px;
         padding: 5px 10px 5px 10px;
     }
-    
+
     .title {
-        height: 40px;
+        height: 52px;
         width: 200px;
         font-size: 15px;
         margin-bottom: 5px;
     }
-    
+
     .path {
         font-size: 11px;
         color: var(--color-path);
     }
-    
+
     .grade {
         font-size: 20px;
-        margin: 10px 0 10px 0;
+        margin: 5px 0 10px 0;
     }
+
     .titles {
         margin: 0px;
         margin: 40px 0px 0px 5px;
     }
 
     .days {
-        left: 126px;
+        left: 120px;
+        bottom: 21px;
     }
 
     .days_recording {
@@ -1222,11 +1227,12 @@ details {
         flex-wrap: wrap;
         margin: 40px 0px 0px 5px;
     }
-    
+
     .page_title {
         font-size: 50px;
         margin: 40px 20px 0px 30px;
     }
+
     .table_head {
         font-size: 20px;
     }

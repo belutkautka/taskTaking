@@ -194,7 +194,7 @@ tr:nth-child(even) {
     background-color: var(--color-nth-child);
 }
 
-.button_tr:last-child{
+.button_tr:last-child {
     background-color: var(--color-body);
 }
 
@@ -631,7 +631,7 @@ details[open] summary::after {
     width: 90%;
 }
 
-.table_students{
+.table_students {
     width: 60%;
 }
 
@@ -663,9 +663,10 @@ details[open] summary::after {
 }
 
 @media screen and (max-width: 600px) {
-    .table_students{
+    .table_students {
         width: 90%;
     }
+
     .table_title {
         font-size: 13px;
     }
@@ -726,10 +727,11 @@ details[open] summary::after {
 
 @media screen and (min-width: 600px) and (max-width: 950px) {
 
-    .table_students{
+    .table_students {
         width: 80%;
     }
-    .table_title{
+
+    .table_title {
         font-size: 20px;
     }
 
