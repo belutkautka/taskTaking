@@ -225,7 +225,6 @@ submitBtn.addEventListener('click', async () => {
                     return false;
                 }
                 if (response.ok || String(response.status)[0] === '3' || response.status === 201) {
-                    alert(response.status);
                     return true;
                 }
             })
