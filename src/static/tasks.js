@@ -2,7 +2,7 @@ const modal = document.getElementById('modal');
 const modalTitle = document.getElementById('modal__title');
 const modalText = document.getElementById('modal__text');
 const modalButton = document.getElementById('button');
-let loadStyle = localStorage.getItem('theme');
+loadStyle = localStorage.getItem('theme');
 
 let tasks = new Map();
 let takenTasks = new Set();
@@ -25,7 +25,7 @@ function createNewTask(data) {
     title.innerHTML = data.name;
     let path = document.createElement("div");
     path.className = "path";
-    path.innerHTML = `${data.contest_type} ${data.contest_number} задача ${data.task_number}`;
+    path.innerHTML = `${data.contest_type} контест ${data.contest_number} задача ${data.task_number}`;
     let grade = document.createElement("div");
     grade.className = "grade";
     grade.innerHTML = data.task_value;
@@ -50,7 +50,6 @@ function createNewTask(data) {
     let image = document.createElement("img");
     let dedline = Math.ceil((Date.parse(data.dead_line)- Date.now()) / (1000 * 3600 * 24))
     image.className = "dedline_image";
-    alert(loadStyle)
     if (loadStyle==="dark"|loadStyle===null){
         if (dedline<2){
             image.src ="../static/img/darkthemededline.png"
@@ -62,7 +61,6 @@ function createNewTask(data) {
         }
     }
     else{
-        alert(1)
         if (dedline<2){
             image.src ="../static/img/rededline.png"
             time.className = "days_recording time_over";
