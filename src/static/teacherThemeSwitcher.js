@@ -1,4 +1,3 @@
-
 const btn = document.getElementById("theme-button");
 const exitButton = document.getElementsByClassName("exit_images").item(0)
 const currentTheme = document.getElementById("current_theme");
@@ -11,6 +10,45 @@ let loadStyle = localStorage.getItem('theme');
 if (loadStyle) {
     LoadStyle(loadStyle);
 }
+
+async function logout() {
+    try {
+        const result = await sendLogoutReq();
+        if (result.success) {
+            console.log(`Logout success with status code ${result.status}`);
+            goToSignInPage();
+            return true;
+        } else {
+            console.error(`Logout failed with status code ${result.status}`);
+            goToSignInPage();
+            return false;
+        }
+    } catch (error) {
+        console.log('Logout failed: ', error);
+    }
+}
+
+async function sendLogoutReq() {
+    const response = await fetch("/auth/jwt/logout", {
+        method: "POST",
+    });
+    let status = response.status;
+    if (response.ok && String(status)[0] !== "3") {
+        return {status: status, success: true};
+    } else {
+        return {status: status, success: false};
+    }
+}
+
+
+function goToSignInPage() {
+    window.location.href = '/pages/signin';
+}
+
+
+exitButton.addEventListener("click", async () => {
+    await logout();
+});
 
 function LoadStyle(loadStyle) {
     localStorage.setItem('theme', loadStyle);

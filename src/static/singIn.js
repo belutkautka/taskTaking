@@ -23,6 +23,13 @@ isStudent.onclick = function () {
     }
 };
 
+for (let i = 0; i < inputs.length; i++) {
+    inputs[i].addEventListener('focus', () => {
+        inputs[i].style.borderColor = 'var(--color-border-checkbox)';
+        inputs[i].placeholder = '';
+    });
+}
+
 buttons.forEach((btn, index) => {
     btn.addEventListener('click', () => {
 
@@ -32,9 +39,9 @@ buttons.forEach((btn, index) => {
             slider.style.left = `${index * 2000}px`;
             slider.style.width = "86px";
             frame.classList.replace('frame-long', 'frame-short');
-            // signinBox.classList.replace("active", "inactive");
-            slideToggle(signinBox, 500, true);
-            submitBtn.value = 'Войти';
+            signinBox.classList.replace("active", "inactive");
+            // slideToggle(signinBox, 500, true);
+            submitBtn.textContent = 'Войти';
             for (let i = 2; i < inputs.length; i++) {
                 inputs[i].required = false;
             }
@@ -44,10 +51,9 @@ buttons.forEach((btn, index) => {
             slider.style.left = `${index * 108.5}px`;
             slider.style.width = "240px";
             frame.classList.replace('frame-short', 'frame-long');
-            // signinBox.classList.replace("inactive", "active");
-            slideToggle(signinBox, 500);
-            // slideToggle(flexInner, 500, true);
-            submitBtn.value = 'Зарегистрироваться';
+            signinBox.classList.replace("inactive", "active");
+            // slideToggle(signinBox, 500);
+            submitBtn.textContent = 'Зарегистрироваться';
             for (let i = 2; i < inputs.length; i++) {
                 inputs[i].required = true;
             }
@@ -106,13 +112,11 @@ function slideToggle(element, speed, hide = false) {
 }
 
 
-async function createUser(login, password, username, role_id, invited_by) {
-    const response = await fetch("/auth/register", {
-        method: "POST",
-        headers: {
+function createUser(login, password, username, role_id, invited_by) {
+    return fetch("/auth/register", {
+        method: "POST", headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
+        }, body: JSON.stringify({
             email: login,
             password: password,
             is_active: true,
@@ -123,118 +127,142 @@ async function createUser(login, password, username, role_id, invited_by) {
             invited_by: invited_by,
         })
     });
-    let status = response.status;
-    if (response.ok && String(status)[0] !== "3") {
-        return {status: status, success: true};
-    } else {
-        return {status: status, success: false};
-    }
 }
 
 async function loginUser(login, password) {
-    const response = await fetch('/auth/jwt/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'accept': 'application/json'
-        },
-        body: `grant_type=&username=${login}&password=${password}&scope=&client_id=&client_secret=`
-    });
+    return await fetch('/auth/jwt/login', {
+        method: 'POST', headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }, body: `grant_type=&username=${login}&password=${password}&scope=&client_id=&client_secret=`
+    })
 
-    let status = response.status;
-    if (response.ok && String(status)[0] !== "3") {
-        return {status: status, success: true};
-    } else {
-        return {status: status, success: false};
-    }
-}
-
-function getRoleId() {
-    let roleId = 2;
-    const response = fetch('/users/me').then(response => response.json())
-        .then(data => {
-            roleId = data['role_id'];
-        });
-    return roleId;
 }
 
 
-async function handleCreateUser(login, password, username, roleId, teacherId) {
-    try {
-        const result = await createUser(login, password, username, roleId, teacherId);
-        if (result.success) {
-            console.log(`Sign up success with status code ${result.status}`);
-            await handleLogin(login, password);
-            return true;
-        } else {
-            console.error(`Sign up failed with status code ${result.status}`);
-            return false;
-        }
-    } catch (error) {
-        console.error('Sign up failed:', error);
-    }
-}
-
-async function handleLogin(login, password) {
-    try {
-        const result = await loginUser(login, password);
-        if (result.success) {
-            console.log(`Login success with status code ${result.status}`);
-            let roleId = getRoleId();
-            if (roleId === '2')
-                await goToStartPage();
-            else
-                await goToTeacherStartPage();
-            return true;
-        } else {
-            console.error(`Login failed with status code ${result.status}`);
-            alert('Неправильный логин или пароль');
-            return false;
-        }
-    } catch (error) {
-        alert('Неправильный логин или пароль');
-        console.error('Login failed:', error);
-    }
+async function getRoleId() {
+    const response = await fetch('/users/me');
+    const data = await response.json();
+    console.log(data);
+    return data['role_id'];
 }
 
 
-async function goToStartPage() {
+function goToStartPage() {
     window.location.href = '/pages/startpage';
 }
 
-async function goToTeacherStartPage() {
+function goToTeacherStartPage() {
     window.location.href = '/pages/teacherstartpage';
 }
 
 submitBtn.addEventListener('click', async () => {
     let login = document.getElementById('login');
     let password = document.getElementById('password');
+    let regex = /^[a-zA-Z0-9]+$/;
 
     if (!login.value) {
+        login.style.borderColor = 'red';
         return;
+    } else if (!regex.test(login.value)) {
+        login.style.borderColor = 'red';
+        login.value = '';
+        login.placeholder = 'Латинские буквы, цифры';
     }
 
     if (!password.value) {
+        password.style.borderColor = 'red';
         return;
+    } else if (!regex.test(password.value)) {
+        password.style.borderColor = 'red';
+        password.value = '';
+        password.placeholder = 'Латинские буквы, цифры';
     }
 
     if (signupProcess) {
         let confirmPassword = document.getElementById('confirmPassword');
-        let teacherId = document.getElementById('teacher');
+        let teacherLogin = document.getElementById('teacher');
         let username = document.getElementById('username');
         let roleId = isStudent.checked ? 2 : 1;
         if (!confirmPassword.value) {
+            confirmPassword.style.borderColor = 'red';
             return;
         }
         if (password.value !== confirmPassword.value) {
+            password.style.borderColor = 'red';
+            confirmPassword.style.borderColor = 'red';
+            confirmPassword.value = '';
+            confirmPassword.placeholder = 'Пароли не совпадают!';
             return;
         }
-        if (isStudent.checked && !teacherId.value) {
-            return;
+        if (isStudent.checked) {
+            if (!teacherLogin.value) {
+                teacherLogin.style.borderColor = 'red';
+                return;
+            } else if (!regex.test(teacherLogin.value)) {
+                teacherLogin.style.borderColor = 'red';
+                teacherLogin.value = '';
+                teacherLogin.placeholder = 'Латинские буквы, цифры'
+                return;
+            }
         }
-        await handleCreateUser(login.value, password.value, username.value, roleId, teacherId.value)
+
+        await createUser(login.value, password.value, username.value, roleId, teacherLogin.value)
+            .then(response  => {
+                if (response.status === 400) {
+                    return false;
+                }
+                if (response.status === 500) {
+                    teacherLogin.style.borderColor = 'red';
+                    teacherLogin.value = '';
+                    teacherLogin.placeholder = 'Нет такого препода';
+                    return false;
+                }
+                if (response.ok || String(response.status)[0] === '3' || response.status === 201) {
+                    alert(response.status);
+                    return true;
+                }
+            })
+            .then(success => {
+                if (success) {
+                    return loginUser(login.value, password.value)
+                        .then(response => {
+                            if (response.ok || String(response.status)[0] === '3') {
+                                if (isStudent) {
+                                    goToStartPage();
+                                } else {
+                                    goToTeacherStartPage();
+                                }
+                            } else {
+
+                            }
+                        });
+                } else {
+
+                }
+            });
 
     } else {
-        await handleLogin(login.value, password.value);
+        let success = await loginUser(login.value, password.value)
+            .then(response => {
+                console.log(response.json());
+                return !(!response.ok && String(response.status)[0] !== '3');
+            });
+
+        if (!success) {
+            password.style.borderColor = 'red';
+            password.value = '';
+            password.placeholder = 'Проверьте данные'
+        }
+
+        let roleId = await getRoleId();
+        if (roleId === 2) {
+            goToStartPage();
+        } else if (roleId === 1) {
+            goToTeacherStartPage();
+        } else {
+            console.log(roleId + ' ' + typeof roleId);
+        }
     }
 });
+
+
