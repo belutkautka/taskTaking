@@ -10,23 +10,30 @@ const submitBtn = document.querySelector('.submit-btn');
 const inputs = document.getElementsByTagName('input');
 const isStudentInput = document.querySelector("[name='isStudent']");
 const teacherInput = document.querySelector("[name='teacher']");
+const placeHolders = [];
 let animationFrameId = null;
 let signupProcess = false;
 
+teacherFieldHeight = teacherField.style.height
+
 isStudent.onclick = function () {
     if (isStudent.checked) {
-        slideToggle(teacherField, 500);
-        inputs[inputs.length - 1].required = true;
+        // slideToggle(teacherField, 1, teacherFieldHeight);
+        // inputs[inputs.length - 1].required = true;
+        teacherField.classList.replace('inactive', 'active');
     } else {
-        slideToggle(teacherField, 500, true);
-        inputs[inputs.length - 1].required = false;
+        teacherField.classList.replace('active', 'inactive');
+        // slideToggle(teacherField, 1, teacherFieldHeight, true);
+        // inputs[inputs.length - 1].required = false;
     }
 };
 
 for (let i = 0; i < inputs.length; i++) {
+    placeHolders.push(inputs[i].placeholder);
     inputs[i].addEventListener('focus', () => {
+        inputs[i].placeholder = placeHolders[i];
         inputs[i].style.borderColor = 'var(--color-border-checkbox)';
-        inputs[i].placeholder = '';
+        // inputs[i].placeholder = '';
     });
 }
 
@@ -40,7 +47,7 @@ buttons.forEach((btn, index) => {
             slider.style.width = "86px";
             frame.classList.replace('frame-long', 'frame-short');
             signinBox.classList.replace("active", "inactive");
-            // slideToggle(signinBox, 500, true);
+            // slideToggle(signinBox, 400, true);
             submitBtn.textContent = 'Войти';
             for (let i = 2; i < inputs.length; i++) {
                 inputs[i].required = false;
@@ -65,14 +72,14 @@ buttons.forEach((btn, index) => {
     });
 });
 
-function slideToggle(element, speed, hide = false) {
+function slideToggle(element, speed, height, hide = false) {
     let display = getComputedStyle(element).display;
 
     if (!hide) {
         // show element
-        element.style.display = 'block';
+        element.style.display = display;
         element.style.height = '0px';
-        let height = element.scrollHeight;
+        // let height = height;
         let step = height / (speed / 0.016);  // 0.016 - время выполнения одного кадра при 60fps
         let animate = function () {
             let currentHeight = parseFloat(getComputedStyle(element).height);
@@ -91,7 +98,7 @@ function slideToggle(element, speed, hide = false) {
 
     } else {
         // hide element
-        let height = element.scrollHeight;
+        let height = height;
         let step = height / (speed / 0.016);
 
         let animate = function () {
@@ -207,7 +214,7 @@ submitBtn.addEventListener('click', async () => {
         }
 
         await createUser(login.value, password.value, username.value, roleId, teacherLogin.value)
-            .then(response  => {
+            .then(response => {
                 if (response.status === 400) {
                     return false;
                 }
@@ -233,11 +240,9 @@ submitBtn.addEventListener('click', async () => {
                                     goToTeacherStartPage();
                                 }
                             } else {
-
                             }
                         });
                 } else {
-
                 }
             });
 
