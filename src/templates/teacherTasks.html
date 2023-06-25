@@ -34,22 +34,24 @@
             <button class="modal__close-button">
                 &#10006;
             </button>
-            <details> 
+            <details>
                 <summary>
                     <p id="modal__title" class="modal__title ">
                         Эрен Уничтожает всех титанов
                     </p>
                     <p id="modal__text" class="modal__text">
-                        Эрен Йегер продолжает идти вперед к своей цели - он хочет уничтожить всех титанов.Эрен хочет расчистить
+                        Эрен Йегер продолжает идти вперед к своей цели - он хочет уничтожить всех титанов.Эрен хочет
+                        расчистить
                         от титанов дорогу к стене Мария, чтобы начать операцию по возвращению Шиганшины.
                     </p>
                 </summary>
                 <div id="modal__text1" class="modal__text">
-                Эрен Йегер продолжает идти вперед к своей цели - он хочет уничтожить всех титанов.Эрен хочет расчистить
-                        от титанов дорогу к стене Мария, чтобы начать операцию по возвращению Шиганшины.
-                    </div>
+                    Эрен Йегер продолжает идти вперед к своей цели - он хочет уничтожить всех титанов.Эрен хочет
+                    расчистить
+                    от титанов дорогу к стене Мария, чтобы начать операцию по возвращению Шиганшины.
+                </div>
             </details>
-            
+
             <div class="buttons_modal">
                 <button id="button_edit" class="button button_task">Редактировать</button>
                 <button id="button_delete" class="button button_task">Удалить задачу</button>
@@ -121,8 +123,8 @@
                     <div class="text_pair">Дней на запись</div>
                     <input class="number_input" type="number" name="days" value="1" min="1" max="30" step="1" required>
                 </div>
-                <button id="button_save" class="button button_form">Сохранить</button>
             </form>
+            <button id="button_save" class="button button_form">Сохранить</button>
         </div>
     </div>
     <div id="modal_back_change" class="modal modal_back_change ">
@@ -162,7 +164,7 @@
         </button>
         Добавить задачу
     </p>
-    <table>
+    <table id="tasks">
         <tr class="table_title">
             <td>Название</td>
             <td>Контест</td>
@@ -174,43 +176,10 @@
             <td>Студент</td>
             <td>Поставленный балл</td>
         </tr>
-        <tr>
-            <td class="teacher_task">
-                Эрен уничтожает всех титанов
-            </td>
-            <td>Длинный 1 задача 3</td>
-            <td>2.847</td>
-            <td>Бубб Полина</td>
-            <td><input id="grade1" class="grade" type="number" name="t" min="0" max="30" step="0.1"></td>
-        </tr>
-        <tr>
-            <td class="teacher_task">
-                Новое изобретение Тони Старка
-            </td>
-            <td>Длинный 3 задача 4</td>
-            <td>2.847</td>
-            <td>Белоусова Анастасия</td>
-            <td><input id="grade2" class="grade_dark" type="number" name="t" min="0" max="30" step="0.1"></td>
-        </tr>
-        <tr>
-            <td class="teacher_task">
-                Сильный подмассив
-            </td>
-            <td>Длинный 14 задача 5</td>
-            <td>2.847</td>
-            <td>Конюшенко Данил</td>
-            <td><input id="grade3" class="grade" type="number" name="t" min="0" max="30" step="0.1"></td>
-        </tr>
-        <tr>
-            <td class="teacher_task">
-                Количество различных подстрок
-            </td>
-            <td>Длинный 14 задача 3</td>
-            <td>2.847</td>
-            <td>Пичугин Фёдор</td>
-            <td><input id="grade" class="grade_dark" type="number" name="t" min="0" max="30" step="0.1"></td>
-        </tr>
     </table>
+    <button class="button button_send_mark" id="button_send_mark">
+        Выставить баллы
+    </button>
     <script src="../static/teachertasks.js"></script>
 </body>
 

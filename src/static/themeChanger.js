@@ -3,9 +3,6 @@ const link = document.getElementById("theme-link");
 const exitButton = document.getElementsByClassName("exit_images").item(0)
 const lightTheme = "../static/light.css";
 const darkTheme = "../static/dark.css";
-
-const currentNotification = document.getElementById("current_notification");
-const notification = document.getElementById("notification");
 const currentProfile = document.getElementById("current_profile");
 const profile = document.getElementById("profile");
 const currentTheme = document.getElementById("current_theme");
@@ -39,8 +36,6 @@ function ChangeTheme() {
 function LoadStyle(loadStyle) {
     localStorage.setItem('theme', loadStyle);
     if (loadStyle === darkTheme) {
-        currentNotification.src = "../static/img/whiteNotification.png";
-        notification.src = "../static/img/blueNotification.png";
         currentProfile.src = "../static/img/whiteProfile.png";
         profile.src = "../static/img/blueProfile.png";
         currentTheme.src = "../static/img/whiteSun.png";
@@ -51,8 +46,6 @@ function LoadStyle(loadStyle) {
             bTree.src = "../static/img/btreelogo.png";
         }
     } else {
-        currentNotification.src = "../static/img/blackNotification.png"
-        notification.src = "../static/img/orangeNotification.png";
         currentProfile.src = "../static/img/blackPerson.png";
         profile.src = "../static/img/orangeProfile.png";
         currentTheme.src = "../static/img/blackMoon.png";

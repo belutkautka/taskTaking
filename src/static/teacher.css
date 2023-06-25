@@ -25,7 +25,11 @@
     --color-input-border:#515151;
     --color-grade:#bababa;
     --color-grade-nth:#bababa;
+    --color-button-send-mark:#ffffff;
+    --size-border-mark:1px;
 }
+
+
 
 body {
     margin: 0;
@@ -562,4 +566,18 @@ details[open] summary::after {
 
 .button_forbidden {
     display: none;
+}
+
+.button_send_mark{
+   position: relative;
+    font-size: 17px;
+    margin: 5px 0 5px;
+    padding: 7px 30px;
+    left:1185px;
+    border: var(--size-border-mark) solid var(--color-border-button);
+    background-color:var(--color-button-send-mark);
+}
+.button_send_mark:hover{
+    border: var(--size-border-mark) solid var(--color-border-button);
+    background-color:var(--color-button-backgroung-hover);
 }

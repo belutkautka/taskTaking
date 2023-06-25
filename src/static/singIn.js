@@ -149,6 +149,16 @@ async function loginUser(login, password) {
     }
 }
 
+function getRoleId() {
+    let roleId = 2;
+    const response = fetch('/users/me').then(response => response.json())
+        .then(data => {
+            roleId = data['role_id'];
+        });
+    return roleId;
+}
+
+
 async function handleCreateUser(login, password, username, roleId, teacherId) {
     try {
         const result = await createUser(login, password, username, roleId, teacherId);
@@ -170,7 +180,11 @@ async function handleLogin(login, password) {
         const result = await loginUser(login, password);
         if (result.success) {
             console.log(`Login success with status code ${result.status}`);
-            goToStartPage();
+            let roleId = getRoleId();
+            if (roleId === '2')
+                await goToStartPage();
+            else
+                await goToTeacherStartPage();
             return true;
         } else {
             console.error(`Login failed with status code ${result.status}`);
@@ -183,12 +197,13 @@ async function handleLogin(login, password) {
     }
 }
 
-function goToStartPage() {
+
+async function goToStartPage() {
     window.location.href = '/pages/startpage';
 }
 
-function goToTeacherStartPage() {
-    window.location.href = 'pages/teacherStartPage';
+async function goToTeacherStartPage() {
+    window.location.href = '/pages/teacherstartpage';
 }
 
 submitBtn.addEventListener('click', async () => {
