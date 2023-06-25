@@ -21,8 +21,8 @@ body[data_theme="light"] {
     --size-border-button: 3px;
     --color-button-border-hover: #5f5f5f;
     --slider-color: linear-gradient(to right,
-    rgb(255, 195, 110),
-    rgb(255, 146, 91));
+            rgb(255, 195, 110),
+            rgb(255, 146, 91));
     --is-student-border: 2px solid #000;
     --is-student-background: rgba(0, 0, 0, 0.56);
     --color-input-background: rgb(232, 232, 232);
@@ -71,8 +71,8 @@ body[data_theme="dark"] {
     --size-border-button: 3px;
     --color-button-border-hover: #6d6d6d;
     --slider-color: linear-gradient(to right,
-    rgba(103, 147, 234, 0.92),
-    rgb(50, 96, 191));
+            rgba(103, 147, 234, 0.92),
+            rgb(50, 96, 191));
     --is-student-border: 2px solid #c2c2c2;
     --is-student-background: rgba(161, 159, 159, 0.63);
     --color-signin-shadow: rgb(0, 0, 0);
@@ -181,7 +181,7 @@ table {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     margin: 10px 75px 0px;
-    width: 50%;
+    width: 60%;
     border-spacing: 0px 5px;
     border-collapse: collapse;
 }
@@ -810,8 +810,7 @@ details {
 
 }
 
-.input-styling :hover {
-}
+.input-styling :hover {}
 
 .is-student-checkbox {
     position: relative;
@@ -862,7 +861,7 @@ details {
     left: 0;
 }
 
-.is-student-checkbox input[type=checkbox]:checked + label::after {
+.is-student-checkbox input[type=checkbox]:checked+label::after {
     background: var(--image-check-mark);
     background-size: 18px;
     outline: var(--outline-checbox-label) solid var(--color-border-checkbox-checked);
@@ -1008,7 +1007,7 @@ details {
     left: 0;
 }
 
-.checkbox input[type=checkbox]:checked + label:after {
+.checkbox input[type=checkbox]:checked+label:after {
     background: var(--image-check-mark);
     background-size: 18px;
     outline: var(--outline-checbox-label) solid var(--color-border-checkbox-checked);
@@ -1082,6 +1081,11 @@ details {
     left: 157px;
 }
 
+.title_td {
+    min-width: 300px;
+
+}
+
 @media screen and (max-width: 900px) and (min-width: 600px) {
     .navbar_mobile {
         padding: 0px 20px;
@@ -1107,4 +1111,60 @@ details {
         max-width: 25px;
         margin: 20px 10px;
     }
+    .table_head {
+        font-size: 18px;
+    }
+
+    .profile_paragraph {
+        font-size: 24px;
+        margin: 30px 30px 0px;
+    }
+
+    table {
+        font-size: 15px;
+        margin: 0px 20px 20px;
+    }
+
+
+    td {
+        max-width: 100px;
+        padding: 10px 10px;
+    }
+
+    table {
+        width: 90%;
+    }
+}
+
+
+@media screen and (min-width: 600px) and (max-width: 950px) {
+
+    .table_head {
+        font-size: 20px;
+    }
+
+    .profile_paragraph {
+        font-size: 26px;
+        margin: 30px 40px 0px;
+    }
+
+    table {
+        font-size: 17px;
+        margin: 0px 30px 20px;
+    }
+
+    .page_title {
+        font-size: 50px;
+        margin: 40px 20px 0px 30px;
+    }
+
+    td {
+        max-width: 100px;
+        padding: 10px 10px;
+    }
+
+    table {
+        width: 90%;
+    }
+
 }
