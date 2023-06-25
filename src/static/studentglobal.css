@@ -566,13 +566,13 @@ details {
 }
 
 .frame {
+    /*outline: 2px solid rgba(38, 231, 151, 0.5);*/
     /*overflow: hidden;*/
     -webkit-transition: height .5s ease;
     -o-transition: height .5s ease;
     transition: height .5s ease;
     width: 100%;
     padding-top: 20px;
-    /*outline: 2px solid rgba(38, 231, 151, 0.5);*/
     /*transition: all .5s ease;*/
     margin-left: auto;
     margin-right: auto;
@@ -590,16 +590,16 @@ details {
 }
 
 .frame-long {
-    height: 600px;
+    height: 550px;
 }
 
 .frame-short {
-    height: 400px;
+    height: 370px;
 }
 
 .signin-nav {
     /*outline: 2px solid rgba(243, 185, 40, 0.71);*/
-    margin: 0 auto;
+    margin-top: -20px;
     padding-top: 10px;
     padding-bottom: 0;
     height: 0;
@@ -677,11 +677,12 @@ details {
 }
 
 .login-form {
+    /*outline: 2px solid rgba(231, 38, 38, 0.83);*/
     padding-top: 0;
+    margin-top: -40px;
     display: block;
     /*flex-shrink: 0;*/
     /*grid-area: B;*/
-    /*outline: 2px solid rgba(231, 38, 38, 0.83);*/
     width: 420px;
     height: auto;
     /*margin-right: 20px;*/
@@ -690,7 +691,6 @@ details {
     position: relative;
     transition: translate 0.5s ease-in-out;
     margin-bottom: 20px;
-    margin-top: 0;
 }
 
 
