@@ -240,8 +240,7 @@ td {
 }
 
 .modal__content_deployed {
-    max-width: 500px;
-    min-width: 500px;
+    width: 500px;
     padding: 25px;
     border-radius: 8px;
     position: relative;
@@ -250,8 +249,7 @@ td {
 }
 
 .modal__content {
-    max-width: 500px;
-    min-width: 500px;
+    width: 500px;
     padding: 25px;
     border-radius: 8px;
     position: relative;
@@ -302,10 +300,6 @@ td {
     color: var(--color-points);
 }
 
-.modal__description {
-    font-size: 1.125rem;
-}
-
 .button {
     margin: 15px 0 0px;
     padding: 20px 80px;
@@ -332,8 +326,7 @@ td {
 }
 
 .task_table {
-    min-height: 120px;
-    max-height: 120px;
+    height: 120px;
     text-align: center;
     width: 215px;
     font-family: Arial, Helvetica, sans-serif;
@@ -347,8 +340,7 @@ td {
 }
 
 .task_table:hover {
-    min-height: 120px;
-    max-height: 120px;
+    height: 120px;
     text-align: center;
     width: 215px;
     font-family: Arial, Helvetica, sans-serif;
@@ -1093,6 +1085,39 @@ details {
 }
 
 @media screen and (max-width: 600px) {
+    .page_title {
+        font-size: 40px;
+        margin: 30px 20px 0px 20px;
+    }
+    .limit_modal {
+        font-size: 12px;
+    }
+
+    .text_checkbox {
+        font-size: 14px;
+    }
+
+    .add_task_button {
+        font-size: 14px;
+
+    }
+
+    .checkboxes {
+        margin-top: 45px;
+    }
+
+
+    .checkbox label:after {
+        height: 14px;
+        width: 14px;
+    }
+
+    .checkbox input[type=checkbox]:checked+label:after {
+        background-size: 14px;
+        height: 14px;
+        width: 14px;
+    }
+
     .navbar_mobile {
         padding: 0px 20px;
         height: 65px;
@@ -1111,6 +1136,7 @@ details {
         max-width: 25px;
         margin: 20px 10px;
     }
+
     .table_head {
         font-size: 18px;
     }
@@ -1134,10 +1160,107 @@ details {
     table {
         width: 90%;
     }
+
+    .task_table {
+        height: 90px;
+        width: 160px;
+        margin: 20px 0px 0px 20px;
+        padding: 5px 10px 5px 10px;
+    }
+
+    .task_table:hover {
+        height: 90px;
+        width: 160px;
+        margin: 20px 0px 0px 20px;
+        padding: 5px 10px 5px 10px;
+    }
+
+    .title {
+        height: 52px;
+        width: 200px;
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+
+    .path {
+        font-size: 11px;
+        color: var(--color-path);
+    }
+
+    .grade {
+        font-size: 20px;
+        margin: 5px 0 10px 0;
+    }
+
+    .titles {
+        margin: 0px;
+        margin: 40px 0px 0px 5px;
+    }
+
+    .days {
+        left: 120px;
+        bottom: 21px;
+    }
+
+    .days_recording {
+        font-size: 9.8px;
+    }
+
+    .dedline_image {
+        max-width: 13px;
+        bottom: 2px;
+    }
+
+
+
+.modal__content_deployed {
+    width: 350px;
+}
+
+.modal__content {
+    width: 350px;
+}
+
+.modal__title {
+    font-size: 1.2rem;
+}
+
+.modal__text {
+    text-align: left;
+    font-size: 12px;
+}
+
+.modal__points {
+    font-size: 15px;
+}
+
+.button {
+    margin: 5px 0 0px;
+    padding: 10px 50px;
+    font-size: 20px;
+}
+
+.modal {
+    padding: 120px 5px;
+}
 }
 
 
 @media screen and (min-width: 600px) and (max-width: 950px) {
+
+    .titles {
+        padding-bottom: 40px;
+        margin: 0px;
+        align-items: flex;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 40px 0px 0px 5px;
+    }
+
+    .page_title {
+        font-size: 50px;
+        margin: 40px 20px 0px 30px;
+    }
 
     .table_head {
         font-size: 20px;
@@ -1151,6 +1274,7 @@ details {
     table {
         font-size: 17px;
         margin: 0px 30px 20px;
+        width: 90%;
     }
 
     .page_title {
@@ -1163,8 +1287,29 @@ details {
         padding: 10px 10px;
     }
 
-    table {
-        width: 90%;
+    .text_checkbox {
+        font-size: 16px;
+    }
+
+    .add_task_button {
+        font-size: 16px;
+
+    }
+
+    .checkboxes {
+        margin-top: 60px;
+    }
+
+
+    .checkbox label:after {
+        height: 15px;
+        width: 15px;
+    }
+
+    .checkbox input[type=checkbox]:checked+label:after {
+        background-size: 15px;
+        height: 15px;
+        width: 15px;
     }
 
 }
