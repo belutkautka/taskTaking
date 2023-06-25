@@ -136,6 +136,7 @@ body {
 
 img {
     width: 30px;
+    max-width: 90%;
 }
 
 .right_nav a img {
