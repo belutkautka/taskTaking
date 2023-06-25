@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Request, Depends, Response
 from fastapi.templating import Jinja2Templates
 from src.auth.base_config import fastapi_users
 from fastapi.responses import RedirectResponse
@@ -52,3 +52,15 @@ def get_base_page(request: Request, user: User = Depends(current_user)):
 @router.get("/signin")
 def get_base_page(request: Request):
     return templates.TemplateResponse("signin.html", {"request": request})
+
+
+@router.post("/set-dark-theme-cookie")
+def get_base_page(response: Response):
+    response.set_cookie(key="theme-cookie", value="dark")
+    return {"message": "Come to the dark side, we have cookies"}
+
+
+@router.post("/set-light-theme-cookie")
+def get_base_page(response: Response):
+    response.set_cookie(key="theme-cookie", value="light")
+    return {"message": "Come to the light side, we have cookies too"}
