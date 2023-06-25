@@ -1,6 +1,6 @@
 from typing import Optional
 
-from fastapi import Depends, Request
+from fastapi import Depends, Request, HTTPException
 from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, schemas
 
 from src.auth.models import User
@@ -42,7 +42,12 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
             teacher = await self.user_db.get_by_email(user_dict['invited_by'])
 
             if teacher is None:
-                raise exceptions.UserNotExists()
+                raise HTTPException(status_code=400, detail=
+                {
+                    'Status': 'Error',
+                    'Data': None,
+                    'Details': 'There is no teacher with such name'
+                })
 
             user_dict['max_task_available'] = 3
             user_dict['score_sum'] = 0
