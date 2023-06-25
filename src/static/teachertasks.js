@@ -13,7 +13,7 @@ const modalDescription = document.getElementById("modal__full_text")
 const modalLimit = document.getElementsByClassName("limit_modal")[0]
 
 let sortedTasks = null;
-let sortedDescTask = null;
+let sortedDescTasks = null;
 let unsortedTasks = null;
 
 sendGetTaskRequest("/tasks/get_tasks_by_teacher_id").then(data => data.Data.forEach(e => makeTask(e)))
@@ -116,7 +116,7 @@ function sendAddTaskRequest(url) {
         })
     }).then(response => {
         if (response.ok && response.status[0] !== "3") {
-            modal.classList.remove('modal_active');
+            location.reload();
             form.reset();
         } else {
             alert("Не удалось создать задачу, попробуйте еще раз")
@@ -173,13 +173,13 @@ sortSign.addEventListener('click', function (e) {
             sortedTasks = Array.from(tasks.querySelectorAll('tr'))
                 .slice(1)
                 .sort((rowA, rowB) => +rowA.cells[1].innerHTML > +rowB.cells[1].innerHTML ? 1 : -1);
-            sortedDescTask = Array.from(sortedTasks);
-            sortedDescTask.reverse();
+            sortedDescTasks = Array.from(sortedTasks);
+            sortedDescTasks.reverse();
         }
         tasks.tBodies[0].append(...sortedTasks);
     } else if (sortSign.innerHTML === '↑') {
         sortSign.innerHTML = '↓';
-        tasks.tBodies[0].append(...sortedDescTask);
+        tasks.tBodies[0].append(...sortedDescTasks);
     } else {
         sortSign.innerHTML = '↕';
         tasks.tBodies[0].append(...unsortedTasks);
