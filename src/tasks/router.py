@@ -353,19 +353,27 @@ async def delete_task(task_id: int, session: AsyncSession = Depends(get_async_se
     if user.role_id != 1:
         raise Exception
 
-    # stmt = update(taken_task) \
-    #     .values(data) \
-    #     .where(and_(taken_task.c.task_id == task_id, taken_task.c.user_id == user_id))
-    stmt = select(task)\
-        .outerjoin(taken_task, task.c.id == taken_task.c.task_id)
-    result = await session.execute(stmt)
+    query = select(taken_task)\
+        .where(taken_task.c.task_id == task_id)\
+        .limit(1)
 
-    # await session.execute(stmt)
-    # await session.commit()
+    is_taken = bool(len([r._asdict() for r in await session.execute(query)]))
 
-    # return {'Status': 'Success'}
+    if is_taken:
+        return {
+            'Status': 'Error',
+            'Data': 'Task already taken',
+            'Details': None
+        }
+
+    stmt = delete(task)\
+        .where(and_(task.c.id == task_id, task.c.added_by == user.id))
+
+    await session.execute(stmt)
+    await session.commit()
+
     return {
         'Status': 'Success',
-        'Data': [r._asdict() for r in result],
+        'Data': None,
         'Details': None
     }
