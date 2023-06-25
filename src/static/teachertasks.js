@@ -27,15 +27,16 @@ document.getElementById('add_task_button').addEventListener('click', function (e
 document.getElementById("button_delete").addEventListener('click', function (e) {
     modalDelete.classList.add('modal_active');
 });
+document.getElementById("button_send_mark").addEventListener('click', function (e) {
+    console.log(document.getElementsByTagName("input")[0]);
+
+});
 
 document.getElementById("button_delete_back").addEventListener('click', function (e) {
     modalDelete.classList.remove('modal_active');
 });
 document.getElementById("button_exactly_delete").addEventListener('click', function (e) {
-    sendDeleteTaskRequest(modalTask.id).then(result=>{
-    document.getElementById(modalTask.id).remove();});
-    modalDelete.classList.remove('modal_active');
-    modalTask.classList.remove('modal_active');
+    sendDeleteTaskRequest(modalTask.id)
 });
 
 document.getElementById("button_save").addEventListener('click', function (e) {
@@ -116,8 +117,6 @@ function sendAddTaskRequest(url) {
         })
     }).then(response => {
         if (response.ok && response.status[0] !== "3") {
-            location.reload();
-            form.reset();
         } else {
             alert("Не удалось создать задачу, попробуйте еще раз")
         }
@@ -129,7 +128,7 @@ function sendDeleteTaskRequest(id) {
         method: "POST",
     }).then(response => {
         if (response.ok && response.status[0] !== "3") {
-            document.getElementById(id).remove();
+            location.reload();
         } else {
             alert("Не удалось удалить задачу, ее уже кто-то взял или она уже оценена")
         }
