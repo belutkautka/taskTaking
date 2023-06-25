@@ -85,9 +85,12 @@ async def get_tasks_by_teacher_id(session: AsyncSession = Depends(get_async_sess
         current_dt = datetime.datetime.utcnow()
 
         if user.role_id == 1:
-            query = select(task) \
+            query = select(task, user_table.c.username, taken_task.c.score)\
+                .outerjoin(taken_task, task.c.id == taken_task.c.task_id)\
+                .outerjoin(user_table, user_table.c.id == taken_task.c.user_id)\
                 .where(and_(task.c.added_by == user.id, task.c.dead_line > current_dt)) \
                 .order_by(task.c.dead_line)
+
         else:
             query = select(task) \
                 .where(and_(task.c.added_by == user.invited_by, task.c.dead_line > current_dt)) \
@@ -111,13 +114,19 @@ async def get_tasks_by_teacher_id(session: AsyncSession = Depends(get_async_sess
 @router.get('/get_students_by_task_id')
 async def get_students_by_task_id(task_id: int, session: AsyncSession = Depends(get_async_session),
                                   user: User = Depends(current_user)):
-    try:
-        query = select(taken_task).where(taken_task.c.task_id == task_id)
-        result = await session.execute(query)
+    # try:
+        # query = select(taken_task).where(taken_task.c.task_id == task_id)
+        # result = await session.execute(query)
+        #
+        # students = [x['user_id'] for x in [r._asdict() for r in result]]
+        #
+        # query = select(user_table.c.username).where(user_table.c.id.in_(students))
+        # result = await session.execute(query)
 
-        students = [x['user_id'] for x in [r._asdict() for r in result]]
+        query = select(user_table.c.username, taken_task.c.score) \
+            .join(taken_task, user_table.c.id == taken_task.c.user_id) \
+            .where(taken_task.c.task_id == task_id)
 
-        query = select(user_table.c.username).where(user_table.c.id.in_(students))
         result = await session.execute(query)
 
         return {
@@ -125,13 +134,13 @@ async def get_students_by_task_id(task_id: int, session: AsyncSession = Depends(
             'Data': [r._asdict() for r in result],
             'Details': None
         }
-    except Exception:
-        raise HTTPException(status_code=500, detail=
-        {
-            'Status': 'Error',
-            'Data': None,
-            'Details': None
-        })
+    # except Exception:
+    #     raise HTTPException(status_code=500, detail=
+    #     {
+    #         'Status': 'Error',
+    #         'Data': None,
+    #         'Details': None
+    #     })
 
 
 @router.get('/get_my_taken_tasks')
