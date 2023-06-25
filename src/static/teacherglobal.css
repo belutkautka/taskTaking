@@ -228,6 +228,7 @@ tr:nth-child(even) {
     font-size: 20px;
     font-family: var(--font-main);
     color: var(--color-text);
+    align-items: center;
 }
 
 .add_task_button {
@@ -654,4 +655,111 @@ details[open] summary::after {
         max-width: 25px;
         margin: 20px 10px;
     }
+}
+
+@media screen and (max-width: 600px) {
+    .table_title{
+        font-size: 13px;
+    }
+    
+    table {
+        font-size: 10px;
+        margin: 0px 20px 20px;
+    }
+
+    .page_title {
+        font-size: 40px;
+        margin: 30px 20px 0px 20px;
+    }
+
+    
+.add_task {
+    margin: 10px 10px 20px;
+    font-size: 14px;
+}
+
+.text_checkbox {
+    font-size: 14px;
+}
+
+.add_task_button {
+    font-size: 14px;
+
+}
+
+.checkboxes {
+    margin-top: 45px;
+}
+
+
+.checkbox label:after {
+    height: 14px;
+    width: 14px;
+}
+
+.checkbox input[type=checkbox]:checked+label:after {
+    background-size: 14px;
+    height: 14px;
+    width: 14px;
+}
+
+td {
+    max-width: 100px;
+    padding: 10px 10px;
+}
+
+}
+
+
+@media screen and (min-width: 600px) and (max-width: 950px) {
+    .table_title{
+        font-size: 15px;
+    }
+    
+    table {
+        font-size: 13px;
+        margin: 0px 30px 20px;
+    }
+
+    .page_title {
+        font-size: 50px;
+        margin: 40px 20px 0px 30px;
+    }
+
+    
+.add_task {
+    margin: 10px 20px 20px;
+    font-size: 16px;
+}
+
+.text_checkbox {
+    font-size: 16px;
+}
+
+.add_task_button {
+    font-size: 16px;
+
+}
+
+.checkboxes {
+    margin-top: 60px;
+}
+
+
+.checkbox label:after {
+    height: 15px;
+    width: 15px;
+}
+
+.checkbox input[type=checkbox]:checked+label:after {
+    background-size: 15px;
+    height: 15px;
+    width: 15px;
+}
+
+td {
+    max-width: 100px;
+    padding: 10px 10px;
+}
+
 }
