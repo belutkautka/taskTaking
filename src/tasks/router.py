@@ -85,19 +85,39 @@ async def get_tasks_by_teacher_id(session: AsyncSession = Depends(get_async_sess
         current_dt = datetime.datetime.utcnow()
 
         if user.role_id == 1:
-            query = select(task) \
+            query = select(task, user_table.c.username, taken_task.c.score, taken_task.c.user_id) \
+                .outerjoin(taken_task, task.c.id == taken_task.c.task_id) \
+                .outerjoin(user_table, user_table.c.id == taken_task.c.user_id) \
                 .where(and_(task.c.added_by == user.id, task.c.dead_line > current_dt)) \
                 .order_by(task.c.dead_line)
+
         else:
             query = select(task) \
                 .where(and_(task.c.added_by == user.invited_by, task.c.dead_line > current_dt)) \
                 .order_by(task.c.dead_line)
 
         result = await session.execute(query)
+        result = [r._asdict() for r in result]
+
+        out = dict()
+
+        for elem in result:
+            if elem['username'] is None:
+                out[elem['id']] = elem.copy()
+                continue
+            else:
+                if elem['id'] not in out.keys():
+                    out[elem['id']] = elem.copy()
+                    out[elem['id']]['user_id'] = []
+                    out[elem['id']]['username'] = []
+                    out[elem['id']]['score'] = []
+                out[elem['id']]['user_id'].append(elem['user_id'])
+                out[elem['id']]['username'].append(elem['username'])
+                out[elem['id']]['score'].append(elem['score'])
 
         return {
             'Status': 'Success',
-            'Data': [r._asdict() for r in result],
+            'Data': list(out.values()),
             'Details': None
         }
     except Exception:
@@ -112,32 +132,34 @@ async def get_tasks_by_teacher_id(session: AsyncSession = Depends(get_async_sess
 async def get_students_by_task_id(task_id: int, session: AsyncSession = Depends(get_async_session),
                                   user: User = Depends(current_user)):
     # try:
-        # query = select(taken_task).where(taken_task.c.task_id == task_id)
-        # result = await session.execute(query)
-        #
-        # students = [x['user_id'] for x in [r._asdict() for r in result]]
-        #
-        # query = select(user_table.c.username).where(user_table.c.id.in_(students))
-        # result = await session.execute(query)
+    # query = select(taken_task).where(taken_task.c.task_id == task_id)
+    # result = await session.execute(query)
+    #
+    # students = [x['user_id'] for x in [r._asdict() for r in result]]
+    #
+    # query = select(user_table.c.username).where(user_table.c.id.in_(students))
+    # result = await session.execute(query)
 
-        query = select(user_table.c.username, taken_task.c.score) \
-            .join(taken_task, user_table.c.id == taken_task.c.user_id) \
-            .where(taken_task.c.task_id == task_id)
+    query = select(user_table.c.username, taken_task.c.score) \
+        .join(taken_task, user_table.c.id == taken_task.c.user_id) \
+        .where(taken_task.c.task_id == task_id)
 
-        result = await session.execute(query)
+    result = await session.execute(query)
 
-        return {
-            'Status': 'Success',
-            'Data': [r._asdict() for r in result],
-            'Details': None
-        }
-    # except Exception:
-    #     raise HTTPException(status_code=500, detail=
-    #     {
-    #         'Status': 'Error',
-    #         'Data': None,
-    #         'Details': None
-    #     })
+    return {
+        'Status': 'Success',
+        'Data': [r._asdict() for r in result],
+        'Details': None
+    }
+
+
+# except Exception:
+#     raise HTTPException(status_code=500, detail=
+#     {
+#         'Status': 'Error',
+#         'Data': None,
+#         'Details': None
+#     })
 
 
 @router.get('/get_my_taken_tasks')
