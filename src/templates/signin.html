@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Sign In</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/main.css">
-    <link rel="stylesheet" type="text/css" href="../static/light.css" id="theme-link">
+    <link rel="stylesheet" type="text/css" href="../static/studentglobal.css">
 </head>
 
-<body>
+<body data_theme="dark">
     <header>
         <div class="navbar">
             <div class="left_nav">
@@ -40,65 +40,66 @@
         </div>
     </header>
 
-<!-- -->
+    <!-- -->
 
-<div class="signin-container">
-    <div class="frame frame-short">
+    <div class="signin-container">
+        <div class="frame frame-short">
 
-        <div class="signin-nav">
-            <div class="btn">
-                <ul class="links">
-                    <li class="signin-active"><a class="btn-top">Войти</a></li>
-                    <li class="signup-inactive"><a class="btn-top">Зарегистрироваться</a></li>
-                </ul>
-                <div class="slider-box">
-                    <div class="slider"></div>
+            <div class="signin-nav">
+                <div class="btn">
+                    <ul class="links">
+                        <li class="signin-active"><a class="btn-top">Войти</a></li>
+                        <li class="signup-inactive"><a class="btn-top">Зарегистрироваться</a></li>
+                    </ul>
+                    <div class="slider-box">
+                        <div class="slider"></div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <form action="#" class="login-form active">
-            <div class="login-box">
-                <div class="form-group login-group">
+            <form action="#" class="login-form active">
+                <div class="login-box">
+                    <div class="form-group login-group">
                         <label class="signin-label" for="login">Логин</label>
                         <input class="input-styling" type="text" id="login" name="login" required>
 
                         <label class="signin-label" for="password">Пароль</label>
-                        <input class="input-styling" type="password" id="password" name="password" required/>
-                </div>
+                        <input class="input-styling" type="password" id="password" name="password" required />
+                    </div>
 
-                <div class="signin-box form-group inactive">
+                    <div class="signin-box form-group inactive">
                         <label class="signin-label" for="confirmPassword">Повторите пароль</label>
                         <input class="input-styling" type="password" id="confirmPassword" name="confirmPassword">
 
                         <label class="signin-label" for="username">Имя и фамилия</label>
                         <input class="input-styling" type="text" id="username" name="username">
 
-                    <div class="input-container">
-                        <div class="signin-label">Я студент</div>
-                        <div class="is-student-checkbox">
-                            <input type="checkbox" id="isStudent" name="isStudent" checked>
-                            <label for="isStudent"></label>
+                        <div class="input-container">
+                            <div class="signin-label">Я студент</div>
+                            <div class="is-student-checkbox">
+                                <input type="checkbox" id="isStudent" name="isStudent" checked>
+                                <label for="isStudent"></label>
+                            </div>
+                        </div>
+
+                        <div class="teacher-field">
+                            <label class="signin-label" for="teacher">Логин моего преподавателя</label>
+                            <input class="input-styling teacher-form" type="text" id="teacher" name="teacher">
                         </div>
                     </div>
 
-                    <div class="teacher-field">
-                        <label class="signin-label" for="teacher">Логин моего преподавателя</label>
-                        <input class="input-styling teacher-form" type="text" id="teacher" name="teacher">
+                    <div class="form-group">
+                        <!--                    <a href="startPage.html" class="submit-btn">Ну го</a>-->
+                        <input class="submit-btn" type="submit" value="Войти" />
                     </div>
                 </div>
-
-                <div class="form-group">
-<!--                    <a href="startPage.html" class="submit-btn">Ну го</a>-->
-                    <input class="submit-btn" type="submit" value="Войти"/>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 
 
-<script src="../static/singIn.js"></script>
-<script src="../static/themeChanger.js"></script>
+    <script src="../static/singIn.js"></script>
+    <script src="../static/studentThemeSwitcher.js"></script>
 </body>
+
 </html>
