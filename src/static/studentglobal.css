@@ -136,6 +136,7 @@ body {
 
 img {
     width: 30px;
+    max-width: 90%;
 }
 
 .right_nav a img {
@@ -524,6 +525,14 @@ summary::after {
 
 details[open] summary::after {
     content: "-";
+}
+
+details[open] .modal__text_summ{
+    display: none;
+}
+
+details{
+    margin-bottom: 30px;
 }
 
 .limit_modal {

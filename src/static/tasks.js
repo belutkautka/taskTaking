@@ -28,7 +28,7 @@ function createNewTask(data) {
     newTask.classList.add("task_active");
     let title = document.createElement("div");
     title.className = "title";
-    title.innerHTML = data.name.length>65?data.name.substring(0,62)+"...":data.name;
+    title.innerHTML = data.name.length > 65 ? data.name.substring(0, 62) + "..." : data.name;
     let path = document.createElement("div");
     path.className = "path";
     path.innerHTML = `${data.contest_type} контест ${data.contest_number} задача ${data.task_number}`;
@@ -49,13 +49,10 @@ function createNewTask(data) {
         .then(result => {
             newTask.addEventListener('click', function (e) {
                 modalTitle.innerHTML = data.name;
-                modalText.innerHTML = data.description.length>150?data.description.substring(0,147)+"...":data.description;
+                modalText.innerHTML = data.description.length > 150 ? data.description.substring(0, 147) + "..." : data.description;
                 modalButton.innerHTML = takenTasks.has(data.id) ? "Снять задачу" : "Взять задачу";
-                if (data.is_available)
-                    modalButton.style.display = "";
-                else
-                    modalButton.style.display = "none";
                 modal.classList.add('modal_active');
+                activeOrNot(data.id);
                 modalLimit.innerHTML = `Осталось ${data.taken_max - result.Data.length} из ${data.taken_max}`;
                 modalDescription.innerHTML = data.description;
             })
@@ -91,6 +88,14 @@ function createNewTask(data) {
 
 function addTaskToDictionary(name, id) {
     tasks.set(name, id);
+}
+
+function activeOrNot(id) {
+    if (document.getElementById(id).className === "task_table task_blocked") {
+        modalButton.style.display = "none";
+    } else {
+        modalButton.style.display = "";
+    }
 }
 
 function sendGetTaskRequest(url) {
