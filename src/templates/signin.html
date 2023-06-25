@@ -59,19 +59,16 @@
         <div class="login-form active">
             <div class="login-box">
                 <div class="form-group login-group">
-                    <label class="signin-label" for="login">Логин</label>
-                    <input class="input-styling" type="text" id="login" name="login" pattern="^[a-zA-Z0-9]+$" required>
-
-                    <label class="signin-label" for="password">Пароль</label>
-                    <input class="input-styling" type="password" id="password" name="password" required/>
+                    <input class="input-styling" type="text" id="login" name="login" pattern="^[a-zA-Z0-9]+$"
+                           placeholder="Логин" required>
+                    <input class="input-styling" type="password" id="password" name="password" placeholder="Пароль"
+                           required/>
                 </div>
 
                 <div class="signin-box form-group inactive">
-                    <label class="signin-label" for="confirmPassword">Повторите пароль</label>
-                    <input class="input-styling" type="password" id="confirmPassword" name="confirmPassword"></input>
-
-                    <label class="signin-label" for="username">Имя и фамилия</label>
-                    <input class="input-styling" type="text" id="username" name="username">
+                    <input class="input-styling" type="password" id="confirmPassword" name="confirmPassword"
+                           placeholder="Повторите пароль">
+                    <input class="input-styling" type="text" id="username" name="username" placeholder="Имя и фамилия">
 
                     <div class="input-container">
                         <div class="signin-label">Я студент</div>
@@ -81,12 +78,11 @@
                         </div>
                     </div>
 
-                    <div class="teacher-field">
-                        <label class="signin-label" for="teacher">Логин моего преподавателя</label>
-                        <input class="input-styling teacher-form" type="text" id="teacher" name="teacher">
+                    <div class="teacher-field active">
+                        <input class="input-styling teacher-form" type="text" id="teacher" name="teacher"
+                               placeholder="Логин моего преподавателя">
                     </div>
                 </div>
-
                 <div class="form-group">
                     <button class="submit-btn">Войти</button>
                 </div>
