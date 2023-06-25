@@ -1,7 +1,14 @@
 const modal = document.getElementById('modal_form');
 const name = document.getElementById('modal_form');
 const form = document.forms.add;
+const sortSign = document.getElementsByClassName('sort_sign')[0];
+const busy = document.getElementById("check_busy");
+const active = document.getElementById("check_free");
 const tasks = document.getElementById("tasks")
+
+let sortedTasks = null;
+let sortedDescTask = null;
+let unsortedTasks = null;
 
 sendGetTaskRequest("/tasks/get_tasks_by_teacher_id").then(data => data.Data.forEach(e => makeTask(e)))
 
@@ -52,8 +59,10 @@ function makeTask(data) {
                 }
             })
         }
+        newTask.classList.add("taken")
     } else {
         student.innerHTML = "—"
+        newTask.classList.add("free")
     }
     newTask.append(name, contest, score, student, input);
     tasks.append(newTask);
@@ -93,3 +102,45 @@ function sendGetTaskRequest(url) {
         }
     });
 }
+busy.addEventListener('click', function (e) {
+    if (!busy.checked) {
+        [...document.getElementsByClassName("taken")]
+            .forEach(e => e.style.display = "none");
+    } else {
+        [...document.getElementsByClassName("taken")]
+            .forEach(e => e.style.display = "");
+    }
+});
+
+active.addEventListener('click', function (e) {
+
+    if (!active.checked) {
+        [...document.getElementsByClassName("free")]
+            .forEach(e => e.style.display = "none");
+    } else {
+        [...document.getElementsByClassName("free")]
+            .forEach(e => e.style.display = "");
+    }
+})
+
+sortSign.addEventListener('click', function (e) {
+    if (unsortedTasks === null)
+        unsortedTasks = Array.from(tasks.querySelectorAll('tr')).slice(1)
+    if (sortSign.innerHTML === '↕') {
+        sortSign.innerHTML = '↑';
+        if (sortedTasks === null) {
+            sortedTasks = Array.from(tasks.querySelectorAll('tr'))
+                .slice(1)
+                .sort((rowA, rowB) => +rowA.cells[1].innerHTML > +rowB.cells[1].innerHTML ? 1 : -1);
+            sortedDescTask = Array.from(sortedTasks);
+            sortedDescTask.reverse();
+        }
+        tasks.tBodies[0].append(...sortedTasks);
+    } else if (sortSign.innerHTML === '↑') {
+        sortSign.innerHTML = '↓';
+        tasks.tBodies[0].append(...sortedDescTask);
+    } else {
+        sortSign.innerHTML = '↕';
+        tasks.tBodies[0].append(...unsortedTasks);
+    }
+});
