@@ -526,6 +526,14 @@ details[open] summary::after {
     content: "-";
 }
 
+details[open] .modal__text_summ{
+    display: none;
+}
+
+details{
+    margin-bottom: 30px;
+}
+
 .limit_modal {
     text-align: left;
     font-family: Arial, Helvetica, sans-serif;
