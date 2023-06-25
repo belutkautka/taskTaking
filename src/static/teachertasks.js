@@ -23,7 +23,7 @@ function sendAddTaskRequest(url) {
             name: form.name.value,
             contest_type: form.answer.value=="long"?"Длинный":"Короткий",
             contest_number: form.contestNumber.value,
-            task_number: 1,
+            task_number: form.word.value,
             description: form.description.value,
             taken_max: form.limit.value,
             dead_line: form.days.value,
@@ -31,7 +31,8 @@ function sendAddTaskRequest(url) {
         })
     }).then(response => {
             if (response.ok && response.status[0] !== "3") {
-                return response.json();
+                modal.classList.remove('modal_active');
+                form.reset();
             }
             else{
                 alert("Не удалось создать задачу, попробуйте еще раз")
