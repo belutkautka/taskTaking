@@ -51,11 +51,8 @@ function createNewTask(data) {
                 modalTitle.innerHTML = data.name;
                 modalText.innerHTML = data.description.length>150?data.description.substring(0,147)+"...":data.description;
                 modalButton.innerHTML = takenTasks.has(data.id) ? "Снять задачу" : "Взять задачу";
-                if (data.is_available)
-                    modalButton.style.display = "";
-                else
-                    modalButton.style.display = "none";
                 modal.classList.add('modal_active');
+                activeOrNot(data.id);
                 modalLimit.innerHTML = `Осталось ${data.taken_max - result.Data.length} из ${data.taken_max}`;
                 modalDescription.innerHTML = data.description;
             })
@@ -91,6 +88,13 @@ function createNewTask(data) {
 
 function addTaskToDictionary(name, id) {
     tasks.set(name, id);
+}
+
+function activeOrNot(id){
+    if (document.getElementById(id).className==="task_table task_blocked")
+        modalButton.style.display = "none";
+    else
+        modalButton.style.display = "";
 }
 
 function sendGetTaskRequest(url) {
