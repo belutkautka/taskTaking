@@ -65,10 +65,10 @@ function createNewTask(data) {
     image.className = "dedline_image";
     if (loadStyle === "dark" | loadStyle === null) {
         if (dedline < 2) {
-            image.src = "../static/img/darkthemededline.png";
+            image.src = "../static/img/darkrededline.png";
             time.className = "days_recording time_over";
         } else {
-            image.src = "../static/img/darkrededline.png";
+            image.src = "../static/img/darkthemededline.png";
             time.className = "days_recording";
         }
     } else {
