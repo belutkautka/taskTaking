@@ -13,7 +13,7 @@ const modalText = document.getElementById('modal__text');
 const modalDescription = document.getElementById("modal__full_text")
 const modalLimit = document.getElementsByClassName("limit_modal")[0]
 const addTaskForm = document.getElementById('add-task-form');
-
+const notification = document.querySelector('.notification-window');
 let sortedTasks = null;
 let sortedDescTasks = null;
 let unsortedTasks = null;
@@ -40,10 +40,18 @@ document.getElementById("button_edit").addEventListener('click', function (e) {
 });
 
 document.getElementById("button_send_mark").addEventListener('click', function (e) {
+    let flag = true;
     [...document.getElementsByClassName("score")].forEach(e => {
-        if (+e.value !== 0)
-            sendRateTaskRequest(e.id.split("_")[1], e.id.split("_")[0], e.value);
+        if (+e.value !== 0) sendRateTaskRequest(e.id.split("_")[1], e.id.split("_")[0], e.value)
+            .then(response => {
+                if (!response.ok){
+                    flag = false;
+                }
+            });
     });
+    if (flag) {
+        showNotification();
+    }
 });
 
 document.getElementById("button_delete_back").addEventListener('click', function (e) {
@@ -75,6 +83,17 @@ document.querySelector('.modal__close-button').addEventListener('click', functio
     modalTask.classList.remove('modal_active');
 });
 
+function showNotification() {
+    if (notification.classList.contains('show')){
+        notification.classList.remove('show');
+    }
+    notification.classList.add('show');
+    setTimeout(function () {
+        notification.classList.remove('show');
+    }, 2000);
+}
+
+
 function makeTask(data) {
     let newTask = document.createElement("tr");
     newTask.id = data.id;
@@ -90,10 +109,8 @@ function makeTask(data) {
     if (data.username != null) {
         if (data.username.length == 1) {
             student.innerHTML = data.username[0];
-            if (data.score[0] !== 0)
-                input.innerHTML = `<input id = ${data.user_id[0]}_${data.id} class="number_input task_score score" type="number" value=${data.score[0]} name="score"  min="0.0" max="30.0"
-                        step="0.1" required>`;
-            else {
+            if (data.score[0] !== 0) input.innerHTML = `<input id = ${data.user_id[0]}_${data.id} class="number_input task_score score" type="number" value=${data.score[0]} name="score"  min="0.0" max="30.0"
+                        step="0.1" required>`; else {
                 input.innerHTML = `<input id = ${data.user_id[0]}_${data.id} class="number_input task_score score" type="number" name="score"  min="1.0" max="30.0"
                         step="0.1" required>`;
             }
@@ -109,11 +126,8 @@ function makeTask(data) {
                         st.innerHTML = data.username[i];
                         student.append(st);
                         let inp = document.createElement("p")
-                        if (data.score[0] !== 0)
-                            inp.innerHTML = `<input id = ${data.user_id[0]}_${data.id} class="number_input task_score score" type="number" value=${data.score[i]} name="score"  min="0.0" max="30.0"
-                        step="0.1" required>`;
-                        else
-                            inp.innerHTML = `<input id = ${data.user_id[i]}_${data.id} class="number_input task_score score" type="number" name="score"  min="0.0" max="30.0"
+                        if (data.score[0] !== 0) inp.innerHTML = `<input id = ${data.user_id[0]}_${data.id} class="number_input task_score score" type="number" value=${data.score[i]} name="score"  min="0.0" max="30.0"
+                        step="0.1" required>`; else inp.innerHTML = `<input id = ${data.user_id[i]}_${data.id} class="number_input task_score score" type="number" name="score"  min="0.0" max="30.0"
                          step="0.1" required>`;
                         input.append(inp)
                     }
@@ -163,23 +177,14 @@ function makeTask(data) {
 }
 
 function getPadege(number) {
-    if (number % 10 === 1 && number !== 11)
-        return "место";
-    else if ((number % 10 === 2 || number % 10 === 2 || number % 10 === 3 || number % 10 === 4)
-        && number !== 12 && number !== 13 && number !== 14)
-        return "места";
-    else
-        return "мест";
+    if (number % 10 === 1 && number !== 11) return "место"; else if ((number % 10 === 2 || number % 10 === 2 || number % 10 === 3 || number % 10 === 4) && number !== 12 && number !== 13 && number !== 14) return "места"; else return "мест";
 }
 
 function sendAddTaskRequest(url) {
     return fetch('/tasks/add_task', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-            'accept': 'application/json'
-        },
-        body: JSON.stringify({
+        method: "POST", headers: {
+            'Content-Type': 'application/json', 'accept': 'application/json'
+        }, body: JSON.stringify({
             name: form.name.value,
             contest_type: form.answer.value == "long" ? "Длинный" : "Короткий",
             contest_number: form.contestNumber.value,
@@ -200,12 +205,9 @@ function sendAddTaskRequest(url) {
 function sendUpdateTaskRequest() {
     let form = document.forms.change;
     return fetch('/tasks/update_task', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-            'accept': 'application/json'
-        },
-        body: JSON.stringify({
+        method: "POST", headers: {
+            'Content-Type': 'application/json', 'accept': 'application/json'
+        }, body: JSON.stringify({
             task_id: form.id,
             name: form.name.value,
             description: form.description.value,
@@ -274,8 +276,7 @@ active.addEventListener('click', function (e) {
 })
 
 sortSign.addEventListener('click', function (e) {
-    if (unsortedTasks === null)
-        unsortedTasks = Array.from(tasks.querySelectorAll('tr')).slice(1);
+    if (unsortedTasks === null) unsortedTasks = Array.from(tasks.querySelectorAll('tr')).slice(1);
     if (sortSign.innerHTML === '↕') {
         sortSign.innerHTML = '↑';
         if (sortedTasks === null) {

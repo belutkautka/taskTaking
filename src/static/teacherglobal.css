@@ -285,7 +285,7 @@ tr:nth-child(even) {
     left: 0;
 }
 
-.checkbox input[type=checkbox]:checked+label:after {
+.checkbox input[type=checkbox]:checked + label:after {
     background: var(--image-check-mark);
     background-size: 18px;
     outline: var(--outline-checbox-label) solid var(--color-border-checkbox-checked);
@@ -616,6 +616,7 @@ details[open] summary::after {
 }
 
 .button_send_mark:hover {
+    cursor: pointer;
     border: var(--size-border-mark) solid var(--color-border-button);
     background-color: var(--color-button-backgroung-hover);
 }
@@ -627,6 +628,38 @@ details[open] summary::after {
 .table_students {
     width: 60%;
 }
+
+
+@keyframes notificationAppears {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+.notification-window {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    /*background-color: #ff0000;*/
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.notification-window.show {
+    animation: notificationAppears;
+    animation-duration: 3s;
+}
+
 
 @media screen and (max-width: 900px) and (min-width: 600px) {
     .navbar_mobile {
@@ -700,7 +733,7 @@ details[open] summary::after {
         width: 14px;
     }
 
-    .checkbox input[type=checkbox]:checked+label:after {
+    .checkbox input[type=checkbox]:checked + label:after {
         background-size: 14px;
         height: 14px;
         width: 14px;
@@ -717,156 +750,157 @@ details[open] summary::after {
         float: right;
     }
 
-    
 
-.modal_form {
-    padding: 80px 15px;
-}
+    .modal_form {
+        padding: 80px 15px;
+    }
 
-.modal__content_deployed_form {
-    max-width: 300px;
-    padding: 25px;
-}
-
+    .modal__content_deployed_form {
+        max-width: 300px;
+        padding: 25px;
+    }
 
 
+    .text_pair {
+        font-size: 14px;
+    }
 
-.text_pair {
-    font-size: 14px;
-}
+    .form_pair {
+        margin-top: 15px;
+        margin-right: 10px;
+    }
 
-.form_pair {
-    margin-top: 15px;
-    margin-right: 10px;
-}
+    .radio_len {
+        font-size: 14px;
+        margin-right: 78px;
+    }
 
-.radio_len {
-    font-size: 14px;
-    margin-right: 78px;
-}
+    .form {
+        padding: 1px;
+        width: 150px;
+    }
 
-.form {
-    padding: 1px;
-    width: 150px;
-}
+    .number_input {
+        margin-right: 84px;
+    }
 
-.number_input {
-    margin-right:84px;
-}
-.task_score {
-    margin-right:71px;
-}
-.button_form {
-    margin-top: 40px;
-    margin-bottom: 10px;
-    padding: 10px 30px;
-    width: 220px;
-}
-.button {
-    margin: 20px 0 5px;
-    padding: 10px 25px;
-    font-size: 16px;
-}
+    .task_score {
+        margin-right: 71px;
+    }
 
+    .button_form {
+        margin-top: 40px;
+        margin-bottom: 10px;
+        padding: 10px 30px;
+        width: 220px;
+    }
 
-
-.modal__content_deployed {
-    max-width: 300px;
-    padding: 25px;
-}
-
-.modal__title {
-    font-size: 1.2rem;
-    margin: 0px 0 0 0;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.modal__text {
-    font-size: 12px;
-}
-.button_task{
-    margin: 20px 0 5px;
-    padding: 5px 20px;
-    font-size: 14px;
-}
-
-.limit_modal {
-    font-size: 12px;
-}
-
-.button_delete {
-    padding: 10px 35px;
-    margin-top: -5px;
-}
+    .button {
+        margin: 20px 0 5px;
+        padding: 10px 25px;
+        font-size: 16px;
+    }
 
 
-}
+    .modal__content_deployed {
+        max-width: 300px;
+        padding: 25px;
+    }
+
+    .modal__title {
+        font-size: 1.2rem;
+        margin: 0px 0 0 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .modal__text {
+        font-size: 12px;
+    }
+
+    .button_task {
+        margin: 20px 0 5px;
+        padding: 5px 20px;
+        font-size: 14px;
+    }
+
+    .limit_modal {
+        font-size: 12px;
+    }
+
+    .button_delete {
+        padding: 10px 35px;
+        margin-top: -5px;
+    }
 
 
-
-
-@media screen and (min-width: 600px) and (max-width: 800px)  {
-
-.modal_form {
-    padding: 80px 15px;
-}
-
-.modal__content_deployed_form {
-    max-width: 450px;
-    padding: 25px;
-}
-
-.text_pair {
-    font-size: 18px;
-}
-
-.form_pair {
-    margin-top: 15px;
-    margin-right: 10px;
-}
-
-.radio_len {
-    font-size: 16px;
-    margin-right: 158px;
-}
-
-.form {
-    padding: 2px;
-    width: 235px;
-}
-
-.number_input {
-    margin-right: 177px;
-}
-.task_score {
-    margin-right:165px;
-}
-.button_form {
-    margin-top: 50px;
-    margin-bottom: 10px;
-    padding: 10px 40px;
-    width: 260px;
-}
-.button {
-    margin: 30px 0 5px;
-    padding: 10px 35px;
-    font-size: 16px;
-}
-.button_delete {
-    padding: 10px 40px;
-    margin-top: -2px;
-}
-.modal__content_deployed {
-    max-width: 450px;
-    padding: 25px;
-}
-.modal__content_deployed_delete{
-    max-width: 300px;
-}
 }
 
 
+@media screen and (min-width: 600px) and (max-width: 800px) {
 
+    .modal_form {
+        padding: 80px 15px;
+    }
+
+    .modal__content_deployed_form {
+        max-width: 450px;
+        padding: 25px;
+    }
+
+    .text_pair {
+        font-size: 18px;
+    }
+
+    .form_pair {
+        margin-top: 15px;
+        margin-right: 10px;
+    }
+
+    .radio_len {
+        font-size: 16px;
+        margin-right: 158px;
+    }
+
+    .form {
+        padding: 2px;
+        width: 235px;
+    }
+
+    .number_input {
+        margin-right: 177px;
+    }
+
+    .task_score {
+        margin-right: 165px;
+    }
+
+    .button_form {
+        margin-top: 50px;
+        margin-bottom: 10px;
+        padding: 10px 40px;
+        width: 260px;
+    }
+
+    .button {
+        margin: 30px 0 5px;
+        padding: 10px 35px;
+        font-size: 16px;
+    }
+
+    .button_delete {
+        padding: 10px 40px;
+        margin-top: -2px;
+    }
+
+    .modal__content_deployed {
+        max-width: 450px;
+        padding: 25px;
+    }
+
+    .modal__content_deployed_delete {
+        max-width: 300px;
+    }
+}
 
 
 @media screen and (min-width: 600px) and (max-width: 950px) {
@@ -924,7 +958,7 @@ details[open] summary::after {
         width: 15px;
     }
 
-    .checkbox input[type=checkbox]:checked+label:after {
+    .checkbox input[type=checkbox]:checked + label:after {
         background-size: 15px;
         height: 15px;
         width: 15px;
