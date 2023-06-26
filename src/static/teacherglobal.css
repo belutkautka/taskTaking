@@ -330,7 +330,7 @@ tr:nth-child(even) {
 }
 
 .modal__content_deployed {
-    max-width: 500px;
+    width: 500px;
     padding: 25px;
     border-radius: 8px;
     position: relative;
@@ -395,14 +395,7 @@ tr:nth-child(even) {
     border: 1px solid;
     color: var(--color-text);
     background-color: var(--color-background-button);
-    ;
-}
-
-.button {
-    background-color: var(--color-background-button);
-    color: var(--color-text);
     border: var(--size-border-add-task-button) solid var(--color-border-button);
-
 }
 
 .button:hover {
@@ -430,7 +423,7 @@ tr:nth-child(even) {
 
 
 .modal__content_deployed_form {
-    min-width: 600px;
+    width: 600px;
 
 }
 
@@ -465,11 +458,11 @@ tr:nth-child(even) {
     margin-bottom: 10px;
     padding: 10px 50px;
     background-color: var(--color-background-button);
-    min-width: 300px;
+    width: 300px;
 }
 
 .number_input {
-    margin-right: 305px;
+    margin-right: 299px;
 }
 
 .point {
@@ -545,7 +538,7 @@ input {
 }
 
 .task_score {
-    margin-right: 292px;
+    margin-right: 287px;
 }
 
 summary::-webkit-details-marker {
@@ -722,7 +715,120 @@ details[open] summary::after {
         padding: 5px 20px;
         float: right;
     }
+
+    
+.modal {
+    padding: 120px 15px;
 }
+
+.modal_form {
+    padding: 80px 15px;
+}
+
+.modal__content_deployed_form {
+    max-width: 300px;
+    padding: 25px;
+}
+
+
+
+
+.text_pair {
+    font-size: 14px;
+}
+
+.form_pair {
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+.radio_len {
+    font-size: 14px;
+    margin-right: 78px;
+}
+
+.form {
+    padding: 1px;
+    width: 150px;
+}
+
+.number_input {
+    margin-right: 91px;
+}
+.task_score {
+    margin-right:78px;
+}
+.button_form {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    padding: 10px 30px;
+    width: 220px;
+}
+.button {
+    margin: 20px 0 5px;
+    padding: 10px 25px;
+    font-size: 16px;
+}
+}
+
+
+
+
+@media screen and (min-width: 600px) and (max-width: 800px)  {
+    
+.modal {
+    padding: 120px 15px;
+}
+
+.modal_form {
+    padding: 80px 15px;
+}
+
+.modal__content_deployed_form {
+    max-width: 450px;
+    padding: 25px;
+}
+
+.text_pair {
+    font-size: 18px;
+}
+
+.form_pair {
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+.radio_len {
+    font-size: 16px;
+    margin-right: 158px;
+}
+
+.form {
+    padding: 2px;
+    width: 235px;
+}
+
+.number_input {
+    margin-right: 177px;
+}
+.task_score {
+    margin-right:165px;
+}
+.button_form {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    padding: 10px 40px;
+    width: 260px;
+}
+.button {
+    margin: 30px 0 5px;
+    padding: 10px 35px;
+    font-size: 16px;
+}
+}
+
+
+
 
 
 @media screen and (min-width: 600px) and (max-width: 950px) {
