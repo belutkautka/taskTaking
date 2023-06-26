@@ -10,6 +10,16 @@ const inputs = document.getElementsByTagName('input');
 const isStudentInput = document.querySelector("[name='isStudent']");
 const teacherInput = document.querySelector("[name='teacher']");
 const placeHolders = [];
+const sliderWidth = {
+    defaultStartWidth: '86px', defaultFinishWidth: '240px',
+    mobileStartWidth: '60px', mobileFinishWidth: '160px'
+};
+
+const sliderLefts = {
+    defaultFinishLeft: '100px',
+    mobileStartLeft: '-6px',
+    mobileFinishLeft: '140px'
+};
 
 let animationFrameId = null;
 let signupProcess = false;
@@ -36,9 +46,13 @@ for (let i = 0; i < inputs.length; i++) {
 buttons.forEach((btn, index) => {
     btn.addEventListener('click', () => {
         if (index === 0) {
+            slider.style.left = '0px';
+            if (window.innerWidth < 600) {
+                slider.style.width = sliderWidth.mobileStartWidth;
+            } else {
+                slider.style.width = sliderWidth.defaultStartWidth;
+            }
             signupProcess = false;
-            slider.style.left = `${index * 2000}px`;
-            slider.style.width = "86px";
             frame.classList.replace('frame-long', 'frame-short');
             signinBox.classList.replace("active", "inactive");
             submitBtn.textContent = 'Войти';
@@ -46,9 +60,14 @@ buttons.forEach((btn, index) => {
                 inputs[i].required = false;
             }
         } else {
+            if (window.innerWidth < 600) {
+                slider.style.width = sliderWidth.mobileFinishWidth;
+                slider.style.left = sliderLefts.mobileFinishLeft;
+            } else {
+                slider.style.width = sliderWidth.defaultFinishWidth;
+                slider.style.left = sliderLefts.defaultFinishLeft;
+            }
             signupProcess = true;
-            slider.style.left = `${index * 108.5}px`;
-            slider.style.width = "240px";
             frame.classList.replace('frame-short', 'frame-long');
             signinBox.classList.replace("inactive", "active");
             submitBtn.textContent = 'Зарегистрироваться';
