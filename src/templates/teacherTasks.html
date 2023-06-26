@@ -128,6 +128,51 @@
 
         </div>
     </div>
+
+    <div id="modal_form_change" class="modal modal_form ">
+        <div class="modal__content_deployed modal__content_deployed_form">
+            <button id="modal_form__close-button_change" class="modal__close-button">
+                &#10006;
+            </button>
+            <form name="change">
+                <div id="text_pair" class="form_pair">
+                    <div class="text_pair">Контест</div>
+                    <div class="radio_lengs">
+                    </div>
+                </div>
+                <div id ="number" class="form_pair">
+                    <div class="text_pair">Номер контеста</div>
+                </div>
+                <div id="word" class="form_pair">
+                    <div class="text_pair">Буква</div>
+                </div>
+                <div class="form_pair">
+                    <div class="text_pair">Название</div>
+                    <input class="form" name="name" type="text" required>
+                </div>
+                <div class="form_pair">
+                    <div class="text_pair">Условия</div>
+                    <input class="form" name="description" type="text" required>
+                </div>
+                <div class="form_pair">
+                    <div class="text_pair">Балл</div>
+                    <input class="number_input task_score" type="number" name="score" value="1.0" min="1.0" max="30.0"
+                           step="0.1" required>
+                </div>
+                <div class="form_pair">
+                    <div class="text_pair">Лимит</div>
+                    <input class="number_input" type="number" name="limit" value="1" min="1" max="30" step="1" required>
+                </div>
+                <div class="form_pair">
+                    <div class="text_pair">Дней на запись</div>
+                    <input class="number_input" type="number" name="days" value="1" min="1" max="30" step="1" required>
+                </div>
+                <button id="button_save_change" class="button button_form">Сохранить</button>
+            </form>
+
+        </div>
+    </div>
+
     <div id="modal_back_change" class="modal modal_back_change ">
         <div class="modal__content_deployed modal__content_deployed_back_change">
             <button class="modal__close-button">
