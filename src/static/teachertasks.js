@@ -12,6 +12,7 @@ const modalTitle = document.getElementById('modal__title');
 const modalText = document.getElementById('modal__text');
 const modalDescription = document.getElementById("modal__full_text")
 const modalLimit = document.getElementsByClassName("limit_modal")[0]
+const addTaskForm = document.getElementById('add-task-form');
 
 let sortedTasks = null;
 let sortedDescTasks = null;
@@ -53,9 +54,19 @@ document.getElementById("button_exactly_delete").addEventListener('click', funct
     sendDeleteTaskRequest(modalTask.id)
 });
 
-document.getElementById("button_save").addEventListener('click', function (e) {
-    sendAddTaskRequest("/tasks/add_task")
-});
+addTaskForm.addEventListener('submit', handleSubmit);
+
+function handleSubmit(event) {
+    event.preventDefault(); // Предотвращаем отправку формы по умолчанию
+    sendAddTaskRequest("/tasks/add_task");
+    addTaskForm.submit();
+}
+
+// document.getElementById("button_save").addEventListener('click', function (e) {
+//
+//     sendAddTaskRequest("/tasks/add_task")
+// });
+
 document.getElementById("button_save_change").addEventListener('click', function (e) {
     sendUpdateTaskRequest()
 });
@@ -161,7 +172,7 @@ function getPadege(number) {
         return "мест";
 }
 
-function sendAddTaskRequest() {
+function sendAddTaskRequest(url) {
     return fetch('/tasks/add_task', {
         method: "POST",
         headers: {
