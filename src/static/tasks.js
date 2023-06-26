@@ -91,13 +91,15 @@ function createNewTask(data) {
 function addTaskToDictionary(name, id) {
     tasks.set(name, id);
 }
+
 function getPadege(number) {
-    if (number%10===1&number!==11)
+    if (number % 10 === 1 && number !== 11)
         return "день";
-    else if ((number%10===2|number%10===2|number%10===3|number%10===4)&number!==12&number!==13&number!==14)
+    else if ((number % 10 === 2 || number % 10 === 2 || number % 10 === 3 || number % 10 === 4)
+        && number !== 12 && number !== 13 && number !== 14)
         return "дня";
     else
-        return "дней"
+        return "дней";
 }
 
 function activeOrNot(id) {

@@ -126,7 +126,7 @@ function makeTask(data) {
         modalDescription.innerHTML = data.description;
         modalTask.classList.add('modal_active');
         modalTask.id = data.id;
-        modalLimit.innerHTML = `${data.taken_max} места до ${data.dead_line.slice(0, 10)} включительно`
+        modalLimit.innerHTML = `${data.taken_max} ${getPadege(data.taken_max)} до ${data.dead_line.slice(0, 10)} включительно`
         let contest = document.getElementById("text_pair");
         let contestValue = document.createElement("text");
         contestValue.className = "text_pair"
@@ -149,6 +149,16 @@ function makeTask(data) {
         document.forms.change.days.value = Math.ceil((Date.parse(data.dead_line) - Date.now()) / (1000 * 3600 * 24));
         ;
     })
+}
+
+function getPadege(number) {
+    if (number % 10 === 1 && number !== 11)
+        return "место";
+    else if ((number % 10 === 2 || number % 10 === 2 || number % 10 === 3 || number % 10 === 4)
+        && number !== 12 && number !== 13 && number !== 14)
+        return "места";
+    else
+        return "мест";
 }
 
 function sendAddTaskRequest() {
