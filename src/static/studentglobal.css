@@ -1103,7 +1103,7 @@ details {
 }
 
 .title_td {
-    min-width: 300px;
+    min-width: 260px;
 
 }
 
@@ -1149,21 +1149,21 @@ details {
     }
 
     .navbar_mobile {
-        padding: 0px 20px;
-        height: 65px;
+        padding: 0px 1px;
+        height: 62px;
     }
 
     .navbar_mobile a {
-        font-size: 18px;
+        font-size: 15px;
         margin: 20px 10px;
     }
 
     .navbar_mobile img {
-        max-width: 25px;
+        max-width: 22px;
     }
 
     .images_button img {
-        max-width: 25px;
+        max-width: 22px;
         margin: 20px 10px;
     }
 

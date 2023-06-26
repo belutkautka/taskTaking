@@ -13,6 +13,9 @@ let loadStyle = localStorage.getItem('theme');
 if (loadStyle) {
     LoadStyle(loadStyle);
 }
+else{
+    LoadStyle("dark");
+}
 
 exitButton.addEventListener("click", async () => {
     await logout();

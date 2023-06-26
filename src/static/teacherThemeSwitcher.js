@@ -11,6 +11,9 @@ let loadStyle = localStorage.getItem('theme');
 if (loadStyle) {
     LoadStyle(loadStyle);
 }
+else{
+    LoadStyle("dark");
+}
 
 async function logout() {
     try {
