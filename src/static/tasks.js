@@ -82,7 +82,7 @@ function createNewTask(data) {
             time.className = "days_recording";
         }
     }
-    time.innerHTML = `${dedline} день`;
+    time.innerHTML = `${dedline} ${getPadege(dedline)}`;
     days.append(image, time);
     newTask.append(title, path, grade, days);
     addTaskToDictionary(data.name, data.id);
@@ -90,6 +90,14 @@ function createNewTask(data) {
 
 function addTaskToDictionary(name, id) {
     tasks.set(name, id);
+}
+function getPadege(number) {
+    if (number%10===1&number!==11)
+        return "день";
+    else if ((number%10===2|number%10===2|number%10===3|number%10===4)&number!==12&number!==13&number!==14)
+        return "дня";
+    else
+        return "дней"
 }
 
 function activeOrNot(id) {
