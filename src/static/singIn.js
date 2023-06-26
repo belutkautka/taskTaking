@@ -1,6 +1,5 @@
 const buttons = document.querySelectorAll(".btn-top");
 const slider = document.querySelector(".slider");
-const loginBox = document.querySelector(".login-box");
 const signinBox = document.querySelector(".signin-box");
 const frame = document.querySelector('.frame');
 const isStudent = document.getElementById('isStudent');
@@ -11,6 +10,7 @@ const inputs = document.getElementsByTagName('input');
 const isStudentInput = document.querySelector("[name='isStudent']");
 const teacherInput = document.querySelector("[name='teacher']");
 const placeHolders = [];
+
 let animationFrameId = null;
 let signupProcess = false;
 
@@ -18,13 +18,9 @@ teacherFieldHeight = teacherField.style.height
 
 isStudent.onclick = function () {
     if (isStudent.checked) {
-        // slideToggle(teacherField, 1, teacherFieldHeight);
-        // inputs[inputs.length - 1].required = true;
         teacherField.classList.replace('inactive', 'active');
     } else {
         teacherField.classList.replace('active', 'inactive');
-        // slideToggle(teacherField, 1, teacherFieldHeight, true);
-        // inputs[inputs.length - 1].required = false;
     }
 };
 
@@ -33,33 +29,28 @@ for (let i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener('focus', () => {
         inputs[i].placeholder = placeHolders[i];
         inputs[i].style.borderColor = 'var(--color-border-checkbox)';
-        // inputs[i].placeholder = '';
+
     });
 }
 
 buttons.forEach((btn, index) => {
     btn.addEventListener('click', () => {
-
         if (index === 0) {
-            // ВОЙТИ
             signupProcess = false;
             slider.style.left = `${index * 2000}px`;
             slider.style.width = "86px";
             frame.classList.replace('frame-long', 'frame-short');
             signinBox.classList.replace("active", "inactive");
-            // slideToggle(signinBox, 400, true);
             submitBtn.textContent = 'Войти';
             for (let i = 2; i < inputs.length; i++) {
                 inputs[i].required = false;
             }
         } else {
-            // ЗАРЕГАТЬСЯ
             signupProcess = true;
             slider.style.left = `${index * 108.5}px`;
             slider.style.width = "240px";
             frame.classList.replace('frame-short', 'frame-long');
             signinBox.classList.replace("inactive", "active");
-            // slideToggle(signinBox, 500);
             submitBtn.textContent = 'Зарегистрироваться';
             for (let i = 2; i < inputs.length; i++) {
                 inputs[i].required = true;
@@ -67,7 +58,6 @@ buttons.forEach((btn, index) => {
             isStudentInput.removeAttribute('required');
             teacherInput.removeAttribute('required');
         }
-
         isStudent.required = false;
     });
 });
@@ -93,14 +83,10 @@ function slideToggle(element, speed, height, hide = false) {
                 cancelAnimationFrame(animationFrameId);
             }
         }
-
         animationFrameId = requestAnimationFrame(animate);
-
     } else {
-        // hide element
         let height = height;
         let step = height / (speed / 0.016);
-
         let animate = function () {
             let currentHeight = parseFloat(getComputedStyle(element).height);
             let newHeight = currentHeight - step;
@@ -113,11 +99,9 @@ function slideToggle(element, speed, height, hide = false) {
                 cancelAnimationFrame(animationFrameId);
             }
         }
-
         animationFrameId = requestAnimationFrame(animate);
     }
 }
-
 
 function createUser(login, password, username, role_id, invited_by) {
     return fetch("/auth/register", {
@@ -142,9 +126,7 @@ async function loginUser(login, password) {
             'Content-Type': 'application/x-www-form-urlencoded'
         }, body: `grant_type=&username=${login}&password=${password}&scope=&client_id=&client_secret=`
     })
-
 }
-
 
 async function getRoleId() {
     const response = await fetch('/users/me');
@@ -152,7 +134,6 @@ async function getRoleId() {
     console.log(data);
     return data['role_id'];
 }
-
 
 function goToStartPage() {
     window.location.href = '/pages/startpage';
