@@ -14,15 +14,13 @@ const sliderWidth = {
     defaultStartWidth: '86px', defaultFinishWidth: '240px',
     mobileStartWidth: '60px', mobileFinishWidth: '160px'
 };
-
 const sliderLefts = {
     defaultFinishLeft: '100px',
     mobileStartLeft: '-6px',
     mobileFinishLeft: '140px'
 };
-
-let animationFrameId = null;
 let signupProcess = false;
+
 
 teacherFieldHeight = teacherField.style.height
 
@@ -83,46 +81,6 @@ buttons.forEach((btn, index) => {
     });
 });
 
-function slideToggle(element, speed, height, hide = false) {
-    let display = getComputedStyle(element).display;
-
-    if (!hide) {
-        // show element
-        element.style.display = display;
-        element.style.height = '0px';
-        // let height = height;
-        let step = height / (speed / 0.016);  // 0.016 - время выполнения одного кадра при 60fps
-        let animate = function () {
-            let currentHeight = parseFloat(getComputedStyle(element).height);
-            let newHeight = currentHeight + step;
-            element.style.height = `${newHeight}px`;
-
-            if (newHeight < height) {
-                animationFrameId = requestAnimationFrame(animate);
-            } else {
-                element.style.height = `${height}px`;  // прибиваем итоговый размер на случай небольшой погрешности при расчёте
-                cancelAnimationFrame(animationFrameId);
-            }
-        }
-        animationFrameId = requestAnimationFrame(animate);
-    } else {
-        let height = height;
-        let step = height / (speed / 0.016);
-        let animate = function () {
-            let currentHeight = parseFloat(getComputedStyle(element).height);
-            let newHeight = currentHeight - step;
-            element.style.height = `${newHeight}px`;
-
-            if (newHeight > 0) {
-                animationFrameId = requestAnimationFrame(animate);
-            } else {
-                element.style.display = 'none';
-                cancelAnimationFrame(animationFrameId);
-            }
-        }
-        animationFrameId = requestAnimationFrame(animate);
-    }
-}
 
 function createUser(login, password, username, role_id, invited_by) {
     return fetch("/auth/register", {
