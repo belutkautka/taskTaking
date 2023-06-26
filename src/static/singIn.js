@@ -235,7 +235,7 @@ submitBtn.addEventListener('click', async () => {
                     return loginUser(login.value, password.value)
                         .then(response => {
                             if (response.ok || String(response.status)[0] === '3') {
-                                if (isStudent) {
+                                if (isStudent.checked) {
                                     goToStartPage();
                                 } else {
                                     goToTeacherStartPage();
