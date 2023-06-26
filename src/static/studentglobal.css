@@ -807,7 +807,7 @@ details {
 .is-student-checkbox {
     position: relative;
     bottom: 27px;
-    left: 25px;
+    left: -70px;
     /*width: 100%;*/
     /*top: 198px;*/
     /*left: 260px;*/
@@ -1314,3 +1314,86 @@ details {
     }
 
 }
+
+
+
+@media screen and (max-width: 600px) {
+    .signin-container {
+        width: 300px;
+    }
+
+    .signin-nav li{
+        font-size: 15px;
+    }
+
+    .btn-top {
+        margin-left: 27px;
+        margin-right: 27px;
+    }
+
+    .btn ul {
+        font-size: 15px;
+        width: 200px;
+        margin: 15px auto;
+    }
+
+    .slider-box {
+        margin-right: 245px;
+        margin-left: 65px;
+    }
+    
+    .slider {
+        width: 60px;
+    }
+    
+    .frame {
+        width: 30%;
+        padding-top: 0px;
+        margin-left: auto;
+        margin-right: auto;
+        display: grid;
+        column-gap: 10px;
+        row-gap: 10px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 90px 200px;
+    
+    }
+    
+    .frame-long {
+        height: 480px;
+    }
+    
+    .frame-short {
+        height: 300px;
+    }
+
+    .login-form {
+        width: 320px;
+        margin-left:-20px;
+    }
+
+    .login-box {
+        font-size: 16px;
+    }
+
+    .signin-label {
+        font-weight: 500;
+        font-size: 13px;
+    }
+    .is-student-checkbox {
+        position: relative;
+        bottom: 27px;
+        left: -90px;
+    }
+    .submit-btn {
+        font-size: 15px;
+        width: 65%;
+        height: 40px;
+        margin-top: 40px;
+        margin-left: 69px;
+    }
+
+}
+
+
+
