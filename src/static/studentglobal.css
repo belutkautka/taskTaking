@@ -1058,7 +1058,8 @@ details {
 }
 
 .circle_tr {
-    max-width: 10px;
+    max-width: 8px;
+    margin-right: 5px;
 }
 
 .time_over {
