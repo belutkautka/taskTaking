@@ -21,8 +21,8 @@ body[data_theme="light"] {
     --size-border-button: 3px;
     --color-button-border-hover: #5f5f5f;
     --slider-color: linear-gradient(to right,
-            rgb(255, 195, 110),
-            rgb(255, 146, 91));
+    rgb(255, 195, 110),
+    rgb(255, 146, 91));
     --is-student-border: 2px solid #000;
     --is-student-background: rgba(0, 0, 0, 0.56);
     --color-input-background: rgb(232, 232, 232);
@@ -71,8 +71,8 @@ body[data_theme="dark"] {
     --size-border-button: 3px;
     --color-button-border-hover: #6d6d6d;
     --slider-color: linear-gradient(to right,
-            rgba(103, 147, 234, 0.92),
-            rgb(50, 96, 191));
+    rgba(103, 147, 234, 0.92),
+    rgb(50, 96, 191));
     --is-student-border: 2px solid #c2c2c2;
     --is-student-background: rgba(161, 159, 159, 0.63);
     --color-signin-shadow: rgb(0, 0, 0);
@@ -687,26 +687,17 @@ details {
 
 
 .login-box {
-    /*display: flex;*/
-    /*flex-direction: column;*/
-
-    /*transition: all 0.5s ease-in-out;*/
-    /*border: none;*/
-    /*background-color: transparent;*/
-    margin-top: 15px;
     /*outline: 2px #3B73E4 solid;*/
+    margin-top: 15px;
     position: absolute;
     -webkit-transition: height .5s ease;
     -o-transition: height .5s ease;
     transition: height .5s ease;
     justify-content: center;
-    /*padding-top: 25px;*/
     display: block;
     font-size: 22px;
-    /*position: relative;*/
     width: 100%;
     height: 200px;
-    /*border: 2px solid #1a1d24;*/
     border-radius: 20px;
 }
 
@@ -719,25 +710,46 @@ details {
     /*outline: 2px solid rgba(59, 24, 169, 0.76);*/
     display: flex;
     /*transition: translate 0.5s ease-in-out;*/
+    opacity: 0;
+    height: 0;
+
+}
+
+@keyframes signinAppears {
+    0% {
+        opacity: 0;
+        height: 0;
+    }
+    100% {
+        display: flex;
+        opacity: 1;
+        height: 160px;
+    }
+}
+
+@keyframes signinDisappears {
+    0% {
+        display: block;
+        opacity: 1;
+        height: 160px;
+    }
+    100% {
+        display: none;
+        opacity: 0;
+        height: 0;
+    }
 }
 
 .active {
-    /*opacity: 1;*/
-    /*margin-left: 0;*/
+    animation: signinAppears .5s;
     display: block;
-    /*grid-area: D;*/
-    /*flex-direction: column;*/
-    /*transform: translateX(0);*/
+    opacity: 1;
+    height: 160px;
 }
 
 .inactive {
-    /*height: 0;*/
+    animation: signinDisappears .5;
     display: none;
-    /*grid-area: E;*/
-    /*opacity: 0;*/
-    /*margin-left: -100%;*/
-    /*display: none;*/
-    /*transform: translateX(-150px);*/
 }
 
 .form-group {
@@ -750,14 +762,19 @@ details {
     /*align-items: center*/
 }
 
-.form-group .teacher-form {
-    /*margin-top: 20px;*/
-}
 
 #teacher {
     margin-top: 0;
 }
 
+.tactive {
+    animation: signinAppears .5s;
+}
+
+.tinactive {
+    animation: signinDisappears .5s;
+    animation-fill-mode: forwards;
+}
 
 .login-group {
     display: block;
@@ -802,7 +819,8 @@ details {
 
 }
 
-.input-styling :hover {}
+.input-styling :hover {
+}
 
 .is-student-checkbox {
     position: relative;
@@ -853,7 +871,7 @@ details {
     left: 0;
 }
 
-.is-student-checkbox input[type=checkbox]:checked+label::after {
+.is-student-checkbox input[type=checkbox]:checked + label::after {
     background: var(--image-check-mark);
     background-size: 18px;
     outline: var(--outline-checbox-label) solid var(--color-border-checkbox-checked);
@@ -912,7 +930,7 @@ details {
     height: 50px;
     /*border: 2px solid var(--color-button-border);*/
     border-radius: 16px;
-    margin-top: 50px;
+    margin-top: 70px;
     margin-left: 43px;
     margin-right: 13px;
     color: var(--color-text);
@@ -921,6 +939,16 @@ details {
     overflow: hidden;
     /*transition: all, .5s;*/
 }
+
+.default {
+    height: 200px;
+}
+
+.extended {
+    height: 600px;
+}
+
+/*.login-form .default ~  {}*/
 
 .submit-btn::before {
     content: "";
@@ -999,7 +1027,7 @@ details {
     left: 0;
 }
 
-.checkbox input[type=checkbox]:checked+label:after {
+.checkbox input[type=checkbox]:checked + label:after {
     background: var(--image-check-mark);
     background-size: 18px;
     outline: var(--outline-checbox-label) solid var(--color-border-checkbox-checked);
@@ -1090,6 +1118,7 @@ details {
         font-size: 40px;
         margin: 30px 20px 0px 20px;
     }
+
     .limit_modal {
         font-size: 12px;
     }
@@ -1113,7 +1142,7 @@ details {
         width: 14px;
     }
 
-    .checkbox input[type=checkbox]:checked+label:after {
+    .checkbox input[type=checkbox]:checked + label:after {
         background-size: 14px;
         height: 14px;
         width: 14px;
@@ -1213,37 +1242,36 @@ details {
     }
 
 
+    .modal__content_deployed {
+        width: 350px;
+    }
 
-.modal__content_deployed {
-    width: 350px;
-}
+    .modal__content {
+        width: 350px;
+    }
 
-.modal__content {
-    width: 350px;
-}
+    .modal__title {
+        font-size: 1.2rem;
+    }
 
-.modal__title {
-    font-size: 1.2rem;
-}
+    .modal__text {
+        text-align: left;
+        font-size: 12px;
+    }
 
-.modal__text {
-    text-align: left;
-    font-size: 12px;
-}
+    .modal__points {
+        font-size: 15px;
+    }
 
-.modal__points {
-    font-size: 15px;
-}
+    .button {
+        margin: 5px 0 0px;
+        padding: 10px 50px;
+        font-size: 20px;
+    }
 
-.button {
-    margin: 5px 0 0px;
-    padding: 10px 50px;
-    font-size: 20px;
-}
-
-.modal {
-    padding: 120px 5px;
-}
+    .modal {
+        padding: 120px 5px;
+    }
 }
 
 
@@ -1307,7 +1335,7 @@ details {
         width: 15px;
     }
 
-    .checkbox input[type=checkbox]:checked+label:after {
+    .checkbox input[type=checkbox]:checked + label:after {
         background-size: 15px;
         height: 15px;
         width: 15px;
@@ -1316,13 +1344,12 @@ details {
 }
 
 
-
 @media screen and (max-width: 600px) {
     .signin-container {
         width: 300px;
     }
 
-    .signin-nav li{
+    .signin-nav li {
         font-size: 15px;
     }
 
@@ -1341,11 +1368,11 @@ details {
         margin-right: 245px;
         margin-left: 65px;
     }
-    
+
     .slider {
         width: 60px;
     }
-    
+
     .frame {
         width: 30%;
         padding-top: 0px;
@@ -1356,20 +1383,20 @@ details {
         row-gap: 10px;
         grid-template-columns: 1fr;
         grid-template-rows: 90px 200px;
-    
+
     }
-    
+
     .frame-long {
         height: 480px;
     }
-    
+
     .frame-short {
         height: 300px;
     }
 
     .login-form {
         width: 320px;
-        margin-left:-20px;
+        margin-left: -20px;
     }
 
     .login-box {
@@ -1380,11 +1407,13 @@ details {
         font-weight: 500;
         font-size: 13px;
     }
+
     .is-student-checkbox {
         position: relative;
         bottom: 27px;
         left: -90px;
     }
+
     .submit-btn {
         font-size: 15px;
         width: 65%;

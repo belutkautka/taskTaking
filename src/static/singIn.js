@@ -4,7 +4,7 @@ const signinBox = document.querySelector(".signin-box");
 const frame = document.querySelector('.frame');
 const isStudent = document.getElementById('isStudent');
 const teacherField = document.querySelector('.teacher-field');
-const form = document.querySelector('.form');
+const loginForm = document.querySelector('.login-form');
 const submitBtn = document.querySelector('.submit-btn');
 const inputs = document.getElementsByTagName('input');
 const isStudentInput = document.querySelector("[name='isStudent']");
@@ -28,9 +28,9 @@ teacherFieldHeight = teacherField.style.height
 
 isStudent.onclick = function () {
     if (isStudent.checked) {
-        teacherField.classList.replace('inactive', 'active');
+        teacherField.classList.replace('tinactive', 'tactive');
     } else {
-        teacherField.classList.replace('active', 'inactive');
+        teacherField.classList.replace('tactive', 'tinactive');
     }
 };
 
@@ -53,6 +53,7 @@ buttons.forEach((btn, index) => {
                 slider.style.width = sliderWidth.defaultStartWidth;
             }
             signupProcess = false;
+            loginForm.classList.replace('extended', 'default');
             frame.classList.replace('frame-long', 'frame-short');
             signinBox.classList.replace("active", "inactive");
             submitBtn.textContent = 'Войти';
@@ -68,6 +69,7 @@ buttons.forEach((btn, index) => {
                 slider.style.left = sliderLefts.defaultFinishLeft;
             }
             signupProcess = true;
+            loginForm.classList.replace('default', 'extended');
             frame.classList.replace('frame-short', 'frame-long');
             signinBox.classList.replace("inactive", "active");
             submitBtn.textContent = 'Зарегистрироваться';
@@ -173,7 +175,7 @@ submitBtn.addEventListener('click', async () => {
     } else if (!regex.test(login.value)) {
         login.style.borderColor = 'red';
         login.value = '';
-        login.placeholder = 'Латинские буквы, цифры';
+        login.placeholder = 'Разрешены только латинские буквы и цифры';
     }
 
     if (!password.value) {
@@ -182,7 +184,7 @@ submitBtn.addEventListener('click', async () => {
     } else if (!regex.test(password.value)) {
         password.style.borderColor = 'red';
         password.value = '';
-        password.placeholder = 'Латинские буквы, цифры';
+        password.placeholder = 'Разрешены только латинские буквы и цифры';
     }
 
     if (signupProcess) {
@@ -208,7 +210,7 @@ submitBtn.addEventListener('click', async () => {
             } else if (!regex.test(teacherLogin.value)) {
                 teacherLogin.style.borderColor = 'red';
                 teacherLogin.value = '';
-                teacherLogin.placeholder = 'Латинские буквы, цифры'
+                teacherLogin.placeholder = 'Разрешены только латинские буквы и цифры'
                 return;
             }
         }
