@@ -636,23 +636,24 @@ details[open] summary::after {
 
 @media screen and (max-width: 600px) {
     .navbar_mobile {
-        padding: 0px 20px;
-        height: 65px;
+        padding: 0px 10px;
+        height: 62px;
     }
 
     .navbar_mobile a {
-        font-size: 18px;
+        font-size: 15px;
         margin: 20px 10px;
     }
 
     .navbar_mobile img {
-        max-width: 25px;
+        max-width: 22px;
     }
 
     .images_button img {
-        max-width: 25px;
+        max-width: 22px;
         margin: 20px 10px;
     }
+
 }
 
 @media screen and (max-width: 600px) {
