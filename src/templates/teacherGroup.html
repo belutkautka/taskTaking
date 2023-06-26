@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/teacherglobal.css">
+</head>
+
+<body data_theme="dark">
+    <header>
+        <div class="navbar navbar_mobile">
+            <div class="left_nav">
+                <a class="alg_title" href="teacherstartpage">Алгосы</a>
+                <a href="teachertasks">Задачи</a></p>
+                <a href="teachergroup">Группа</a></p>
+            </div>
+            <div class="right_nav">
+                <div class="images_button">
+                    <div class="theme_images" id="theme-button">
+                        <img id="current_theme" class="theme_image" src="../static/img/blackMoon.png" alt="Луна">
+                        <img id="theme" class="theme_image" src="../static/img/orangeMoon.png" alt="Луна">
+                    </div>
+                    <div class="exit_images">
+                        <img id="current_exit" class="exit_image" src="../static/img/blackExit.png" alt="выход">
+                        <img id="exit" class="exit_image" src="../static/img/orangeExit.png" alt="выход">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="title_group">
+        <div class="page_title">Группа</div>
+    </div>
+    <table id="students" class="table_students">
+        <tr class="table_title">
+            <td>Студент</td>
+            <td>
+                <div class="price">Балл
+                    <div id="sort_sign_group" class="sort_sign">↕</div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <script src="../static/teacherGroup.js"></script>
+    <script src="../static/teacherThemeSwitcher.js"></script>
+</body>
+
+</html>

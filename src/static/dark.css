@@ -1,0 +1,47 @@
+:root {
+    --color-body: #111;
+    --color-text: #f4f4f4;
+    --color-child-odd: #111;
+    --color-child-even: #1a1d24;
+    --color-border-bottom: #3B73E4;
+    --size-border-bottom: 4px;
+    --color-navbar-hover: #5f95ff;
+    --color-modal-background: rgba(0, 0, 0, 0.5);
+    --color-box-shadow: rgb(0, 0, 0);
+    --color-points: rgb(167, 167, 167);
+    --color-button-background: #111111;
+    --color-button-border: #3B73E4;
+    --color-button-active: #252525;
+    --color-button-hover: #252525;
+    --color-path: rgb(130, 130, 130);
+    --color-task-table-border-hover: #6d6d6d;
+    --size-task-table-border: 5px;
+    --color-task-table-background: #252525;
+    --color-task-table-border: #3B73E4;
+    --size-border-button: 3px;
+    --color-button-border-hover: #6d6d6d;
+    --slider-color: linear-gradient(to right,
+            rgba(103, 147, 234, 0.92),
+            rgb(50, 96, 191));
+    --is-student-border: 2px solid #c2c2c2;
+    --is-student-background: rgba(161, 159, 159, 0.63);
+    --color-signin-shadow: rgb(0, 0, 0);
+    --color-submit-button: rgba(208, 208, 208, 0.38);
+    --color-signin-container-border: rgb(0, 0, 0);
+    --font-main: Arial, Helvetica, sans-serif;
+    --color-border-checkbox: #3B73E4;
+    --outline-checbox-label: 2px;
+    --color-border-checkbox-checked: #3B73E4;
+    --image-check-mark: url(../static/img/whiteCheckMark.png);
+    --color-signin-container: rgba(35, 35, 35, 0.82);
+    --color-input-background: rgba(141, 141, 141, 0.55);
+    --color-submit-button-border: var(--color-button-border);
+    --color-task-block: #6d6d6d;
+    --color-text-block: rgb(167, 167, 167);
+    --color-text-selected: #e7e7e7;
+    --color-background-selected: #3560b8;
+    --color-border-selected: #3560b8;
+    --color-background-button:#111;
+    --color-days-rec: rgb(80, 80, 80);
+    --color-time-over:#f99696;
+}

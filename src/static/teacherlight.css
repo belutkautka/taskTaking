@@ -1,0 +1,30 @@
+:root {
+    --color-body: #f4f4f4;
+    --color-background-button:#ffffff;
+    --color-line-head: rgb(238, 238, 238);
+    --color-nth-child: rgb(234, 234, 234);
+    --color-modal-button-background:rgb(248, 248, 248);
+    --color-button-backgroung-hover:#ececec;
+    --color-hover-head: #ff5e00;
+    --color-text:#111111;
+    --color-add-task-button: #111111;
+    --font-main: Arial, Helvetica, sans-serif;
+    --color-modal-background: rgba(0, 0, 0, 0.5);
+    --color-modal-shadow: rgb(102, 102, 102);
+    --color-modal-body:#f9f9f9;
+    --color-points: rgb(167, 167, 167);
+    --color-border-form:#717171;
+    --color-border-checkbox:#939598;
+    --color-border-button: #515151;
+    --outline-checbox-label:1px;
+    --color-border-checkbox-checked:#939598;
+    --size-border-add-task-button: 1px;
+    --image-check-mark:url(../static/img/blackCheckMark.png);
+    --color-border-modal-button-hover:#717171;
+    --color-num-input:#ffffff;
+    --color-input-border:#515151;
+    --color-grade:#bababa;
+    --color-grade-nth:#bababa;
+    --color-button-send-mark:#ffffff;
+    --size-border-mark:1px;
+}

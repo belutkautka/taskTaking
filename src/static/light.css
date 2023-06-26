@@ -1,0 +1,48 @@
+:root {
+    --color-body: #f4f4f4;
+    --color-text: #111;
+    --color-child-odd: #f4f4f4;
+    --color-child-even: rgb(234, 234, 234);
+    --color-border-bottom: rgb(238, 238, 238);
+    --size-border-bottom: 3px;
+    --color-navbar-hover: #ff5e00;
+    --color-modal-background: rgba(0, 0, 0, 0.5);
+    --color-box-shadow: rgb(102, 102, 102);
+    --color-points: rgb(167, 167, 167);
+    --color-button-background: rgb(232, 232, 232);
+    --color-button-border: rgb(130, 130, 130);
+    --color-button-active: rgb(220, 220, 220);
+    --color-button-hover: rgb(220, 220, 220);
+    --color-path: rgb(130, 130, 130);
+    --color-task-table-border-hover: #3b3b3b;
+    --size-task-table-border: 3.5px;
+    --color-task-table-background: rgb(234, 234, 234);
+    --color-task-table-border: #3b3b3b;
+    --size-border-button: 3px;
+    --color-button-border-hover: #5f5f5f;
+    --slider-color: linear-gradient(to right,
+            rgb(255, 195, 110),
+            rgb(255, 146, 91));
+    --is-student-border: 2px solid #000;
+    --is-student-background: rgba(0, 0, 0, 0.56);
+    --color-input-background: rgb(232, 232, 232);
+    --color-signin-shadow: rgb(128, 128, 128);
+    --color-submit-button: rgb(110, 110, 110);
+    --color-signin-container-border: rgba(229, 229, 229, 0.55);
+    --font-main: Arial, Helvetica, sans-serif;
+    --color-border-checkbox: #939598;
+    --outline-checbox-label: 1px;
+    --color-border-checkbox-checked: #939598;
+    --image-check-mark: url(../static/img/blackCheckMark.png);
+    --color-signin-container: rgba(255, 255, 255, 0.77);
+    --color-submit-button-border: rgb(190, 190, 190);
+    --color-submit-button-background-hover: rgb(145, 145, 145);
+    --color-task-block: rgb(181, 181, 181);
+    --color-text-block: rgb(134, 134, 134);
+    --color-text-selected: rgb(130, 130, 130);
+    --color-background-selected: #f4f4f4;
+    --color-border-selected: #ff6f1c;
+    --color-background-button:white;
+    --color-days-rec: rgb(180, 180, 180);
+    --color-time-over:#ea4d4d;
+}

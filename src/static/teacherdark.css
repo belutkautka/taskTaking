@@ -1,0 +1,30 @@
+:root {
+    --color-body: #111111;
+    --color-background-button:#111111;
+    --color-line-head: #3B73E4;
+    --color-nth-child: #1a1d24;
+    --color-add-task-background:#111111;
+    --color-button-backgroung-hover:rgb(31, 31, 31);
+    --color-hover-head: #5f95ff;
+    --color-text:#f4f4f4;
+    --color-add-task-button: #3B73E4;
+    --font-main: Arial, Helvetica, sans-serif;
+    --color-modal-background: rgba(0, 0, 0, 0.825);
+    --color-modal-shadow: rgb(0, 0, 0);
+    --color-modal-body:#f9f9f9;
+    --color-points:rgb(167, 167, 167);
+    --color-border-form:#717171;
+    --color-border-checkbox:#3B73E4;
+    --color-border-button:#3B73E4 ; /*rgb(86, 86, 86);*/
+    --outline-checbox-label:2px;
+    --color-border-checkbox-checked:#3B73E4;
+    --size-border-add-task-button: 2px;
+    --image-check-mark:url(../static/img/whiteCheckMark.png);
+    --color-border-modal-button-hover:#717171;
+    --color-num-input:#111111;
+    --color-input-border:#515151;
+    --color-grade:#3e3e3e;
+    --color-grade-nth:#343434;
+    --color-button-send-mark:#111111;
+    --size-border-mark:2px;
+}
