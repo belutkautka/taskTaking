@@ -6,6 +6,7 @@ const modalLimit = document.getElementsByClassName("limit_modal")[0];
 const modalDescription = document.getElementById("modal__full_text")
 const busy = document.getElementById("check_busy");
 const active = document.getElementById("check_free");
+
 loadStyle = localStorage.getItem('theme');
 
 let tasks = new Map();
@@ -21,7 +22,6 @@ function createNewTasks(data) {
 }
 
 function createNewTask(data) {
-    let taken = 0;
     let newTask = document.createElement("div");
     newTask.id = data.id;
     newTask.className = "task_table";
@@ -45,6 +45,7 @@ function createNewTask(data) {
         grade.classList.add('text_blocked');
     }
     document.getElementById("titles").append(newTask);
+
     sendGetTaskRequest(`/tasks/get_students_by_task_id?task_id=${data.id}`)
         .then(result => {
             newTask.addEventListener('click', function (e) {
@@ -57,6 +58,7 @@ function createNewTask(data) {
                 modalDescription.innerHTML = data.description;
             })
         });
+
     let days = document.createElement("div");
     days.className = "days";
     let time = document.createElement("div");

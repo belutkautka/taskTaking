@@ -108,7 +108,7 @@ function makeTask(data) {
                     }
                 } else {
                     student.innerHTML = "►"
-                    input.innerHTML="";
+                    input.innerHTML = "";
                 }
             })
         }
@@ -119,6 +119,7 @@ function makeTask(data) {
     }
     newTask.append(name, contest, score, student, input);
     document.getElementById("button").parentNode.insertBefore(newTask, document.getElementById("button"));
+
     name.addEventListener('click', function (e) {
         modalTitle.innerHTML = data.name;
         modalText.innerHTML = data.description.length > 150 ? data.description.substring(0, 147) + "..." : data.description;
@@ -127,27 +128,27 @@ function makeTask(data) {
         modalTask.id = data.id;
         modalLimit.innerHTML = `${data.taken_max} места до ${data.dead_line.slice(0, 10)} включительно`
         let contest = document.getElementById("text_pair");
-        let contestValue=document.createElement("text");
-        contestValue.className="text_pair"
-        contestValue.innerHTML=data.contest_type;
+        let contestValue = document.createElement("text");
+        contestValue.className = "text_pair"
+        contestValue.innerHTML = data.contest_type;
         contest.append(contestValue);
         let number = document.getElementById("number");
-        let numberValue=document.createElement("text");
-        numberValue.className="text_pair"
-        numberValue.innerHTML=data.contest_number;
+        let numberValue = document.createElement("text");
+        numberValue.className = "text_pair"
+        numberValue.innerHTML = data.contest_number;
         number.append(numberValue);
         let word = document.getElementById("word");
-        let wordValue=document.createElement("text");
-        wordValue.className="text_pair"
-        wordValue.innerHTML=data.task_number;
+        let wordValue = document.createElement("text");
+        wordValue.className = "text_pair"
+        wordValue.innerHTML = data.task_number;
         word.append(wordValue);
         document.forms.change.id = data.id;
-        document.forms.change.name.value=data.name;
-        document.forms.change.description.value=data.description;
-        document.forms.change.score.value=data.task_value;
-        document.forms.change.days.value=Math.ceil((Date.parse(data.dead_line) - Date.now()) / (1000 * 3600 * 24));;
+        document.forms.change.name.value = data.name;
+        document.forms.change.description.value = data.description;
+        document.forms.change.score.value = data.task_value;
+        document.forms.change.days.value = Math.ceil((Date.parse(data.dead_line) - Date.now()) / (1000 * 3600 * 24));
+        ;
     })
-
 }
 
 function sendAddTaskRequest() {
@@ -173,7 +174,9 @@ function sendAddTaskRequest() {
             alert("Не удалось создать задачу, попробуйте еще раз")
         }
     });
-}function sendUpdateTaskRequest() {
+}
+
+function sendUpdateTaskRequest() {
     let form = document.forms.change;
     return fetch('/tasks/update_task', {
         method: "POST",
@@ -183,7 +186,7 @@ function sendAddTaskRequest() {
         },
         body: JSON.stringify({
             task_id: form.id,
-            name:form.name.value ,
+            name: form.name.value,
             description: form.description.value,
             taken_max: form.limit.value,
             dead_line: form.days.value,

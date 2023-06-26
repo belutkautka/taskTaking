@@ -1,5 +1,6 @@
 const students = document.getElementById("students")
 const sortSign = document.getElementsByClassName('sort_sign')[0];
+
 let sortedStudents = null;
 let sortedDescStudents = null;
 let unsortedStudents = null;

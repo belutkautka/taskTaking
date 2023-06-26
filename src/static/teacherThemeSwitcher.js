@@ -5,6 +5,7 @@ const theme = document.getElementById("theme");
 const currentExit = document.getElementById("current_exit");
 const exit = document.getElementById("exit");
 const bTree = document.getElementById("logo");
+
 let loadStyle = localStorage.getItem('theme');
 
 if (loadStyle) {
@@ -40,11 +41,9 @@ async function sendLogoutReq() {
     }
 }
 
-
 function goToSignInPage() {
     window.location.href = '/pages/signin';
 }
-
 
 exitButton.addEventListener("click", async () => {
     await logout();

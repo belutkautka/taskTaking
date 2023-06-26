@@ -1,6 +1,7 @@
 const circle = document.getElementById("circle");
-sendRequest("/users/me").then(data=>{
-    if (data.has_unchecked_tasks===true){
+
+sendRequest("/users/me").then(data => {
+    if (data.has_unchecked_tasks === true) {
         circle.classList.remove("block");
     }
 })
