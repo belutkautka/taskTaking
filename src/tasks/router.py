@@ -170,13 +170,13 @@ async def get_students_by_task_id(task_id: int, session: AsyncSession = Depends(
 
 @router.get('/get_my_taken_tasks')
 async def get_my_taken_tasks(session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
-    if user.role_id != 2:
-        raise HTTPException(status_code=405, detail=
-        {
-            'Status': 'Error',
-            'Data': None,
-            'Details': 'Not a student'
-        })
+    #if user.role_id != 2:
+#         raise HTTPException(status_code=405, detail=
+#         {
+#             'Status': 'Error',
+#             'Data': None,
+#             'Details': 'Not a student'
+#         })
 
     query = select(task.c.id, task.c.name, task.c.task_value, taken_task.c.score) \
         .join(taken_task, task.c.id == taken_task.c.task_id) \
@@ -364,7 +364,7 @@ async def rate_task(task_id: int, flag: str,
     flag_e = task_dict[0]["flag"]
     if flag_e!=flag:
         raise Exception
-    score = int(task_dict[0]["taken_max"])
+    score = int(task_dict[0]["score"])
     data = {'task_id': task_id,'message':"meow", 'answer':"meow", 'user_id': user_id, 'score': score, 'is_checked': False}
 
     stmt = update(taken_task) \
