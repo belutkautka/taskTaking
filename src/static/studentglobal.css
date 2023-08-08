@@ -5,7 +5,7 @@ body[data_theme="light"] {
     --color-child-even: rgb(234, 234, 234);
     --color-border-bottom: rgb(238, 238, 238);
     --size-border-bottom: 3px;
-    --color-navbar-hover: #ff5e00;
+    --color-navbar-hover: #8000FF;
     --color-modal-background: rgba(0, 0, 0, 0.5);
     --color-box-shadow: rgb(102, 102, 102);
     --color-points: rgb(167, 167, 167);
@@ -21,8 +21,8 @@ body[data_theme="light"] {
     --size-border-button: 3px;
     --color-button-border-hover: #5f5f5f;
     --slider-color: linear-gradient(to right,
-    rgb(255, 195, 110),
-    rgb(255, 146, 91));
+    rgb(128, 0, 255),
+    rgb(128, 0, 255));
     --is-student-border: 2px solid #000;
     --is-student-background: rgba(0, 0, 0, 0.56);
     --color-input-background: rgb(232, 232, 232);
@@ -41,7 +41,7 @@ body[data_theme="light"] {
     --color-text-block: rgb(134, 134, 134);
     --color-text-selected: rgb(130, 130, 130);
     --color-background-selected: #f4f4f4;
-    --color-border-selected: #ff6f1c;
+    --color-border-selected: #8000FF;
     --color-background-button: white;
     --color-days-rec: rgb(180, 180, 180);
     --color-time-over: #ea4d4d;
@@ -53,35 +53,35 @@ body[data_theme="dark"] {
     --color-text: #f4f4f4;
     --color-child-odd: #111;
     --color-child-even: #1a1d24;
-    --color-border-bottom: #3B73E4;
+    --color-border-bottom: #FE28A2;
     --size-border-bottom: 4px;
-    --color-navbar-hover: #5f95ff;
+    --color-navbar-hover: #FE28A2;
     --color-modal-background: rgba(0, 0, 0, 0.5);
     --color-box-shadow: rgb(0, 0, 0);
     --color-points: rgb(167, 167, 167);
     --color-button-background: #111111;
-    --color-button-border: #3B73E4;
+    --color-button-border: #FE28A2;
     --color-button-active: #252525;
     --color-button-hover: #252525;
     --color-path: rgb(130, 130, 130);
     --color-task-table-border-hover: #6d6d6d;
     --size-task-table-border: 5px;
     --color-task-table-background: #252525;
-    --color-task-table-border: #3B73E4;
+    --color-task-table-border: #FE28A2;
     --size-border-button: 3px;
     --color-button-border-hover: #6d6d6d;
     --slider-color: linear-gradient(to right,
-    rgba(103, 147, 234, 0.92),
-    rgb(50, 96, 191));
+    rgba(254, 40, 162, 0.92),
+    rgb(254, 40, 162));
     --is-student-border: 2px solid #c2c2c2;
     --is-student-background: rgba(161, 159, 159, 0.63);
     --color-signin-shadow: rgb(0, 0, 0);
     --color-submit-button: rgba(208, 208, 208, 0.38);
     --color-signin-container-border: rgb(0, 0, 0);
     --font-main: Arial, Helvetica, sans-serif;
-    --color-border-checkbox: #3B73E4;
+    --color-border-checkbox: #FE28A2;
     --outline-checbox-label: 2px;
-    --color-border-checkbox-checked: #3B73E4;
+    --color-border-checkbox-checked: #FE28A2;
     --image-check-mark: url(../static/img/whiteCheckMark.png);
     --color-signin-container: rgba(35, 35, 35, 0.82);
     --color-input-background: rgba(141, 141, 141, 0.55);
@@ -89,8 +89,8 @@ body[data_theme="dark"] {
     --color-task-block: #6d6d6d;
     --color-text-block: rgb(167, 167, 167);
     --color-text-selected: #e7e7e7;
-    --color-background-selected: #3560b8;
-    --color-border-selected: #3560b8;
+    --color-background-selected: #EF52AB;
+    --color-border-selected: #FE28A2;
     --color-background-button: #111;
     --color-days-rec: rgb(80, 80, 80);
     --color-time-over: #f99696;
@@ -99,10 +99,53 @@ body[data_theme="dark"] {
 }
 
 body {
+    width:100%;
+    height: 100%;
     margin: 0;
     background-color: var(--color-body);
     color: var(--color-text);
     transition: var(--change-theme-duration) ease;
+    cursor: none;
+}
+.cursor {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.cursor img {
+    width: 100%;
+    height: 100%;
+
+    transition: opacity 0.2s ease-in-out;
+    opacity: 0;
+}
+
+.cursor img.active-cursor {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: none; /* Отключаем анимацию для обычного курсора */
+}
+
+.cursor.hover .active-cursor {
+    animation: sparkles 0.7s infinite ease-in-out; /* Включаем анимацию только при наведении на активный элемент */
+}
+
+@keyframes sparkles {
+    from {
+        transform: scale(1);
+        content: url("src/static/img/default-cursor.png");
+
+    }
+    to {
+        transform: scale(1.2);
+        content: url("src/static/img/default-cursor.png");
+
+    }
 }
 
 .logo {
@@ -116,7 +159,9 @@ body {
 .left_nav {
     display: flex;
 }
-
+.flag{
+    width: 90%;
+}
 .right_nav {
     display: flex;
 }
@@ -988,7 +1033,9 @@ details {
     margin: 50px 20px 0px 75px;
     color: var(--color-text);
 }
-
+.canvas{
+    width: 10%;
+}
 
 .title_settings {
     display: flex;

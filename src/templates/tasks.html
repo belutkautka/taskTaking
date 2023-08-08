@@ -6,14 +6,18 @@
     <title>Таски</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/studentglobal.css">
+    <link rel="stylesheet" href="../static/styles.css">
 </head>
 
 <body data_theme="dark">
+<div class="cursor">
+    <img id = "cursor" src="../static/img/default-cursor.png" alt="Active Cursor"  class="active-cursor">
+</div>
     <header>
         <div class="navbar navbar_mobile">
             <div class="left_nav">
-                <a class="alg_title" href="startpage">Алгосы</a>
-                <a href="tasks">Задачи</a></p>
+                <a class="alg_title" href="startpage">CTF</a>
+                <a href="tasks">Таски</a></p>
             </div>
             <div class="right_nav">
                 <a href="profile" class="profile">
@@ -58,7 +62,9 @@
                     от титанов дорогу к стене Мария, чтобы начать операцию по возвращению Шиганшины.
                 </div>
             </details>
-
+            <form id="add-task-form" name="take">
+                <input class="flag" name="flag" type="text">
+            </form>
             <p>
                 <button id="button" class="button button1">Взять задачу</button>
             </p>
@@ -66,7 +72,7 @@
         </div>
     </div>
     <div class="title_settings">
-        <div class="page_title">Задачи</div>
+        <div class="page_title">Таски</div>
         <div class="checkboxes">
             <div class="checkbox">
                 <input type="checkbox" id="check_busy" checked>
@@ -85,6 +91,7 @@
     <script src="../static/tasks.js"></script>
     <script src="../static/studentThemeSwitcher.js"></script>
     <script src="../static/notifications.js"></script>
+<script src="../static/script.js"></script>
 </body>
 
 </html>

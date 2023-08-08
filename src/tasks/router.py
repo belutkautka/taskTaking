@@ -191,7 +191,7 @@ async def get_my_taken_tasks(session: AsyncSession = Depends(get_async_session),
 
 
 @router.post('/take_task')
-async def take_task(task_id: int, session: AsyncSession = Depends(get_async_session),
+async def take_task(task_id: int, answer: str, session: AsyncSession = Depends(get_async_session),
                     user: User = Depends(current_user)):
     if user.role_id != 2:
         raise HTTPException(status_code=405, detail=
@@ -218,7 +218,7 @@ async def take_task(task_id: int, session: AsyncSession = Depends(get_async_sess
             'Details': f'{max_task_cnt} students already took this task'
         })
     try:
-        stmt = insert(taken_task).values((task_id, user.id, 0, True))
+        stmt = insert(taken_task).values((task_id, user.id,answer, 0, True,answer))
         await session.execute(stmt)
         await session.commit()
     except:
@@ -277,8 +277,8 @@ async def drop_task(task_id: int, session: AsyncSession = Depends(get_async_sess
 async def add_task(new_task: TaskCreate, session: AsyncSession = Depends(get_async_session),
                    user: User = Depends(current_user)):
     try:
-        if user.role_id != 1:
-            raise Exception
+        # if user.role_id != 1:
+        #      raise Exception
         data = new_task.dict()
 
         data['added_by'] = user.id
@@ -289,12 +289,12 @@ async def add_task(new_task: TaskCreate, session: AsyncSession = Depends(get_asy
         await session.execute(stmt)
         await session.commit()
         return {'Status': 'Success'}
-    except Exception:
+    except Exception as e:
         raise HTTPException(status_code=405, detail=
         {
             'Status': 'Error',
             'Data': None,
-            'Details': 'Not a teacher'
+            'Details': str(e)
         })
 
 
@@ -312,14 +312,21 @@ async def add_task(updated_task: TaskUpdate, session: AsyncSession = Depends(get
         raise Exception
 
     data = {'name': updated_task.name, 'description': updated_task.description, 'taken_max': updated_task.taken_max,
-            'dead_line': task_dict[0]['dead_line'] + datetime.timedelta(days=updated_task.dead_line),
-            'task_value': updated_task.task_value}
+                'dead_line': task_dict[0]['dead_line'] + datetime.timedelta(days=updated_task.dead_line),
+                'task_value': updated_task.task_value}
 
     stmt = update(task).values(data).where(task.c.id == updated_task.task_id)
     await session.execute(stmt)
     await session.commit()
 
     return {'Status': 'Success'}
+    #except Exception as e:
+    #    raise HTTPException(status_code=405, detail=
+    #    {
+    #        'Status': 'Error',
+    ##        'Data': None,
+     #       'Details': str(e)
+     #   })
 
 
 @router.post('/rate_task')
@@ -346,6 +353,37 @@ async def rate_task(task_id: int, user_id: int, score: float,
     await session.commit()
 
     return {'Status': 'Success'}
+
+@router.post('/rate_task_flag')
+async def rate_task(task_id: int, flag: str,
+                    session: AsyncSession = Depends(get_async_session), user: User = Depends(current_user)):
+    user_id=user.id
+    query = select(task).where(task.c.id == task_id)
+    res = await session.execute(query)
+    task_dict = [r._asdict() for r in res]
+    flag_e = task_dict[0]["flag"]
+    if flag_e!=flag:
+        raise Exception
+    score = int(task_dict[0]["taken_max"])
+    data = {'task_id': task_id,'message':"meow", 'answer':"meow", 'user_id': user_id, 'score': score, 'is_checked': False}
+
+    stmt = update(taken_task) \
+        .values(data) \
+        .where(and_(taken_task.c.task_id == task_id, taken_task.c.user_id == user_id))
+
+    await session.execute(stmt)
+    await session.commit()
+
+    stmt = update(user_table) \
+        .values({'has_unchecked_tasks': True,
+                 'score_sum': user_table.c.score_sum + score}) \
+        .where(user_table.c.id == user_id)
+
+    await session.execute(stmt)
+    await session.commit()
+
+    return {'Status': 'Success'}
+
 
 
 @router.post('/delete_task')

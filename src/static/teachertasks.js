@@ -12,8 +12,7 @@ const modalTitle = document.getElementById('modal__title');
 const modalText = document.getElementById('modal__text');
 const modalDescription = document.getElementById("modal__full_text")
 const modalLimit = document.getElementsByClassName("limit_modal")[0]
-const addTaskForm = document.getElementById('add-task-form');
-const notification = document.querySelector('.notification-window');
+
 let sortedTasks = null;
 let sortedDescTasks = null;
 let unsortedTasks = null;
@@ -40,18 +39,10 @@ document.getElementById("button_edit").addEventListener('click', function (e) {
 });
 
 document.getElementById("button_send_mark").addEventListener('click', function (e) {
-    let flag = true;
     [...document.getElementsByClassName("score")].forEach(e => {
-        if (+e.value !== 0) sendRateTaskRequest(e.id.split("_")[1], e.id.split("_")[0], e.value)
-            .then(response => {
-                if (!response.ok){
-                    flag = false;
-                }
-            });
+        if (+e.value !== 0)
+            sendRateTaskRequest(e.id.split("_")[1], e.id.split("_")[0], e.value);
     });
-    if (flag) {
-        showNotification();
-    }
 });
 
 document.getElementById("button_delete_back").addEventListener('click', function (e) {
@@ -62,19 +53,10 @@ document.getElementById("button_exactly_delete").addEventListener('click', funct
     sendDeleteTaskRequest(modalTask.id)
 });
 
-addTaskForm.addEventListener('submit', handleSubmit);
-
-function handleSubmit(event) {
-    event.preventDefault(); // Предотвращаем отправку формы по умолчанию
-    sendAddTaskRequest("/tasks/add_task");
-    addTaskForm.submit();
-}
-
-// document.getElementById("button_save").addEventListener('click', function (e) {
-//
-//     sendAddTaskRequest("/tasks/add_task")
-// });
-
+document.getElementById("button_save").addEventListener('click', function (e) {
+    sendAddTaskRequest("/tasks/add_task")
+    location.reload();
+});
 document.getElementById("button_save_change").addEventListener('click', function (e) {
     sendUpdateTaskRequest()
 });
@@ -83,17 +65,6 @@ document.querySelector('.modal__close-button').addEventListener('click', functio
     modalTask.classList.remove('modal_active');
 });
 
-function showNotification() {
-    if (notification.classList.contains('show')){
-        notification.classList.remove('show');
-    }
-    notification.classList.add('show');
-    setTimeout(function () {
-        notification.classList.remove('show');
-    }, 2000);
-}
-
-
 function makeTask(data) {
     let newTask = document.createElement("tr");
     newTask.id = data.id;
@@ -101,7 +72,7 @@ function makeTask(data) {
     name.className = "teacher_task";
     name.innerHTML = data.name;
     let contest = document.createElement("td");
-    contest.innerHTML = `${data.contest_type} ${data.contest_number} задача ${data.task_number}`;
+    contest.innerHTML = data.task_type;
     let score = document.createElement("td");
     score.innerHTML = data.task_value;
     let student = document.createElement("td");
@@ -109,8 +80,10 @@ function makeTask(data) {
     if (data.username != null) {
         if (data.username.length == 1) {
             student.innerHTML = data.username[0];
-            if (data.score[0] !== 0) input.innerHTML = `<input id = ${data.user_id[0]}_${data.id} class="number_input task_score score" type="number" value=${data.score[0]} name="score"  min="0.0" max="30.0"
-                        step="0.1" required>`; else {
+            if (data.score[0] !== 0)
+                input.innerHTML = `<input id = ${data.user_id[0]}_${data.id} class="number_input task_score score" type="number" value=${data.score[0]} name="score"  min="0.0" max="30.0"
+                        step="0.1" required>`;
+            else {
                 input.innerHTML = `<input id = ${data.user_id[0]}_${data.id} class="number_input task_score score" type="number" name="score"  min="1.0" max="30.0"
                         step="0.1" required>`;
             }
@@ -126,8 +99,11 @@ function makeTask(data) {
                         st.innerHTML = data.username[i];
                         student.append(st);
                         let inp = document.createElement("p")
-                        if (data.score[0] !== 0) inp.innerHTML = `<input id = ${data.user_id[0]}_${data.id} class="number_input task_score score" type="number" value=${data.score[i]} name="score"  min="0.0" max="30.0"
-                        step="0.1" required>`; else inp.innerHTML = `<input id = ${data.user_id[i]}_${data.id} class="number_input task_score score" type="number" name="score"  min="0.0" max="30.0"
+                        if (data.score[0] !== 0)
+                            inp.innerHTML = `<input id = ${data.user_id[0]}_${data.id} class="number_input task_score score" type="number" value=${data.score[i]} name="score"  min="0.0" max="30.0"
+                        step="0.1" required>`;
+                        else
+                            inp.innerHTML = `<input id = ${data.user_id[i]}_${data.id} class="number_input task_score score" type="number" name="score"  min="0.0" max="30.0"
                          step="0.1" required>`;
                         input.append(inp)
                     }
@@ -155,7 +131,7 @@ function makeTask(data) {
         let contest = document.getElementById("text_pair");
         let contestValue = document.createElement("text");
         contestValue.className = "text_pair"
-        contestValue.innerHTML = data.contest_type;
+        contestValue.innerHTML = data.task_type;
         contest.append(contestValue);
         let number = document.getElementById("number");
         let numberValue = document.createElement("text");
@@ -172,27 +148,36 @@ function makeTask(data) {
         document.forms.change.description.value = data.description;
         document.forms.change.score.value = data.task_value;
         document.forms.change.days.value = Math.ceil((Date.parse(data.dead_line) - Date.now()) / (1000 * 3600 * 24));
-        ;
+
     })
 }
 
 function getPadege(number) {
-    if (number % 10 === 1 && number !== 11) return "место"; else if ((number % 10 === 2 || number % 10 === 2 || number % 10 === 3 || number % 10 === 4) && number !== 12 && number !== 13 && number !== 14) return "места"; else return "мест";
+    if (number % 10 === 1 && number !== 11)
+        return "место";
+    else if ((number % 10 === 2 || number % 10 === 2 || number % 10 === 3 || number % 10 === 4)
+        && number !== 12 && number !== 13 && number !== 14)
+        return "места";
+    else
+        return "мест";
 }
 
-function sendAddTaskRequest(url) {
+function sendAddTaskRequest() {
     return fetch('/tasks/add_task', {
-        method: "POST", headers: {
-            'Content-Type': 'application/json', 'accept': 'application/json'
-        }, body: JSON.stringify({
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'accept': 'application/json'
+        },
+        body: JSON.stringify({
             name: form.name.value,
-            contest_type: form.answer.value == "long" ? "Длинный" : "Короткий",
-            contest_number: form.contestNumber.value,
-            task_number: form.word.value,
+            task_type: form.type.value,
             description: form.description.value,
-            taken_max: form.limit.value,
-            dead_line: form.days.value,
-            task_value: form.score.value
+            taken_max: +form.limit.value,
+            dead_line: +form.days.value,
+            task_value: +form.score.value,
+            flag: form.flag.value,
+            file_link: form.limit.value
         })
     }).then(response => {
         if (response.ok && response.status[0] !== "3") {
@@ -205,9 +190,12 @@ function sendAddTaskRequest(url) {
 function sendUpdateTaskRequest() {
     let form = document.forms.change;
     return fetch('/tasks/update_task', {
-        method: "POST", headers: {
-            'Content-Type': 'application/json', 'accept': 'application/json'
-        }, body: JSON.stringify({
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'accept': 'application/json'
+        },
+        body: JSON.stringify({
             task_id: form.id,
             name: form.name.value,
             description: form.description.value,
@@ -276,7 +264,8 @@ active.addEventListener('click', function (e) {
 })
 
 sortSign.addEventListener('click', function (e) {
-    if (unsortedTasks === null) unsortedTasks = Array.from(tasks.querySelectorAll('tr')).slice(1);
+    if (unsortedTasks === null)
+        unsortedTasks = Array.from(tasks.querySelectorAll('tr')).slice(1);
     if (sortSign.innerHTML === '↕') {
         sortSign.innerHTML = '↑';
         if (sortedTasks === null) {

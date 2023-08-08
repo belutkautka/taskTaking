@@ -1,15 +1,15 @@
 from pydantic import BaseModel
-
+from typing import Optional
 
 class TaskCreate(BaseModel):
     name: str
-    contest_type: str
-    contest_number: int
-    task_number: str
+    task_type: str
     description: str
     taken_max: int
     dead_line: int
-    task_value: float
+    task_value: int
+    flag: str #
+    file_link: str #
 
 
 class TaskUpdate(BaseModel):
@@ -18,4 +18,4 @@ class TaskUpdate(BaseModel):
     description: str
     taken_max: int
     dead_line: int
-    task_value: float
+    task_value: int

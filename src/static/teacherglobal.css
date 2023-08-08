@@ -1,24 +1,24 @@
 body[data_theme="dark"] {
     --color-body: #111111;
     --color-background-button: #111111;
-    --color-line-head: #3B73E4;
+    --color-line-head: #FE28A2;
     --color-nth-child: #1a1d24;
     --color-add-task-background: #111111;
     --color-button-backgroung-hover: rgb(31, 31, 31);
-    --color-hover-head: #5f95ff;
+    --color-hover-head: #FE28A2;
     --color-text: #f4f4f4;
-    --color-add-task-button: #3B73E4;
+    --color-add-task-button: #FE28A2;
     --font-main: Arial, Helvetica, sans-serif;
     --color-modal-background: rgba(0, 0, 0, 0.825);
     --color-modal-shadow: rgb(0, 0, 0);
     --color-modal-body: #f9f9f9;
     --color-points: rgb(167, 167, 167);
     --color-border-form: #717171;
-    --color-border-checkbox: #3B73E4;
-    --color-border-button: #3B73E4;
+    --color-border-checkbox: #FE28A2;
+    --color-border-button: #FE28A2;
     /*rgb(86, 86, 86);*/
     --outline-checbox-label: 2px;
-    --color-border-checkbox-checked: #3B73E4;
+    --color-border-checkbox-checked: #FE28A2;
     --size-border-add-task-button: 2px;
     --image-check-mark: url(../static/img/whiteCheckMark.png);
     --color-border-modal-button-hover: #717171;
@@ -38,7 +38,7 @@ body[data_theme="light"] {
     --color-nth-child: rgb(234, 234, 234);
     --color-modal-button-background: rgb(248, 248, 248);
     --color-button-backgroung-hover: #ececec;
-    --color-hover-head: #ff5e00;
+    --color-hover-head: #8000FF;
     --color-text: #111111;
     --color-add-task-button: #111111;
     --font-main: Arial, Helvetica, sans-serif;
@@ -67,6 +67,7 @@ body {
     margin: 0;
     background-color: var(--color-body);
     transition: var(--change-theme-duration) ease;
+    cursor: none;
 }
 
 img {
@@ -169,6 +170,9 @@ img {
 
 .table_head {
     font-size: 23px;
+}
+.big{
+
 }
 
 table {
@@ -430,8 +434,12 @@ tr:nth-child(even) {
 .text_pair {
     font-family: var(--font-main);
     font-size: 23px;
+    max-width: 65%;
     white-space: nowrap;
     text-align: left;
+}
+.textarea {
+    max-width: 65%;
 }
 
 .form_pair {
